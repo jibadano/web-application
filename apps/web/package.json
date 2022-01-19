@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "node index",
     "update-next": "next update",
-    "build": "next build",
+    "build": "node index build",
     "start": "node index start -p $PORT",
     "heroku-postbuild": "npm run build"
   },
