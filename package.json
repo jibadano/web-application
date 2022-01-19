@@ -14,8 +14,7 @@
     "core": "turbo run dev --scope='core' --no-cache --no-deps",
     "system": "turbo run dev --scope='system' --no-cache --no-deps",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "cd ./apps/$APP && node src/index.js"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "prettier": "^2.5.1",
@@ -34,8 +33,7 @@
       },
       "dev": {
         "cache": false
-      },
-      "prod": {}
+      }
     }
   },
   "engines": {
