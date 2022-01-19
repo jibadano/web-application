@@ -1,5 +1,4 @@
 require('dotenv').config()
-const withTM = require('next-transpile-modules')(['config'])
 
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
@@ -302,29 +301,27 @@ process.env.config =
     system: { url: 'http://localhost:9000' }
   })
 
-module.exports = withTM(
-  withPWA({
-    webpack: (config) => {
-      config.plugins = config.plugins || []
+module.exports = withPWA({
+  webpack: (config) => {
+    config.plugins = config.plugins || []
 
-      config.plugins = [
-        ...config.plugins,
-        new Dotenv({
-          path: path.join(__dirname, '.env'),
-          systemvars: true
-        }),
-        new MomentLocalesPlugin({
-          localesToKeep: ['en', 'es']
-        })
-      ]
+    config.plugins = [
+      ...config.plugins,
+      new Dotenv({
+        path: path.join(__dirname, '.env'),
+        systemvars: true
+      }),
+      new MomentLocalesPlugin({
+        localesToKeep: ['en', 'es']
+      })
+    ]
 
-      return config
-    },
-    pwa: {
-      dest: 'public'
-    },
-    publicRuntimeConfig: {
-      config: JSON.parse(process.env.config)
-    }
-  })
-)
+    return config
+  },
+  pwa: {
+    dest: 'public'
+  },
+  publicRuntimeConfig: {
+    config: JSON.parse(process.env.config)
+  }
+})
