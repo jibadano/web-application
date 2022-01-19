@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   })
 }))
 
-export default ({ window }) => {
+const Header = ({ window }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 200,
@@ -35,3 +35,5 @@ export default ({ window }) => {
     </AppBar>
   )
 }
+
+export default Header

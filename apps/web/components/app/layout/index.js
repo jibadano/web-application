@@ -2,10 +2,12 @@ import React from 'react'
 import Footer from './footer'
 import Header from './header'
 
-export default ({ children }) => (
+const Layout = ({ children }) => (
   <>
     <Header />
     {children}
     <Footer />
   </>
 )
+
+export default Layout

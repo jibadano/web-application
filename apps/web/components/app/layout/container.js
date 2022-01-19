@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default (props) => {
+const WrapperContainer = (props) => {
   const classes = useStyles()
 
   return (
@@ -23,3 +23,5 @@ export default (props) => {
     />
   )
 }
+
+export default WrapperContainer

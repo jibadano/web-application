@@ -59,7 +59,7 @@ const MenuMobile = ({ menuItems = [], route, onChange }) => {
           </Box>
           <Box textAlign="center">
             {menuItems.map(({ name, value, badge }) => (
-              <Box width="100%">
+              <Box width="100%" key={value}>
                 <Button
                   variant="text"
                   size="large"

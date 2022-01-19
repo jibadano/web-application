@@ -77,7 +77,7 @@ args = args.concat(
 
 module.exports = async (moduleName) => {
   const port = await initConfig(moduleName)
-  if (port) args = args.concat(['-p', port])
+  if (port && process.argv[2] == 'start') args = args.concat(['-p', port])
 
   const ls = spawn('next', args)
 
