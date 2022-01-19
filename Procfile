@@ -1,1 +1,0 @@
-web: sh -c 'cd ./apps/$APP && node ./src/index.js'
