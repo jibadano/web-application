@@ -18,6 +18,7 @@
     "start": "cd ./apps/$APP && node index.js"
   },
   "devDependencies": {
+    "pnpm": "^6.27.1",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
