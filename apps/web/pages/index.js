@@ -8,7 +8,7 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Background } from '@jibadano/components'
-import FadeOnScreen from 'fade-on-screen'
+import FadeOnScreen from 'fade-on-screen/fade'
 import ImageButton from '@jibadano/image/button'
 
 const useStyles = makeStyles((theme) => ({
