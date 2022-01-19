@@ -33,11 +33,12 @@
     "graphql": "^14.1.1",
     "i18next": "^19.4.4",
     "js-cookie": "^3.0.1",
+    "lib": "*",
     "lodash": "^4.17.10",
     "moment": "^2.25.3",
     "moment-locales-webpack-plugin": "^1.2.0",
     "mongoose": "^5.9.13",
-    "next": "^12.0.1",
+    "next": "^12.0.8",
     "next-pwa": "^5.4.0",
     "notistack": "^1.0.1",
     "react": "^17.0.2",
@@ -48,8 +49,7 @@
     "react-json-pretty": "^2.2.0",
     "react-map-gl": "^6.1.17",
     "react-responsive-carousel": "^3.2.9",
-    "yup": "^0.28.5",
-    "lib": "*"
+    "yup": "^0.28.5"
   },
   "license": "ISC"
 }
