@@ -44,7 +44,6 @@
     "react-i18next": "^11.4.0",
     "react-map-gl": "^6.1.17",
     "yup": "^0.28.5",
-    "eslint": "^7.32.0",
     "@jibadano/fade-on-screen": "^0.0.1",
     "mongoose": "^5.9.13",
     "fade-on-screen": "workspace:*"
