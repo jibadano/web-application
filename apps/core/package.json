@@ -14,7 +14,7 @@
   "dependencies": {
     "@jibadano/microservice": "^0.1.93",
     "apollo-server": "^2.15.1",
-    "dotenv": "^6.0.0",
+    "dotenv": "^10.0.0",
     "graphql": "^15.2.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.1.4"

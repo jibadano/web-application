@@ -58,6 +58,7 @@ const initConfig = async (moduleName) => {
 
   const webConfig = getWebConfig(config, moduleName)
   process.env.config = JSON.stringify(webConfig)
+  return get(config, `${moduleName}.port`)
 }
 
 const { spawn } = require('child_process')
@@ -73,8 +74,10 @@ args = args.concat(
     process.argv.length
   )
 )
+
 module.exports = async (moduleName) => {
-  await initConfig(moduleName)
+  const port = await initConfig(moduleName)
+  if (port) args = args.concat(['-p', port])
 
   const ls = spawn('next', args)
 
