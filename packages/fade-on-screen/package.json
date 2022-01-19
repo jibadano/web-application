@@ -1,12 +1,7 @@
 {
   "name": "fade-on-screen",
   "version": "0.0.1",
-  "author": "Juan Badano",
   "license": "MIT",
-  "main": "./index.js",
-  "engines": {
-    "node": ">=10"
-  },
   "peerDependencies": {
     "react": "^17.0.2"
   },
