@@ -1,6 +1,15 @@
 {
   "name": "lib",
   "version": "1.1.1",
+  "exports": {
+    ".": "./index.js",
+    "./apollo": "./apollo.js",
+    "./i18next": "./i18next/index.js",
+    "./traffic": "./traffic/index.js",
+    "./router": "./router.js",
+    "./theme": "./theme.js",
+    "./utils": "./utils.js"
+  },
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@mui/material": "^5.0.6",
