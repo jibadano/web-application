@@ -1,5 +1,9 @@
 require('dotenv').config()
-const withTM = require('next-transpile-modules')(['fade-on-screen', 'lib'])
+const withTM = require('next-transpile-modules')([
+  'fade-on-screen',
+  'lib',
+  'config'
+])
 
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
