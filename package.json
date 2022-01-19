@@ -1,0 +1,43 @@
+{
+  "name": "product",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "web": "turbo run dev --parallel --scope='core' --scope='system' --scope='web' --no-cache --no-deps",
+    "backoffice": "turbo run dev --parallel --scope='core' --scope='system' --scope='backoffice' --no-cache --no-deps",
+    "core": "turbo run dev --scope='core' --no-cache --no-deps",
+    "system": "turbo run dev --scope='system' --no-cache --no-deps",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "turbo": {
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**"
+        ]
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  }
+}

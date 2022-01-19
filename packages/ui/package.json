@@ -1,0 +1,11 @@
+{
+  "name": "ui",
+  "version": "0.0.0",
+  "main": "./index.js",
+  "types": "./index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "config": "*",
+    "typescript": "^4.5.3"
+  }
+}

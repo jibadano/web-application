@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@backoffice/components/*": ["components/*"],
+      "@components/*": ["../web/components/*"]
+    }
+  }
+}

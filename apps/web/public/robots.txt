@@ -1,0 +1,23 @@
+User-agent: *
+
+Disallow: /checkout/
+
+Allow: /
+
+User-agent: WBSearchBot
+Disallow: /
+
+User-agent: TurnitinBot
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: URLmetrica
+Disallow: /
+
+User-agent: MJ12bot
+Crawl-Delay: 10
+
+User-agent: Pinterest
+Crawl-delay: 1
