@@ -1,4 +1,3 @@
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 export const formatMoney = (
   amount,
@@ -48,22 +47,6 @@ export const addPadding = (id) => {
     result += '0'
   }
   return result + id.toString()
-}
-
-export const isMobile = () =>
-  useMediaQuery((theme) => theme.breakpoints.down('sm'))
-
-export const getDevice = () => {
-  let device = 'desktop'
-
-  device = useMediaQuery((theme) => theme.breakpoints.down('md'))
-    ? 'tablet'
-    : device
-  device = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-    ? 'mobile'
-    : device
-
-  return device
 }
 
 export const useNavigate = () => {

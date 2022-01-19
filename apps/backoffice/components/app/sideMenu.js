@@ -5,11 +5,12 @@ import Drawer from '@mui/material/Drawer'
 
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import { isMobile } from 'lib/utils'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const SideMenu = ({ children, swipeable, title = 'Menu', defaultOpen }) => {
   const [open, setOpen] = React.useState(defaultOpen)
-  const mobile = isMobile()
+  const mobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+
   if (!mobile) return children
   const Component = swipeable ? SwipeableDrawer : Drawer
   return (

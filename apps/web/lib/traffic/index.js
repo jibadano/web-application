@@ -1,10 +1,6 @@
-import { NextResponse } from 'next/server'
-
 const urls = ['/', '/contact', '/article']
 
-export default async (req) => {
-  let res = NextResponse.next()
-
+const traffic = async (req, res) => {
   if (!req.cookies.traffic && urls.includes(req.nextUrl.pathname)) {
     const origin = req.nextUrl.href
     const geolocation = req.geo
@@ -34,3 +30,5 @@ export default async (req) => {
 
   return res
 }
+
+export default traffic
