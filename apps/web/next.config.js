@@ -7,7 +7,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const withPWA =
   process.env.NODE_ENV != 'development' ? require('next-pwa') : (v) => v
 
-module.exports = withPWA({
+module.exports = {
   webpack: (config) => {
     config.plugins = config.plugins || []
 
@@ -30,4 +30,4 @@ module.exports = withPWA({
   publicRuntimeConfig: {
     config: JSON.parse(process.env.config)
   }
-})
+}
