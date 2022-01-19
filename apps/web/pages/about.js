@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import { Background } from '@jibadano/components'
-import FadeOnScreen from 'fade-on-screen'
+import FadeOnScreen from '@jibadano/fade-on-screen'
 
 const useStyles = makeStyles((theme) => ({
   section: {

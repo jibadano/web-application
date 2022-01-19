@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
-import FadeOnScreen from 'fade-on-screen'
+import FadeOnScreen from '@jibadano/fade-on-screen'
 import Button from '@mui/material/Button'
 
 const useStyles = makeStyles((theme) => ({
