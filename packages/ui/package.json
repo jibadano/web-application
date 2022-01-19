@@ -5,7 +5,6 @@
   "types": "./index.js",
   "license": "MIT",
   "devDependencies": {
-    "config": "*",
     "typescript": "^4.5.3"
   }
 }

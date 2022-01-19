@@ -1,3 +1,3 @@
 const pjson = require('./package.json')
 
-require('config/init')(pjson.name)
+require('config')(pjson.name)

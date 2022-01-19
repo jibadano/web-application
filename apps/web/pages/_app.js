@@ -6,7 +6,7 @@ import Email from '@components/app/email'
 import Layout from '@components/app/layout'
 import 'lib/i18next/init'
 import theme from 'lib/theme'
-import config from 'config'
+import config from 'config/get'
 import { BackgroundProvider } from '@jibadano/components'
 
 const App = ({ Component, pageProps, router }) => {

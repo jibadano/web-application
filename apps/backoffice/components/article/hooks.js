@@ -1,6 +1,6 @@
 import { useQuery, useMutation, gql } from '@apollo/client'
 import get from 'lodash/get'
-import config from 'config'
+import config from 'config/get'
 const ARTICLE = gql`
   query article($_id: ID!) {
     article(_id: $_id) {

@@ -11,7 +11,7 @@ import Actions from '@jibadano/backoffice-components/actions'
 import Title from '@jibadano/backoffice-components/title'
 import CardSkeleton from '@jibadano/backoffice-components/cardSkeleton'
 
-import config from 'config'
+import config from 'config/get'
 import {
   useArticle,
   useUpdateArticle,

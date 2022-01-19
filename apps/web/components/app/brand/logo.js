@@ -1,5 +1,5 @@
 import React from 'react'
-import config from 'config'
+import config from 'config/get'
 import { useRouter } from 'lib/router'
 import Typography from '@mui/material/Typography'
 

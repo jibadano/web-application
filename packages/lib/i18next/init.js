@@ -1,6 +1,6 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import config from 'config'
+import config from 'config/get'
 
 const i18nextConfig = config.get('settings.i18next') || {
   fallbackLng: 'es',
