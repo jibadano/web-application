@@ -32,7 +32,6 @@
     "graphql": "^15.2.0",
     "i18next": "^19.4.4",
     "js-cookie": "^3.0.1",
-    "lib": "*",
     "config": "*",
     "fade-on-screen": "*",
     "setup": "*",

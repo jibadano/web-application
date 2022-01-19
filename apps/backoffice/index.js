@@ -1,5 +1,4 @@
 const pjson = require('./package.json')
 
-const init = require('lib')
-console.log(init, pjson.name)
+const init = require('./lib')
 init(pjson.name)
