@@ -13,7 +13,7 @@ import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
 
-import config from 'config/get'
+import config from 'config'
 import Cookies from 'js-cookie'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'

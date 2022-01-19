@@ -18,7 +18,7 @@ import Link from '@mui/material/Link'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import IconButton from '@mui/material/IconButton'
-import config from 'config/get'
+import config from 'config'
 import { useTranslation } from 'lib/i18next'
 
 const useStyles = makeStyles((theme) => ({
