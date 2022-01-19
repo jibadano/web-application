@@ -5,6 +5,7 @@
     ".": "./index.js",
     "./apollo": "./apollo.js",
     "./i18next": "./i18next/index.js",
+    "./i18next/init": "./i18next/init.js",
     "./traffic": "./traffic/index.js",
     "./router": "./router.js",
     "./theme": "./theme.js",
