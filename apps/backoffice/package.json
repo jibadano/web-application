@@ -26,6 +26,7 @@
     "@mui/styles": "^5.0.2",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.1.13",
+    "chart.js": "^3.7.1",
     "deepmerge": "^4.2.2",
     "dotenv": "^10.0.0",
     "dotenv-webpack": "^7.0.3",
