@@ -9,13 +9,10 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "web": "turbo run dev --parallel --scope='core' --scope='system' --scope='web' --no-cache --no-deps",
-    "backoffice": "turbo run dev --parallel --scope='core' --scope='system' --scope='backoffice' --no-cache --no-deps",
-    "core": "turbo run dev --scope='core' --no-cache --no-deps",
-    "system": "turbo run dev --scope='system' --no-cache --no-deps",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "cd ./apps/$APP && node index.js"
+    "start": "cd ./apps/$APP && node index.js",
+    "heroku-postbuild": ""
   },
   "devDependencies": {
     "prettier": "^2.5.1",
