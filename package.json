@@ -11,7 +11,7 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "cd ./app/$APP && node index.js",
+    "start": "cd ./apps/$APP && node index.js",
     "heroku-postbuild": ""
   },
   "devDependencies": {
