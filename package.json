@@ -12,7 +12,6 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start": "node ./apps/$APP",
-    "postinstall": "pnpm i -r",
     "heroku-postbuild": "npx turbo run build --scope=$APP --includeDependencies --no-deps"
   },
   "devDependencies": {
