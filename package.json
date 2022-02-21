@@ -12,27 +12,11 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start": "cd ./apps/$APP && node index.js",
-    "heroku-postbuild": "npx turbo run build"
+    "heroku-postbuild": "cd ./apps/$APP && npm i"
   },
   "devDependencies": {
     "prettier": "^2.5.1",
-    "turbo": "latest"
-  },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "dev": {
-        "cache": false
-      }
-    }
+    "turbo": "^1.1.3"
   },
   "engines": {
     "npm": ">=7.0.0",
