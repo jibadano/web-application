@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -7,8 +7,7 @@ import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import { Background } from '@jibadano/components'
-import FadeOnScreen from 'fade-on-screen/fade'
+import FadeOnScreen from 'components/app/animation/fadeOnScreen'
 import ImageButton from '@jibadano/image/button'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +27,7 @@ const Home = () => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <Background overlay height="100vh" image="/images/background.jpg">
+      <div height="100vh" width="100%" src="/images/background.jpg">
         <Container maxWidth="lg" style={{ height: '100%' }}>
           <Box
             display="flex"
@@ -56,7 +55,7 @@ const Home = () => {
             </Grid>
           </Box>
         </Container>
-      </Background>
+      </div>
       <div className={classes.section}>
         <Container maxWidth="lg">
           <Grid container spacing={6}>
@@ -120,7 +119,7 @@ const Home = () => {
           </Grid>
         </Container>
       </div>
-      <Background overlay height="100vh" image="/images/background2.jpg">
+      <div width="100%" height="100vh" src="/images/background2.jpg">
         <Container maxWidth="md" style={{ height: '100%' }}>
           <Box
             display="flex"
@@ -161,7 +160,7 @@ const Home = () => {
             </Box>
           </Box>
         </Container>
-      </Background>
+      </div>
     </div>
   )
 }

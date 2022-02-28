@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import { useQuery, useMutation, gql } from '@apollo/client'
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 
 const DEPLOYMENTS = gql`
   query deployments {

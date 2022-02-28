@@ -9,8 +9,6 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start": "pnpm run start --filter $APP",
     "heroku-postbuild": "npx turbo run build --scope=$APP --includeDependencies --no-deps"
   },

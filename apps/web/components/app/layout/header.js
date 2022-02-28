@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Logo from '../brand/logo'
 import Menu from '../menu'
+
 const useStyles = makeStyles((theme) => ({
   appBar: ({ trigger }) => ({
     zIndex: 1201,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import Logo from '@components/brand/logo'
 
 const EmailBody = ({ children }) => {

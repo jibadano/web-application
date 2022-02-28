@@ -1,11 +1,11 @@
 import React from 'react'
 import TextField from '@jibadano/form/textField'
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import Paper from '@mui/material/Paper'
 import ImageUpload from '@jibadano/image/upload'
 import Actions from '@jibadano/backoffice-components/actions'
 
-import config from 'config'
+import config from 'common-lib/config'
 import { useUpdateUser } from './hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'

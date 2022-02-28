@@ -1,12 +1,12 @@
 import React from 'react'
-import { useTranslation } from 'lib/i18next'
-import { useRouter } from 'lib/router'
+import { useTranslation } from 'common-lib/i18next'
+import { useRouter } from 'common-lib/router'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
-import FadeOnScreen from '@jibadano/fade-on-screen'
+import FadeOnScreen from 'components/app/animation/fadeOnScreen'
 import Button from '@mui/material/Button'
 
 const useStyles = makeStyles((theme) => ({

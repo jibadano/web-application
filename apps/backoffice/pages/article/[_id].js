@@ -1,7 +1,7 @@
 import React from 'react'
-import { useRouter } from 'lib/router'
+import { useRouter } from 'common-lib/router'
 import TextField from '@jibadano/form/textField'
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -11,7 +11,7 @@ import Actions from '@jibadano/backoffice-components/actions'
 import Title from '@jibadano/backoffice-components/title'
 import CardSkeleton from '@jibadano/backoffice-components/cardSkeleton'
 
-import config from 'config'
+import config from 'common-lib/config'
 import {
   useArticle,
   useUpdateArticle,

@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@jibadano/microservice": "^0.1.94",
+    "@vercel/client": "^10.2.2",
+    "apollo-server": "^2.15.1",
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "graphql": "^15.2.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.25.3",
+    "mongoose": "^5.9.13",
+    "simple-git": "^2.48.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}

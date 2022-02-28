@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles'
 import TextField from '@jibadano/form/textField'
 import Actions from '@jibadano/backoffice-components/actions'
 
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 import Paper from '@mui/material/Paper'
 
 import { useUpdateTranslation } from '../hooks'

@@ -5,7 +5,7 @@ import Select from '@jibadano/form/select'
 
 import Actions from '@jibadano/backoffice-components/actions'
 
-import { useTranslation } from 'lib/i18next'
+import { useTranslation } from 'common-lib/i18next'
 
 import Paper from '@mui/material/Paper'
 

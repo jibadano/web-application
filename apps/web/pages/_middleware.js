@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import trafficMiddleware from 'lib/traffic'
+import trafficMiddleware from 'common-lib/traffic'
 
 export async function middleware(req) {
   let res = NextResponse.next()
