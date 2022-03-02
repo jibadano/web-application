@@ -9,6 +9,7 @@ const getConfig = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
+    console.log(mongoose.models)
 
     if (!mongoose.models.Config)
       mongoose.model(
