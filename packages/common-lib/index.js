@@ -5,6 +5,8 @@ const set = require('lodash/set')
 const getConfig = async () => {
   let configList = []
   if (process.env.CONFIG_URL) {
+    const a = process.env.CONFIG_URL.toString()
+    console.log(a)
     await mongoose.connect(process.env.CONFIG_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
