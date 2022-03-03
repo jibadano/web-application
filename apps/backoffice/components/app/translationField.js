@@ -1,7 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
 import TextField from '@mui/material/TextField'
-import config from 'common-lib/config'
+import config from 'lib/config'
 import { ToggleButtonGroup, ToggleButton } from '@mui/material'
 const TranslationField = ({
   key,

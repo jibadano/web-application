@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Menu from '@jibadano/backoffice-components/menu'
 import Footer from '@jibadano/backoffice-components/footer'
 
-import config from 'common-lib/config'
+import config from 'lib/config'
 import {
   BarChart as BarChartIcon,
   Settings as SettingsIcon,

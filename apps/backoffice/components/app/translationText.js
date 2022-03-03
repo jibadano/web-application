@@ -2,7 +2,7 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import config from 'common-lib/config'
+import config from 'lib/config'
 import { ToggleButtonGroup, ToggleButton } from '@mui/material'
 const TranslationField = ({ values }) => {
   let languages = config.get('settings.i18next.whitelist') || []

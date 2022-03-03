@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useTranslation } from 'common-lib/i18next'
+import { useTranslation } from 'lib/i18next'
 import Copyright from '../brand/copyright'
 import Logo from '../brand/logo'
 

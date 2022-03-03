@@ -12,7 +12,7 @@ import Title from '@jibadano/backoffice-components/title'
 
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
-import { scaleImage } from 'common-lib/utils'
+import { scaleImage } from 'lib/utils'
 
 const Articles = () => {
   const router = useRouter()

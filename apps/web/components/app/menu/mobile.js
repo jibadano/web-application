@@ -10,7 +10,7 @@ import Box from '@mui/material/Box'
 import MenuIcon from '@mui/icons-material/Menu'
 import Language from '@jibadano/language'
 import Logo from '../brand/logo'
-import { useTranslation } from 'common-lib/i18next'
+import { useTranslation } from 'lib/i18next'
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,1 +1,1 @@
-require('common-lib')()
+require('lib')()

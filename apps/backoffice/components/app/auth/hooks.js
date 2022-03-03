@@ -1,5 +1,5 @@
 import { useQuery, useMutation, gql } from '@apollo/client'
-import { useRouter } from 'common-lib/router'
+import { useRouter } from 'lib/router'
 import get from 'lodash/get'
 import Cookies from 'js-cookie'
 

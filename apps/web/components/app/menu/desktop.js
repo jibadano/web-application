@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 
 import Language from '@jibadano/language'
 
-import { useTranslation } from 'common-lib/i18next'
+import { useTranslation } from 'lib/i18next'
 import Button from '@mui/material/Button'
 
 const useStyles = makeStyles((theme) => ({

@@ -3,7 +3,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loa
 import Head from 'next/head'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { blue, cyan, blueGrey, common } from '@mui/material/colors'
-import 'common-lib/i18next/init'
+import 'lib/i18next/init'
 import Layout from '@backoffice/components/app/layout'
 import { SnackbarProvider } from 'notistack'
 import { makeStyles, createStyles } from '@mui/styles'
@@ -11,7 +11,7 @@ import SignIn from '@backoffice/components/app/auth/signin'
 import Email from '@backoffice/components/app/email'
 
 import { ApolloProvider } from '@apollo/client'
-import { useApollo } from 'common-lib/apollo'
+import { useApollo } from 'lib/apollo'
 
 const useStyles = makeStyles(() =>
   createStyles({

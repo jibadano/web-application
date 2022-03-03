@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import authMiddleware from 'common-lib/auth'
+import authMiddleware from 'lib/auth'
 
 export async function middleware(req) {
   let res = NextResponse.next()

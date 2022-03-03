@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouter } from 'common-lib/router'
+import { useRouter } from 'lib/router'
 import { makeStyles } from '@mui/styles'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
@@ -18,8 +18,8 @@ import Link from '@mui/material/Link'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import IconButton from '@mui/material/IconButton'
-import config from 'common-lib/config'
-import { useTranslation } from 'common-lib/i18next'
+import config from 'lib/config'
+import { useTranslation } from 'lib/i18next'
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -2,8 +2,8 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import Link from '@mui/material/Link'
-import config from 'common-lib/config'
-import { useTranslation } from 'common-lib/i18next'
+import config from 'lib/config'
+import { useTranslation } from 'lib/i18next'
 
 const TITLE = config.get('settings.app.name')
 

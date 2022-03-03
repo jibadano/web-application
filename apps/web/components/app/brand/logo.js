@@ -1,6 +1,6 @@
 import React from 'react'
-import config from 'common-lib/config'
-import { useRouter } from 'common-lib/router'
+import config from 'lib/config'
+import { useRouter } from 'lib/router'
 import Typography from '@mui/material/Typography'
 
 const Logo = (props) => {
