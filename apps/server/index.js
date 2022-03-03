@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: '../../.env' })
 
 const Microservice = require('@jibadano/microservice')
 

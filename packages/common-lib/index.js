@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 const get = require('lodash/get')
 const set = require('lodash/set')
+const path = require('path')
 
 const getConfig = async () => {
   let configList = []
   if (process.env.CONFIG_URL) {
-    const a = process.env.CONFIG_URL.toString()
-    console.log(a)
     await mongoose.connect(process.env.CONFIG_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -64,7 +63,7 @@ const initConfig = async (moduleName) => {
 }
 
 const { spawn } = require('child_process')
-!process.env.CONFIG_URL && require('dotenv').config()
+!process.env.CONFIG_URL && require('dotenv').config({ path: '../../.env' })
 let args = []
 
 if (process.argv[2] == 'build') args.push('build')
@@ -77,8 +76,10 @@ args = args.concat(
   )
 )
 
-module.exports = async (moduleName) => {
-  const port = await initConfig(moduleName)
+module.exports = async () => {
+  const pjson = require(path.resolve(`./package.json`))
+
+  const port = await initConfig(pjson.name)
   if (port && process.argv[2] == 'start') args = args.concat(['-p', port])
 
   const ls = spawn('next', args)
