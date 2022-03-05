@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import { useApollo } from 'lib/apollo'
 import { ApolloProvider } from '@apollo/client'
+import { createTheme } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material/styles'
 import Email from '@components/app/email'
 import Layout from '@components/app/layout'
 import 'lib/i18next/init'
-import theme from 'lib/theme'
 import config from 'lib/config'
+
+export const theme = createTheme(config.get('settings.theme'))
 
 const App = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps)

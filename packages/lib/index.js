@@ -80,7 +80,7 @@ module.exports = async () => {
   const pjson = require(path.resolve(`./package.json`))
 
   const port = await initConfig(pjson.name)
-  if (port && process.argv[2] == 'start') args = args.concat(['-p', port])
+  if (port) args = args.concat(['-p', port])
 
   const ls = spawn('next', args)
 
