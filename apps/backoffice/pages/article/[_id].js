@@ -17,7 +17,7 @@ import {
   useUpdateArticle,
   useRemoveArticle,
   useInsertArticle
-} from '@backoffice/components/app/article/hooks'
+} from '@backoffice/components/article/hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@mui/styles'
