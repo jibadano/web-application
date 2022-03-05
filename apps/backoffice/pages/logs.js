@@ -18,14 +18,14 @@ import FilterIcon from '@mui/icons-material/FilterList'
 import RemoveIcon from '@mui/icons-material/Close'
 import { Formik } from 'formik'
 
-import Loading from '@jibadano/backoffice-components/loading'
-import LogTable from '@jibadano/backoffice-components/logTable'
-import Title from '@jibadano/backoffice-components/title'
-import Actions from '@jibadano/backoffice-components/actions'
+import Loading from '@backoffice/components/app/loading'
+import LogTable from '@backoffice/components/app/logTable'
+import Title from '@backoffice/components/app/title'
+import Actions from '@backoffice/components/app/actions'
 
-import TextField from '@jibadano/form/textField'
-import Toggle from '@jibadano/form/toggle'
-import Select from '@jibadano/form/select'
+import TextField from 'form/textField'
+import Toggle from 'form/toggle'
+import Select from 'form/select'
 
 const Filter = ({ onChange, filters }) => {
   const { data, loading, error } = useTraceFacets()

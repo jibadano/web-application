@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
-import FadeOnScreen from 'components/app/animation/fadeOnScreen'
+import FadeOnScreen from '@components/app/animation/fadeOnScreen'
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -65,7 +65,14 @@ const About = () => {
         </Container>
       </div>
 
-      <div width="100%" height="100vh" src="/images/classes.jpg">
+      <div
+        style={{
+          background: 'url(/images/classes.jpg)',
+          backgroundSize: 'cover',
+          width: '100%',
+          height: '100vh'
+        }}
+      >
         <Container maxWidth="lg" style={{ height: '100%' }}>
           <Box
             display="flex"

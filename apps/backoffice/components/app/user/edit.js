@@ -1,9 +1,9 @@
 import React from 'react'
-import TextField from '@jibadano/form/textField'
+import TextField from 'form/textField'
 import { useTranslation } from 'lib/i18next'
 import Paper from '@mui/material/Paper'
-import ImageUpload from '@jibadano/image/upload'
-import Actions from '@jibadano/backoffice-components/actions'
+import ImageUpload from 'image/upload'
+import Actions from '@backoffice/components/app/actions'
 
 import config from 'lib/config'
 import { useUpdateUser } from './hooks'

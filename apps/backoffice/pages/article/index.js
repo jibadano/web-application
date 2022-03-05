@@ -7,8 +7,8 @@ import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
 import Avatar from '@mui/material/Avatar'
 
-import DataTable from '@jibadano/backoffice-components/dataTable'
-import Title from '@jibadano/backoffice-components/title'
+import DataTable from '@backoffice/components/app/dataTable'
+import Title from '@backoffice/components/app/title'
 
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'

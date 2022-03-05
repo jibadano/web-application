@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Actions from '@jibadano/backoffice-components/actions'
-import DataList from '@jibadano/backoffice-components/dataList'
-import DataListItem from '@jibadano/backoffice-components/dataListItem'
+import Actions from '@backoffice/components/app/actions'
+import DataList from '@backoffice/components/app/dataList'
+import DataListItem from '@backoffice/components/app/dataListItem'
 
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'

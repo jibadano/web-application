@@ -5,7 +5,7 @@ import Traffic from '@backoffice/components/stats/traffic'
 import Device from '@backoffice/components/stats/device'
 import { useMe } from '@backoffice/components/app/user/hooks'
 
-import Title from '@jibadano/backoffice-components/title'
+import Title from '@backoffice/components/app/title'
 
 const Dashboard = () => {
   const { me } = useMe()

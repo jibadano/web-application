@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
-import FadeOnScreen from 'components/app/animation/fadeOnScreen'
+import FadeOnScreen from '@components/app/animation/fadeOnScreen'
 
 const useStyles = makeStyles((theme) => ({
   section: {

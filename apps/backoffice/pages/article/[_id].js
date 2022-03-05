@@ -1,15 +1,15 @@
 import React from 'react'
 import { useRouter } from 'lib/router'
-import TextField from '@jibadano/form/textField'
+import TextField from 'form/textField'
 import { useTranslation } from 'lib/i18next'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import ImageUpload from '@jibadano/image/upload'
-import Actions from '@jibadano/backoffice-components/actions'
-import Title from '@jibadano/backoffice-components/title'
-import CardSkeleton from '@jibadano/backoffice-components/cardSkeleton'
+import ImageUpload from 'image/upload'
+import Actions from '@backoffice/components/app/actions'
+import Title from '@backoffice/components/app/title'
+import CardSkeleton from '@backoffice/components/app/cardSkeleton'
 
 import config from 'lib/config'
 import {
@@ -17,7 +17,7 @@ import {
   useUpdateArticle,
   useRemoveArticle,
   useInsertArticle
-} from '@backoffice/components/article/hooks'
+} from '@backoffice/components/app/article/hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { makeStyles } from '@mui/styles'

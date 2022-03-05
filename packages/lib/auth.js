@@ -12,7 +12,7 @@ export default async (req, res) => {
       return NextResponse.redirect(req.nextUrl.href + '?auth=true')
 
     const config = JSON.parse(process.env.config || '')
-    const url = config && config.backoffice && config.backoffice.url
+    const url = config && config.sys && config.sys.url
 
     token = await fetch(url + '/token', {
       method: 'GET',

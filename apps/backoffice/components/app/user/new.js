@@ -1,9 +1,9 @@
 import React from 'react'
-import TextField from '@jibadano/form/textField'
-import Password from '@jibadano/form/password'
-import Select from '@jibadano/form/select'
+import TextField from 'form/textField'
+import Password from 'form/password'
+import Select from 'form/select'
 
-import Actions from '@jibadano/backoffice-components/actions'
+import Actions from '@backoffice/components/app/actions'
 
 import { useTranslation } from 'lib/i18next'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-import TextField from '@jibadano/form/textField'
-import Actions from '@jibadano/backoffice-components/actions'
+import TextField from 'form/textField'
+import Actions from '@backoffice/components/app/actions'
 
 import { useTranslation } from 'lib/i18next'
 import Paper from '@mui/material/Paper'

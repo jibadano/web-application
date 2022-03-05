@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import FadeOnScreen from 'components/app/animation/fadeOnScreen'
-import ImageButton from '@jibadano/image/button'
+import FadeOnScreen from '@components/app/animation/fadeOnScreen'
+import ImageButton from 'image/button'
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -27,7 +27,14 @@ const Home = () => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <div height="100vh" width="100%" src="/images/background.jpg">
+      <div
+        style={{
+          background: 'url(/images/background.jpg)',
+          width: '100%',
+          height: '100vh',
+          backgroundSize: 'cover'
+        }}
+      >
         <Container maxWidth="lg" style={{ height: '100%' }}>
           <Box
             display="flex"
@@ -119,7 +126,14 @@ const Home = () => {
           </Grid>
         </Container>
       </div>
-      <div width="100%" height="100vh" src="/images/background2.jpg">
+      <div
+        style={{
+          background: 'url(/images/background2.jpg)',
+          width: '100%',
+          height: '100vh',
+          backgroundSize: 'cover'
+        }}
+      >
         <Container maxWidth="md" style={{ height: '100%' }}>
           <Box
             display="flex"

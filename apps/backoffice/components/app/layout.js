@@ -2,8 +2,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { makeStyles } from '@mui/styles'
 import { useTranslation } from 'react-i18next'
-import Menu from '@jibadano/backoffice-components/menu'
-import Footer from '@jibadano/backoffice-components/footer'
+import Menu from '@backoffice/components/app/menu'
+import Footer from '@backoffice/components/app/footer'
 
 import config from 'lib/config'
 import {

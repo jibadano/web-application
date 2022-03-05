@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDeployments, useStartDeploy } from './hooks'
-import DataTable from '@jibadano/backoffice-components/dataTable'
-import Status from '@jibadano/backoffice-components/status'
+import DataTable from '@backoffice/components/app/dataTable'
+import Status from '@backoffice/components/app/status'
 
 import IconButton from '@mui/material/IconButton'
 import Button from '@mui/material/Button'

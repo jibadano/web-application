@@ -25,14 +25,14 @@ const App = ({ Component, pageProps, router }) => {
           </Layout>
         </ThemeProvider>
       </ApolloProvider>
-      {/*   <style jsx global>
+      <style jsx global>
         {`
           body {
             margin: 0;
             overflow-x: hidden;
           }
         `}
-      </style> */}
+      </style>
     </>
   )
 }

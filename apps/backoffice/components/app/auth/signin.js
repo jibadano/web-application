@@ -15,8 +15,9 @@ import { useLogin } from './hooks'
 import Container from '@mui/material/Container'
 import Logo from '@components/app/brand/logo'
 import Language from '@jibadano/language'
-import TextField from '@jibadano/form/textField'
-import Password from '@jibadano/form/password'
+
+import TextField from 'form/textField'
+import Password from 'form/password'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {

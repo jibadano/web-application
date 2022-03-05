@@ -1,4 +1,4 @@
-const withTM = (v) => v // require('next-transpile-modules')(['fade-on-screen'])
+const withTM = require('next-transpile-modules')(['form', 'image'])
 const withPWA =
   process.env.NODE_ENV != 'development' ? require('next-pwa') : (v) => v
 

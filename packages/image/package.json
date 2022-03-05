@@ -1,0 +1,27 @@
+{
+  "name": "image",
+  "version": "0.0.3",
+  "description": "Custom Material UI React components",
+  "author": "Juan Badano",
+  "license": "MIT",
+  "main": "index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "react": "17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.5",
+    "@mui/material": "^5.0.6",
+    "@mui/styles": "^5.0.2",
+    "axios": "^0.21.0",
+    "react-easy-crop": "^3.5.3"
+  }
+}

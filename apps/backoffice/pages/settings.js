@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Loading from '@jibadano/backoffice-components/loading'
-import Title from '@jibadano/backoffice-components/title'
-import DataList from '@jibadano/backoffice-components/dataList'
-import DataListItem from '@jibadano/backoffice-components/dataListItem'
-import ActionsSet from '@jibadano/backoffice-components/actionsSet'
-import Actions from '@jibadano/backoffice-components/actions'
+import Loading from '@backoffice/components/app/loading'
+import Title from '@backoffice/components/app/title'
+import DataList from '@backoffice/components/app/dataList'
+import DataListItem from '@backoffice/components/app/dataListItem'
+import ActionsSet from '@backoffice/components/app/actionsSet'
+import Actions from '@backoffice/components/app/actions'
 
-import TextField from '@jibadano/form/textField'
+import TextField from 'form/textField'
 import Box from '@mui/material/Box'
 
 import { Formik } from 'formik'

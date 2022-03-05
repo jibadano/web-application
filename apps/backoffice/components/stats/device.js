@@ -22,7 +22,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import { useTraffic } from './hooks'
 
-import CardSkeleton from '@jibadano/backoffice-components/cardSkeleton'
+import CardSkeleton from '@backoffice/components/app/cardSkeleton'
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%'
