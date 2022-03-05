@@ -1,4 +1,4 @@
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, gql } from '@apollo/client'
 
 const TRAFFIC = gql`
   query traffic {
@@ -21,6 +21,6 @@ const TRAFFIC = gql`
 export const useTraffic = () =>
   useQuery(TRAFFIC, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })

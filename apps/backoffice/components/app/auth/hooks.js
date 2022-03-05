@@ -16,7 +16,7 @@ const CREDENTIALS = gql`
 export const useCredentials = () => {
   const { data, ...rest } = useQuery(CREDENTIALS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return { credentials: get(data, 'credentials') || [], data, ...rest }
@@ -35,7 +35,7 @@ const CREDENTIAL = gql`
 export const useCredential = (_id) => {
   const { data, ...rest } = useQuery(CREDENTIAL, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     variables: {
       _id
@@ -54,7 +54,7 @@ export const useLogin = () => {
   const [login, { data, loading, error }] = useMutation(LOGIN, {
     skip: true,
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
 
@@ -81,7 +81,7 @@ export const useExists = () =>
   useQuery(EXISTS, {
     skip: true,
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
 
@@ -98,7 +98,7 @@ const SIGNUP = gql`
 export const useSignup = () => {
   const signup = useMutation(SIGNUP, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     update(cache, { data: { signup } }) {
       try {
@@ -130,7 +130,7 @@ const REMOVE_CREDENTIAL = gql`
 export const useRemoveCredential = () =>
   useMutation(REMOVE_CREDENTIAL, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     update(cache, { data: { removeCredential } }) {
       try {
@@ -163,7 +163,7 @@ const UPDATE_CREDENTIAL = gql`
 export const useUpdateCredential = () =>
   useMutation(UPDATE_CREDENTIAL, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     update(cache, { data: { updateCredential } }) {
       try {
@@ -198,7 +198,7 @@ const ROLE = gql`
 export const useRole = () => {
   const { data } = useQuery(ROLE, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
 

@@ -15,7 +15,7 @@ const DEPLOYMENTS = gql`
 export const useDeployments = (_id) => {
   const { data, ...rest } = useQuery(DEPLOYMENTS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return { deployments: get(data, 'deployments') || [], data, ...rest }
@@ -35,7 +35,7 @@ const START_DEPLOY = gql`
 export const useStartDeploy = () =>
   useMutation(START_DEPLOY, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     update(cache, { data: { startDeploy } }) {
       try {
@@ -59,7 +59,7 @@ const DEPLOY_STATUS = gql`
 export const useDeployStatus = () => {
   const { data, loading, ...rest } = useQuery(DEPLOY_STATUS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return {

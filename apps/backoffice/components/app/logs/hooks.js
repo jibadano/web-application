@@ -54,7 +54,7 @@ export const useTraces = ({ size = PAGE_SIZE, page = 0, ...rest }) => {
   const { data, ...query } = useQuery(TRACES, {
     fetchPolicy: 'no-cache',
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     variables: {
       size: size + 1,
@@ -93,6 +93,6 @@ const TRACE_FACETS = gql`
 export const useTraceFacets = () =>
   useQuery(TRACE_FACETS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })

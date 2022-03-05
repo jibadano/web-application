@@ -16,7 +16,7 @@ const DEPLOYMENTS = gql`
 export const useDeployments = (_id) => {
   const { data, ...rest } = useQuery(DEPLOYMENTS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return { deployments: get(data, 'deployments') || [], data, ...rest }
@@ -36,7 +36,7 @@ const START_DEPLOY = gql`
 export const useStartDeploy = () =>
   useMutation(START_DEPLOY, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     update(cache, { data: { startDeploy } }) {
       try {
@@ -60,7 +60,7 @@ const DEPLOY_STATUS = gql`
 export const useDeployStatus = () => {
   const { data, loading, ...rest } = useQuery(DEPLOY_STATUS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return {
@@ -78,7 +78,7 @@ const SETTINGS = gql`
 export const useSettings = () => {
   const query = useQuery(SETTINGS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return { ...query, settings: get(query, 'data.settings') || [] }
@@ -93,7 +93,7 @@ const UPDATE_SETTINGS = gql`
 export const useUpdateSettings = () =>
   useMutation(UPDATE_SETTINGS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     notifyOnNetworkStatusChange: true,
 
@@ -120,7 +120,7 @@ const TRANSLATIONS = gql`
 export const useTranslations = () => {
   const query = useQuery(TRANSLATIONS, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     }
   })
   return { ...query, translations: get(query, 'data.translations') || [] }
@@ -140,7 +140,7 @@ export const useUpdateTranslation = () => {
   const { i18n } = useTranslation()
   return useMutation(UPDATE_TRANSLATION, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     notifyOnNetworkStatusChange: true,
     update(cache, { data: { updateTranslation }, ...query }) {
@@ -182,7 +182,7 @@ const INSERT_TRANSLATION = gql`
 export const useInsertTranslation = () =>
   useMutation(INSERT_TRANSLATION, {
     context: {
-      clientName: 'system'
+      clientName: 'sys'
     },
     notifyOnNetworkStatusChange: true,
 
