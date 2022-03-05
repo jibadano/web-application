@@ -32,6 +32,7 @@ const App = ({ Component, pageProps, router }) => {
           body {
             margin: 0;
             overflow-x: hidden;
+            background: '#ccc';
           }
         `}
       </style>

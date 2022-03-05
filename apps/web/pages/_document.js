@@ -14,7 +14,7 @@ class MyDocument extends Document {
             content="kHnqaa5IhIF6B7wjOZzyfiJKamA2q02nF6YHwRA414c"
           />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.secondary.main} />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
           <meta name="description" content="Description" />
