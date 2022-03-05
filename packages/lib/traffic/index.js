@@ -7,7 +7,7 @@ const traffic = async (req, res) => {
     const ip = req.ip
     const userAgent = req.ua && req.ua.ua
     const config = JSON.parse(process.env.config || '')
-    const url = config && config.backoffice && config.backoffice.url
+    const url = config && config.sys && config.sys.url
 
     if (url)
       fetch(url + '/logTraffic', {
