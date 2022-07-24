@@ -15,7 +15,7 @@
     "@vercel/client": "^10.2.2",
     "apollo-server": "^2.15.1",
     "@jibadano/config": "0.0.0",
-    "@jibadano/microservice": "0.3.1",
+    "@jibadano/microservice": "0.3.5",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.2.0",

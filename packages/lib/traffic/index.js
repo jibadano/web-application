@@ -15,7 +15,7 @@ const traffic = async (req, res) => {
       config.services.sys.url
 
     if (url)
-      fetch(url + '/logTraffic', {
+      fetch(url + '/traffic', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
