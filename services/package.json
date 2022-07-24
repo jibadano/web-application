@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@jibadano/config": "0.0.3",
-    "@jibadano/microservice": "0.3.11",
+    "@jibadano/microservice": "0.3.12",
     "apollo-server": "^3.10.0",
     "dotenv": "^16.0.1",
     "graphql": "^15.0.0",

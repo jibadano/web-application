@@ -35,7 +35,7 @@ importers:
       next-transpile-modules: ^9.0.0
       notistack: ^2.0.3
       react: ^17.0.2
-      react-chartjs-2: ^3.0.5
+      react-chartjs-2: ^4.3.1
       react-dom: ^17.0.2
       react-feather: ^2.0.9
       react-i18next: ^11.4.0
@@ -67,7 +67,7 @@ importers:
       next-transpile-modules: 9.0.0
       notistack: 2.0.5_0c665d8429d535e486164501c4c98fd8
       react: 17.0.2
-      react-chartjs-2: 3.3.0_chart.js@3.8.1+react@17.0.2
+      react-chartjs-2: 4.3.1_chart.js@3.8.1+react@17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-feather: 2.0.10_react@17.0.2
       react-i18next: 11.18.1_8f2a12f93b34591c18c344cd829419b1
@@ -198,7 +198,7 @@ importers:
   services:
     specifiers:
       '@jibadano/config': 0.0.3
-      '@jibadano/microservice': 0.3.11
+      '@jibadano/microservice': 0.3.12
       apollo-server: ^3.10.0
       dotenv: ^16.0.1
       graphql: ^15.0.0
@@ -208,7 +208,7 @@ importers:
       nodemon: ^2.0.19
     dependencies:
       '@jibadano/config': 0.0.3
-      '@jibadano/microservice': 0.3.11
+      '@jibadano/microservice': 0.3.12
       apollo-server: 3.10.0_graphql@15.8.0
       dotenv: 16.0.1
       graphql: 15.8.0
@@ -1861,8 +1861,8 @@ packages:
       - react-native
     dev: false
 
-  /@jibadano/microservice/0.3.11:
-    resolution: {integrity: sha512-11NeEHCUQ9FKiIjqwZNwJsvBozmKqAu1sBH+8IANbFjN2yMw2lIiDxomRMOQrWvhu84Os7x+xPkU7p+QnBNkFw==}
+  /@jibadano/microservice/0.3.12:
+    resolution: {integrity: sha512-lfyHoVDPv8KurjyA8tIlfEwUrHHR7umIk1+nXaM/Z2yX+c4gCBJBN9SnNBHpEfO+dBzThUNUmTuz2YnOnmksOg==}
     dependencies:
       '@jibadano/config': 0.0.3
       '@types/node-fetch': 2.6.2
@@ -5946,11 +5946,11 @@ packages:
       unpipe: 1.0.0
     dev: false
 
-  /react-chartjs-2/3.3.0_chart.js@3.8.1+react@17.0.2:
-    resolution: {integrity: sha512-4Mt0SR2aiUbWi/4762odRBYSnbNKSs4HWc0o3IW43py5bMfmfpeZU95w6mbvtuLZH/M3GsPJMU8DvDc+5U9blQ==}
+  /react-chartjs-2/4.3.1_chart.js@3.8.1+react@17.0.2:
+    resolution: {integrity: sha512-5i3mjP6tU7QSn0jvb8I4hudTzHJqS8l00ORJnVwI2sYu0ihpj83Lv2YzfxunfxTZkscKvZu2F2w9LkwNBhj6xA==}
     peerDependencies:
       chart.js: ^3.5.0
-      react: ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       chart.js: 3.8.1
       react: 17.0.2
