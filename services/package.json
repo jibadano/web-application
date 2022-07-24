@@ -12,26 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vercel/client": "^10.2.2",
     "apollo-server": "^2.15.1",
-    "@jibadano/config": "0.0.0",
+    "@jibadano/config": "0.0.2",
     "@jibadano/microservice": "0.3.5",
-    "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.2.0",
-    "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
-    "mongoose": "6.4.6",
-    "simple-git": "^2.48.0",
-    "apollo-server-express": "^2.15.1",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "express-jwt": "^5.3.3",
-    "jsonwebtoken": "^8.3.0",
-    "nodemailer": "^6.4.6",
-    "request": "^2.88.2",
-    "uuid": "^3.3.2"
+    "mongoose": "6.4.6"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"

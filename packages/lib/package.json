@@ -9,7 +9,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.0.6",
-    "@jibadano/config": "0.0.0",
+    "@jibadano/config": "0.0.2",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.1.13",
     "deepmerge": "^4.2.2",
