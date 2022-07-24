@@ -12,16 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.15.1",
-    "@jibadano/config": "0.0.2",
-    "@jibadano/microservice": "0.3.7",
-    "dotenv": "^10.0.0",
-    "graphql": "^15.2.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.25.3",
+    "@jibadano/config": "0.0.3",
+    "@jibadano/microservice": "0.3.11",
+    "apollo-server": "^3.10.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^15.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "mongoose": "6.4.6"
   },
   "devDependencies": {
-    "nodemon": "^1.17.5"
+    "nodemon": "^2.0.19"
   }
 }
