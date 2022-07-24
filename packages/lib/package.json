@@ -9,6 +9,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.0.6",
+    "@jibadano/config": "0.0.0",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.1.13",
     "deepmerge": "^4.2.2",
@@ -20,7 +21,6 @@
     "next": "^12.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-i18next": "^11.4.0",
-    "mongoose": "^5.9.13"
+    "react-i18next": "^11.4.0"
   }
 }

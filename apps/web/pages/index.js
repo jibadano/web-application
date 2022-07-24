@@ -9,6 +9,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FadeOnScreen from '@components/app/animation/fadeOnScreen'
 import ImageButton from 'image/button'
+import Background from '@components/app/background'
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -27,14 +28,7 @@ const Home = () => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <div
-        style={{
-          background: 'url(/images/background.jpg)',
-          width: '100%',
-          height: '100vh',
-          backgroundSize: 'cover'
-        }}
-      >
+      <Background>
         <Container maxWidth="lg" style={{ height: '100%' }}>
           <Box
             display="flex"
@@ -62,7 +56,7 @@ const Home = () => {
             </Grid>
           </Box>
         </Container>
-      </div>
+      </Background>
       <div className={classes.section}>
         <Container maxWidth="lg">
           <Grid container spacing={6}>

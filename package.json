@@ -4,17 +4,19 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "services/"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "start": "pnpm run start --filter $APP",
-    "heroku-postbuild": "npx turbo run build --scope=$APP --includeDependencies --no-deps"
+    "scope": "turbo run dev --scope=web",
+    "start": "pnpm run start --filter services",
+    "heroku-postbuild": "npx turbo run build --scope=services --includeDependencies --no-deps"
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
-    "turbo": "^1.1.5"
+    "prettier": "^2.6.2",
+    "turbo": "^1.2.8"
   },
   "engines": {
     "npm": ">=7.0.0",

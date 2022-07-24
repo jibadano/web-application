@@ -13,18 +13,20 @@ import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
 
-import config from './config'
+import config from '@jibadano/config'
 import Cookies from 'js-cookie'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 function getHttpLink() {
-  const services = config.getServices()
+  const services = config.get('..services')
   const endpoints = []
   if (services) {
-    for (let service of services) {
-      const uri = config.get(`${service}.url`) + '/graphql'
-      if (uri) endpoints.push({ name: service, uri })
+    for (let service in services) {
+      if (service != 'default') {
+        const uri = services[service].url + '/graphql'
+        if (uri) endpoints.push({ name: service, uri })
+      }
     }
     return split(endpoints, null)
   }

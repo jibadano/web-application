@@ -1,7 +1,6 @@
 const { gql, ApolloError } = require('apollo-server')
 const moment = require('moment')
 const ms = require('../..')
-const Traffic = ms.getModel('Traffic')
 const typeDefs = gql`
   extend type Query {
     traffic: Traffic @auth
@@ -56,15 +55,15 @@ const resolvers = {
         .minute(0)
         .second(0)
 
-      const thisPeriod = await Traffic.find({
+      const thisPeriod = await ms.model.Traffic.find({
         date: { $gte: firstDayOfCurrentMonth, $lte: today }
       }).exec()
 
-      const previousPeriod = await Traffic.find({
+      const previousPeriod = await ms.model.Traffic.find({
         date: { $gte: firstDayFromAMonthAgo, $lte: aMonthAgo }
       }).exec()
 
-      const source = await Traffic.aggregate([
+      const source = await ms.model.Traffic.aggregate([
         {
           $group: {
             _id: '$source',
@@ -73,7 +72,7 @@ const resolvers = {
         }
       ])
 
-      const device = await Traffic.aggregate([
+      const device = await ms.model.Traffic.aggregate([
         {
           $group: {
             _id: '$device',
@@ -94,7 +93,7 @@ const resolvers = {
   Mutation: {
     logTraffic: (_, { origin, device }, { trace }) => {
       try {
-        new Traffic({
+        new ms.model.Traffic({
           ip: trace.ip,
           source: getSource(origin),
           device

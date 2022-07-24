@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const { config } = require('../..')
+const config = require('@jibadano/config')
 
 module.exports = new Schema({
   _id: {

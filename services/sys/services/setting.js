@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server')
 const ms = require('../..')
-const Config = ms.getModel('Config')
+const config = require('@jibadano/config')
 const { print } = require('graphql')
 const axios = require('axios').default
 const get = require('lodash/get')
@@ -35,9 +35,9 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    settings: () => Config.findOne({ _id: 'settings' }).exec(),
+    settings: () => ms.model.Config.findOne({ _id: 'settings' }).exec(),
     translations: () =>
-      Config.findOne({ _id: 'translations' })
+      ms.model.Config.findOne({ _id: 'translations' })
         .select('translations')
         .exec()
         .then(
@@ -46,7 +46,7 @@ const resolvers = {
   },
   Mutation: {
     insertTranslations: (_, { translations }) =>
-      Config.findOneAndUpdate(
+      ms.model.Config.findOneAndUpdate(
         { _id: 'translations' },
         {
           $push: { translations: { $each: translations } }
@@ -56,7 +56,7 @@ const resolvers = {
         }
       ).exec(),
     insertTranslation: (_, translation) =>
-      Config.findOneAndUpdate(
+      ms.model.Config.findOneAndUpdate(
         { _id: 'translations', 'translations.key': { $ne: translation.key } },
         {
           $push: { translations: translation }
@@ -66,7 +66,7 @@ const resolvers = {
         }
       ).exec(),
     updateTranslation: (_, { key, newKey, values }) =>
-      Config.findOneAndUpdate(
+      ms.model.Config.findOneAndUpdate(
         { _id: 'translations', 'translations.key': key },
         {
           $set: {
@@ -82,7 +82,7 @@ const resolvers = {
     updateSettings: (_, { settings }) => {
       delete settings._id
 
-      return Config.findOneAndUpdate(
+      return ms.model.Config.findOneAndUpdate(
         { _id: 'settings' },
         { ...settings, status: 'required' },
         {
@@ -92,7 +92,7 @@ const resolvers = {
       ).exec()
     },
     deploy: async (_, __, { log }) => {
-      Config.findOneAndUpdate(
+      ms.model.Config.findOneAndUpdate(
         { _id: 'settings' },
         { $set: { status: 'deploying' } }
       ).exec()
@@ -103,13 +103,13 @@ const resolvers = {
         }
       `
 
-      const serviceNames = ms.config.get('services') || []
+      const serviceNames = config.get('services') || []
       const promises = []
       serviceNames.forEach((serviceName) =>
         promises.push(
           new Promise((resolve, reject) => {
             axios
-              .post(`${ms.config.get('url', serviceName)}/graphql`, {
+              .post(`${config.get('url', serviceName)}/graphql`, {
                 operationName: 'refreshSettings',
                 query: print(REFRESH_SETTINGS)
               })
@@ -118,7 +118,7 @@ const resolvers = {
         )
       )
 
-      const hooks = ms.config.get('vercel.hooks') || []
+      const hooks = config.get('vercel.hooks') || []
       for (let hook of hooks)
         promises.push(
           new Promise((resolve, reject) => {
@@ -129,17 +129,17 @@ const resolvers = {
       return Promise.all(promises)
         .then(() => {
           setTimeout(() => {
-            Config.findOneAndUpdate(
+            ms.model.Config.findOneAndUpdate(
               { _id: 'settings' },
               { $set: { status: 'ready' } }
             ).exec()
-          }, ms.config.get('vercel.estimatedDeployTime') || 120000)
+          }, config.get('vercel.estimatedDeployTime') || 120000)
 
           return 'deploying'
         })
         .catch((e) => {
           log('error while updating settings', e.toString(), 'error')
-          Config.findOneAndUpdate(
+          ms.model.Config.findOneAndUpdate(
             { _id: 'settings' },
             { $set: { status: 'error' } }
           ).exec()

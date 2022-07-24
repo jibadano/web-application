@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Menu from '@backoffice/components/app/menu'
 import Footer from '@backoffice/components/app/footer'
 
-import config from 'lib/config'
+import config from '@jibadano/config'
 import {
   BarChart as BarChartIcon,
   Settings as SettingsIcon,
@@ -87,7 +87,7 @@ const Layout = ({ children }) => {
       <div className={classes.wrapper}>
         <div className={classes.container}>
           {children}
-          <Footer name={config.get('settings.app.name')} />
+          <Footer name={config.get('..settings.app.name')} />
         </div>
       </div>
     </>

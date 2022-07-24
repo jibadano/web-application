@@ -1,7 +1,6 @@
 const { gql, ApolloError } = require('apollo-server')
 const ms = require('../..')
 const crypto = require('../crypto')
-const Credential = ms.getModel('Credential')
 
 const typeDefs = gql`
   extend type Query {
@@ -31,7 +30,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     exists: (_, { _id }) =>
-      Credential.findOne({ _id })
+      ms.model.Credential.findOne({ _id })
         .select('_id')
         .exec()
         .then((cred) => Boolean(cred)),
@@ -43,20 +42,22 @@ const resolvers = {
       return ms.sign(context.session)
     },
     credentials: () =>
-      Credential.find({ inactive: { $ne: true } })
+      ms.model.Credential.find({ inactive: { $ne: true } })
         .select('_id role createdAt')
         .exec(),
     credential: (_, credential) =>
-      Credential.findOne(credential).select('_id role createdAt').exec(),
+      ms.model.Credential.findOne(credential)
+        .select('_id role createdAt')
+        .exec(),
     role: (_, __, { session }) =>
-      Credential.findOne({ _id: session.user._id })
+      ms.model.Credential.findOne({ _id: session.user._id })
         .select('role')
         .exec()
         .then((credential) => (credential ? credential.role : null))
   },
   Mutation: {
     login: async (_, { _id, password, remember }) => {
-      const user = await Credential.findOne({ _id }).exec()
+      const user = await ms.model.Credential.findOne({ _id }).exec()
 
       if (!user) return new ApolloError('User not found')
       if (user.inactive) return new ApolloError('User is inactive')
@@ -71,12 +72,12 @@ const resolvers = {
     },
     signup: (_, { _id, password, role = 'USER' }) => {
       const credential = crypto.generate({ _id, password })
-      return new Credential({ ...credential, role }).save()
+      return new ms.model.Credential({ ...credential, role }).save()
     },
     updateCredential: (_, { _id, password, role }) => {
       const credential = password ? crypto.generate({ _id, password }) : { _id }
 
-      return Credential.findOneAndUpdate(
+      return ms.model.Credential.findOneAndUpdate(
         { _id },
         { ...credential, role },
         { new: true }
@@ -85,7 +86,7 @@ const resolvers = {
         .exec()
     },
     removeCredential: (_, credential) =>
-      Credential.findOneAndRemove(credential)
+      ms.model.Credential.findOneAndRemove(credential)
         .select('_id role createdAt')
         .exec()
   }

@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper'
 import ImageUpload from 'image/upload'
 import Actions from '@backoffice/components/app/actions'
 
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { useUpdateUser } from './hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'

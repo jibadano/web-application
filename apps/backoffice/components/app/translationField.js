@@ -1,7 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
 import TextField from '@mui/material/TextField'
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { ToggleButtonGroup, ToggleButton } from '@mui/material'
 const TranslationField = ({
   key,
@@ -11,7 +11,7 @@ const TranslationField = ({
   multi,
   ...props
 }) => {
-  let languages = config.get('settings.i18next.whitelist') || []
+  let languages = config.get('..settings.i18next.whitelist') || []
   languages = languages.filter((lng) => lng != 'cimode')
   const [language, setLanguage] = React.useState(languages[0])
   let values = get(props, `values.${id}`) || {}

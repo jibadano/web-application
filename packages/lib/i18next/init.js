@@ -1,8 +1,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import config from '../config'
+import config from '@jibadano/config'
 
-const i18nextConfig = config.get('settings.i18next') || {
+const i18nextConfig = config.get('..settings.i18next') || {
   fallbackLng: 'es',
   whitelist: ['es'],
   keySeparator: true, // we do not use keys in form messages.welcome
@@ -11,7 +11,8 @@ const i18nextConfig = config.get('settings.i18next') || {
   }
 }
 
-const translations = config.get('translations')
+const translations = config.get('..translations')
+
 const resources = {}
 translations.forEach(({ key, values }) =>
   values.forEach(({ language, text }) => {

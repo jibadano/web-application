@@ -1,6 +1,6 @@
 import { useQuery, useMutation, gql } from '@apollo/client'
 import get from 'lodash/get'
-import config from 'lib/config'
+import config from '@jibadano/config'
 const ARTICLE = gql`
   query article($_id: ID!) {
     article(_id: $_id) {
@@ -35,7 +35,7 @@ const ARTICLES = gql`
 `
 
 export const useArticles = ({
-  size = config.get('settings.app.articles.pageSize') || 6,
+  size = config.get('..settings.app.articles.pageSize') || 6,
   page
 }) => {
   const { data, ...query } = useQuery(ARTICLES, {

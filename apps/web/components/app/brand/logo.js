@@ -1,5 +1,5 @@
 import React from 'react'
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { useRouter } from 'lib/router'
 import Typography from '@mui/material/Typography'
 
@@ -12,7 +12,7 @@ const Logo = (props) => {
       variant="h4"
       {...props}
     >
-      {config.get('settings.app.name')}
+      {config.get('..settings.app.name')}
     </Typography>
   )
 }

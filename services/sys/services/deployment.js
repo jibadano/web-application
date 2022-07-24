@@ -1,17 +1,14 @@
 const { gql, ApolloError } = require('apollo-server')
 const ms = require('../..')
-const Deployment = ms.getModel('Deployment')
-const Config = ms.getModel('Config')
 const { print } = require('graphql')
 const axios = require('axios').default
 const { createDeployment } = require('@vercel/client')
-
 const git = require('simple-git')
 
 const updateBase = () =>
   git()
     .silent(true)
-    .clone(ms.config.get('deploy.remote'), `${process.env.PWD}/tmp/project`)
+    .clone(config.get('deploy.remote'), `${process.env.PWD}/tmp/project`)
     .then(() => console.log('finished'))
     .catch((err) => console.error('failed: ', err))
 
@@ -36,7 +33,7 @@ const typeDefs = gql`
 const vercelDeploy = async (deployment) => {
   for await (const event of createDeployment(
     {
-      token: ms.config.get('deploy.token'),
+      token: config.get('deploy.token'),
       path: `${process.env.PWD}/tmp/project`
     },
     {
@@ -59,26 +56,28 @@ const vercelDeploy = async (deployment) => {
 const resolvers = {
   Query: {
     deployStatus: () =>
-      Config.findOne({ _id: 'settings' })
+      ms.model.Config.findOne({ _id: 'settings' })
         .select('status')
         .exec()
         .then((settings) => settings.toObject().status),
-    deployments: () => Deployment.find().sort('-date').exec()
+    deployments: () => ms.model.Deployment.find().sort('-date').exec()
   },
   Mutation: {
     startDeploy: async (_, { _id }) => {
       let settings
       if (_id) {
-        const existingDeployment = await Deployment.findOne({ _id }).exec()
+        const existingDeployment = await ms.model.Deployment.findOne({
+          _id
+        }).exec()
         if (!existingDeployment) return new ApolloError('deployment not found')
 
-        settings = await Config.findOneAndUpdate(
+        settings = await ms.model.Config.findOneAndUpdate(
           { _id: 'settings' },
           { $set: { settings, status: 'info' } },
           { new: true }
         ).exec()
       } else {
-        settings = await Config.findOneAndUpdate(
+        settings = await ms.model.Config.findOneAndUpdate(
           { _id: 'settings' },
           { $set: { status: 'info' } },
           { new: true }
@@ -95,13 +94,13 @@ const resolvers = {
         }
       `
 
-      const serviceNames = ms.config.get('services') || []
+      const serviceNames = config.get('services') || []
       const promises = []
       serviceNames.forEach((serviceName) =>
         promises.push(
           new Promise((resolve, reject) => {
             axios
-              .post(`${ms.config.get('url', serviceName)}/graphql`, {
+              .post(`${config.get('url', serviceName)}/graphql`, {
                 operationName: 'refreshSettings',
                 query: print(REFRESH_SETTINGS)
               })
@@ -121,7 +120,7 @@ const resolvers = {
 
           await Deployment.find()
             .sort('-date')
-            .skip(ms.config.get('deploy.max') || 32)
+            .skip(config.get('deploy.max') || 32)
             .exec()
             .then(
               (deployments) =>

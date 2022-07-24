@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const urls = ['/', '/user', '/logs', '/settings', '/article']
-
-export default async (req, res) => {
+export default async (req, res, urls) => {
   let token = req.cookies.token
   if (
     !req.nextUrl.searchParams.get('auth') &&
@@ -11,10 +9,14 @@ export default async (req, res) => {
     if (!req.cookies.token)
       return NextResponse.redirect(req.nextUrl.href + '?auth=true')
 
-    const config = process.env.config
-    const url = config && config.sys && config.sys.url
+    const config = JSON.parse(process.env.CONFIG)
+    const url =
+      config &&
+      config.services.sys &&
+      config.services.sys &&
+      config.services.sys.url
 
-    token = await fetch(url + '/token', {
+    token = await fetch(url + '/auth', {
       method: 'GET',
 
       headers: {

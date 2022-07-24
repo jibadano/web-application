@@ -1,6 +1,5 @@
 const { gql } = require('apollo-server')
 const ms = require('../..')
-const Trace = ms.getModel('Trace')
 const PAGE_SIZE = 12
 
 const typeDefs = gql`
@@ -76,7 +75,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     traceFacets: async () => {
-      const operations = await Trace.aggregate([
+      const operations = await ms.model.Trace.aggregate([
         {
           $group: {
             _id: '$operation',
@@ -85,7 +84,7 @@ const resolvers = {
         }
       ])
 
-      const modules = await Trace.aggregate([
+      const modules = await ms.model.Trace.aggregate([
         {
           $group: {
             _id: '$module',
@@ -94,7 +93,7 @@ const resolvers = {
         }
       ])
 
-      const dates = await Trace.aggregate([
+      const dates = await ms.model.Trace.aggregate([
         {
           $group: {
             _id: 'date',
@@ -132,7 +131,11 @@ const resolvers = {
       if (dateFrom) trace.date.$gte = `${dateFrom}:00+0000`
       if (dateTo) trace.date.$lte = `${dateTo}:00+0000`
 
-      return Trace.find(trace).sort(sort).skip(offset).limit(size).exec()
+      return ms.model.Trace.find(trace)
+        .sort(sort)
+        .skip(offset)
+        .limit(size)
+        .exec()
     }
   }
 }

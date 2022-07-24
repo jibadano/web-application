@@ -6,9 +6,9 @@ import { ThemeProvider } from '@mui/material/styles'
 import Email from '@components/app/email'
 import Layout from '@components/app/layout'
 import 'lib/i18next/init'
-import config from 'lib/config'
+import config from '@jibadano/config'
 
-export const theme = createTheme(config.get('settings.theme'))
+export const theme = createTheme(config.get('..settings.theme'))
 
 const App = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps)
@@ -18,7 +18,7 @@ const App = ({ Component, pageProps, router }) => {
   return (
     <>
       <Head>
-        <title>{config.get('settings.app.name')}</title>
+        <title>{config.get('..settings.app.name')}</title>
       </Head>
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>

@@ -6,8 +6,13 @@ const traffic = async (req, res) => {
     const geolocation = req.geo
     const ip = req.ip
     const userAgent = req.ua && req.ua.ua
-    const config = process.env.config
-    const url = config && config.sys && config.sys.url
+
+    const config = JSON.parse(process.env.CONFIG)
+    const url =
+      config &&
+      config.services.sys &&
+      config.services.sys &&
+      config.services.sys.url
 
     if (url)
       fetch(url + '/logTraffic', {

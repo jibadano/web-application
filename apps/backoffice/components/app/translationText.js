@@ -2,10 +2,10 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { ToggleButtonGroup, ToggleButton } from '@mui/material'
 const TranslationField = ({ values }) => {
-  let languages = config.get('settings.i18next.whitelist') || []
+  let languages = config.get('..settings.i18next.whitelist') || []
   languages = languages.filter((lng) => lng != 'cimode')
 
   const [language, setLanguage] = React.useState(languages[0])

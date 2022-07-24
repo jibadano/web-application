@@ -1,7 +1,6 @@
 const { gql } = require('apollo-server')
 const get = require('lodash/get')
-const { model } = require('../..')
-const { Product } = model
+const ms = require('../..')
 
 const typeDefs = gql`
   extend type Query {
@@ -20,7 +19,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     items: (_, { items }) =>
-      Product.find({
+      ms.model.Product.find({
         _id: {
           $in: items.map((itemId) => itemId.split('/')[0])
         }

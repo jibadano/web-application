@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const { config } = require('..')
+const config = require('@jibadano/config')
 const validate = ({ password, hash, salt }) =>
   hash ==
   crypto

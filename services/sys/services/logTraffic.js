@@ -1,5 +1,4 @@
 const ms = require('../..')
-const Traffic = ms.getModel('Traffic')
 
 const getSource = (origin = '') => {
   if (origin.indexOf('utm_source=IGShopping') > -1) return 'instagram'
@@ -43,7 +42,7 @@ module.exports = {
       if (mobile(userAgent)) device = 'mobile'
     }
 
-    new Traffic({
+    new ms.model.Traffic({
       ip: ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       userAgent,
       source: getSource(origin),

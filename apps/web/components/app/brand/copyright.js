@@ -2,10 +2,10 @@ import React from 'react'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import Link from '@mui/material/Link'
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { useTranslation } from 'lib/i18next'
 
-const TITLE = config.get('settings.app.name')
+const TITLE = config.get('..settings.app.name')
 
 const useStyles = makeStyles((theme) => ({
   footer: {

@@ -18,7 +18,7 @@ import Link from '@mui/material/Link'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import IconButton from '@mui/material/IconButton'
-import config from 'lib/config'
+import config from '@jibadano/config'
 import { useTranslation } from 'lib/i18next'
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +87,7 @@ const Footer = () => {
                 style={{ marginRight: 5 }}
               />
               <Typography variant="body1" color="textPrimary">
-                {config.get('settings.contact.address')}
+                {config.get('..settings.contact.address')}
               </Typography>
             </ListItem>
             <ListItem>
@@ -97,7 +97,7 @@ const Footer = () => {
                 style={{ marginRight: 5 }}
               />
               <Typography variant="body1" color="textPrimary">
-                {config.get('settings.contact.email')}
+                {config.get('..settings.contact.email')}
               </Typography>
             </ListItem>
             <ListItem>
@@ -107,7 +107,7 @@ const Footer = () => {
                 style={{ marginRight: 5 }}
               />
               <Typography variant="body1" color="textPrimary">
-                {config.get('settings.contact.whatsapp')}
+                {config.get('..settings.contact.whatsapp')}
               </Typography>
             </ListItem>
           </List>
