@@ -19,8 +19,8 @@
     "turbo": "^1.2.8"
   },
   "engines": {
-    "npm": ">=7.0.0",
-    "node": "16.x"
+    "npm": "8.10.0",
+    "node": "16.13.0"
   },
   "packageManager": "pnpm@6.31.0"
 }
