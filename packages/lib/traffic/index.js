@@ -1,5 +1,6 @@
 import { userAgent } from 'next/server'
-const config = JSON.parse(process.env.CONFIG)
+import config from '@jibadano/config'
+
 const urls = ['/', '/contact', '/article']
 
 const traffic = async (req, res) => {
@@ -10,11 +11,7 @@ const traffic = async (req, res) => {
     const { device, isBot } = userAgent(req)
     const viewport = device.type === 'mobile' ? 'mobile' : 'desktop'
 
-    const url =
-      config &&
-      config.services.sys &&
-      config.services.sys &&
-      config.services.sys.url
+    const url = config.get('..services.sys.url')
 
     if (url)
       fetch(url + '/traffic', {

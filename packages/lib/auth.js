@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-const config = JSON.parse(process.env.CONFIG)
+import config from '@jibadano/config'
 
 export default async (req, res, urls) => {
   let token = req.cookies.token
@@ -10,11 +10,7 @@ export default async (req, res, urls) => {
     if (!req.cookies.token)
       return NextResponse.redirect(req.nextUrl.href + '?auth=true')
 
-    const url =
-      config &&
-      config.services.sys &&
-      config.services.sys &&
-      config.services.sys.url
+    const url = config.get('..services.sys.url')
 
     token = await fetch(url + '/auth', {
       method: 'GET',
