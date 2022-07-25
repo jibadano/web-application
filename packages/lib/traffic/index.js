@@ -17,6 +17,7 @@ const traffic = async (req, res) => {
       config.services.sys &&
       config.services.sys.url
 
+    console.log({ url })
     if (url)
       fetch(url + '/traffic', {
         method: 'POST',
@@ -34,7 +35,7 @@ const traffic = async (req, res) => {
         //do nothing
       })
 
-    res.cookie('traffic', true)
+    res.cookies.set('traffic', true)
   }
 
   return res

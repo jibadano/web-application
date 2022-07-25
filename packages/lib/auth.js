@@ -24,7 +24,7 @@ export default async (req, res, urls) => {
       }
     }).then((res) => res.status == 200 && res.text())
 
-    if (token) res.cookie('token', token)
+    if (token) res.cookies.set('token', token)
 
     if (!token) return NextResponse.redirect(req.nextUrl.href + '?auth=true')
   }
