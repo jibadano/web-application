@@ -31,7 +31,7 @@ importers:
       lib: workspace:*
       lodash: ^4.17.10
       moment: ^2.25.3
-      next: ^12.0.8
+      next: ^12.2.3
       next-transpile-modules: ^9.0.0
       notistack: ^2.0.3
       react: ^17.0.2
@@ -91,7 +91,7 @@ importers:
       image: workspace:*
       lib: workspace:*
       lodash: ^4.17.10
-      next: ^12.0.8
+      next: ^12.2.3
       next-pwa: ^5.5.4
       next-transpile-modules: ^9.0.0
       notistack: ^2.0.3
@@ -172,15 +172,15 @@ importers:
       i18next: ^19.4.4
       js-cookie: ^3.0.1
       lodash: ^4.17.10
-      next: ^12.0.8
+      next: ^12.2.3
       react: ^17.0.2
       react-dom: ^17.0.2
       react-i18next: ^11.4.0
     dependencies:
       '@apollo/client': 3.6.9_graphql@15.8.0+react@17.0.2
-      '@emotion/react': 11.9.3_react@17.0.2
-      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
-      '@jibadano/config': 0.0.5
+      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
+      '@jibadano/config': 0.0.5_@babel+core@7.18.9
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
       apollo-link-context: 1.0.20_graphql@15.8.0
       apollo-link-error: 1.1.13_graphql@15.8.0
@@ -190,7 +190,7 @@ importers:
       i18next: 19.9.2
       js-cookie: 3.0.1
       lodash: 4.17.21
-      next: 12.2.3_react-dom@17.0.2+react@17.0.2
+      next: 12.2.3_8530c319cc77dce1ab627155a67642c5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-i18next: 11.18.1_8f2a12f93b34591c18c344cd829419b1
@@ -701,6 +701,8 @@ packages:
     resolution: {integrity: sha512-9uJveS9eY9DJ0t64YbIBZICtJy8a5QrDEVdiLCG97fVLpDTpGX7t8mMSb6OWw6Lrnjqj4O8zwjELX3dhoMgiBg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.18.9
     dev: false
 
   /@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression/7.18.6_@babel+core@7.18.9:
@@ -2098,8 +2100,8 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.18.9
-      '@emotion/react': 11.9.3_react@17.0.2
-      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
       '@mui/base': 5.0.0-alpha.90_react-dom@17.0.2+react@17.0.2
       '@mui/system': 5.9.1_cf460bf2c10d416730a3448bc1e65644
       '@mui/types': 7.1.4
@@ -2145,8 +2147,8 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.9
       '@emotion/cache': 11.9.3
-      '@emotion/react': 11.9.3_react@17.0.2
-      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
       csstype: 3.1.0
       prop-types: 15.8.1
       react: 17.0.2
@@ -2199,8 +2201,8 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.18.9
-      '@emotion/react': 11.9.3_react@17.0.2
-      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
       '@mui/private-theming': 5.9.1_react@17.0.2
       '@mui/styled-engine': 5.8.7_cf460bf2c10d416730a3448bc1e65644
       '@mui/types': 7.1.4
