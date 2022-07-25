@@ -9,7 +9,6 @@ module.exports = withConfig(
     webpack: (config) => {
       config.module.rules.forEach((rule) => {
         if (rule.oneOf) {
-          console.log(rule)
           rule.oneOf.forEach((one) => {
             if (
               one.test &&

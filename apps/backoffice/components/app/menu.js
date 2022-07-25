@@ -67,11 +67,7 @@ const MenuItem = ({
       disableGutters
       {...rest}
     >
-      <Button
-        activeClassName={classes.active}
-        className={classes.button}
-        onClick={onClick}
-      >
+      <Button className={classes.button} onClick={onClick}>
         {Icon && <Icon className={classes.icon} size="20" />}
         <span className={classes.title}>{title}</span>
       </Button>
