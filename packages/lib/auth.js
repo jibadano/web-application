@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server'
 
 export default async (req, res, urls) => {
-  let token = req.cookies.token
+  let token = req.cookies.get('token')
   if (
     !req.nextUrl.searchParams.get('auth') &&
     urls.includes(req.nextUrl.pathname)
   ) {
-    if (!req.cookies.token)
-      return NextResponse.redirect(req.nextUrl.href + '?auth=true')
+    if (!token) return NextResponse.redirect(req.nextUrl.href + '?auth=true')
 
     const config = JSON.parse(process.env.CONFIG)
     const url =
@@ -20,7 +19,7 @@ export default async (req, res, urls) => {
       method: 'GET',
 
       headers: {
-        authorization: 'Bearer ' + req.cookies.token
+        authorization: 'Bearer ' + token
       }
     }).then((res) => res.status == 200 && res.text())
 

@@ -3,7 +3,7 @@ import { userAgent } from 'next/server'
 const urls = ['/', '/contact', '/article']
 
 const traffic = async (req, res) => {
-  if (!req.cookies.traffic && urls.includes(req.nextUrl.pathname)) {
+  if (!req.cookies.get('traffic') && urls.includes(req.nextUrl.pathname)) {
     const origin = req.nextUrl.href
     const geolocation = req.geo
     const ip = req.ip
