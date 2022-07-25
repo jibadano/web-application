@@ -7,7 +7,7 @@ const traffic = async (req, res) => {
     const origin = req.nextUrl.href
     const geolocation = req.geo
     const ip = req.ip
-    const { device, isBot } = userAgent(request)
+    const { device, isBot } = userAgent(req)
     const viewport = device.type === 'mobile' ? 'mobile' : 'desktop'
 
     const config = JSON.parse(process.env.CONFIG)
