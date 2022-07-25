@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+const config = JSON.parse(process.env.CONFIG)
 
 export default async (req, res, urls) => {
   let token = req.cookies.token
@@ -9,7 +10,6 @@ export default async (req, res, urls) => {
     if (!req.cookies.token)
       return NextResponse.redirect(req.nextUrl.href + '?auth=true')
 
-    const config = JSON.parse(process.env.CONFIG)
     const url =
       config &&
       config.services.sys &&

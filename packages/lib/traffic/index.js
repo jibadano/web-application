@@ -1,5 +1,5 @@
 import { userAgent } from 'next/server'
-
+const config = JSON.parse(process.env.CONFIG)
 const urls = ['/', '/contact', '/article']
 
 const traffic = async (req, res) => {
@@ -10,14 +10,12 @@ const traffic = async (req, res) => {
     const { device, isBot } = userAgent(req)
     const viewport = device.type === 'mobile' ? 'mobile' : 'desktop'
 
-    const config = JSON.parse(process.env.CONFIG)
     const url =
       config &&
       config.services.sys &&
       config.services.sys &&
       config.services.sys.url
 
-    console.log({ url })
     if (url)
       fetch(url + '/traffic', {
         method: 'POST',
