@@ -17,7 +17,7 @@
     "@babel/core": "^7.18.9",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
-    "@jibadano/config": "0.0.5",
+    "@jibadano/config": "0.0.6",
     "@jibadano/language": "^0.0.1",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",

@@ -16,7 +16,7 @@ importers:
       '@babel/core': ^7.18.9
       '@emotion/react': ^11.5.0
       '@emotion/styled': ^11.3.0
-      '@jibadano/config': 0.0.5
+      '@jibadano/config': 0.0.6
       '@jibadano/language': ^0.0.1
       '@mui/icons-material': ^5.0.5
       '@mui/material': ^5.0.6
@@ -48,7 +48,7 @@ importers:
       '@babel/core': 7.18.9
       '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
       '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
-      '@jibadano/config': 0.0.5_@babel+core@7.18.9
+      '@jibadano/config': 0.0.6_@babel+core@7.18.9
       '@jibadano/language': 0.0.1_8530c319cc77dce1ab627155a67642c5
       '@mui/icons-material': 5.8.4_@mui+material@5.9.1+react@17.0.2
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
@@ -82,7 +82,7 @@ importers:
       '@babel/core': ^7.18.9
       '@emotion/react': ^11.5.0
       '@emotion/styled': ^11.3.0
-      '@jibadano/config': 0.0.3
+      '@jibadano/config': 0.0.6
       '@mui/material': ^5.0.6
       '@mui/styles': ^5.0.2
       form: workspace:*
@@ -105,7 +105,7 @@ importers:
       '@babel/core': 7.18.9
       '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
       '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
-      '@jibadano/config': 0.0.3_@babel+core@7.18.9
+      '@jibadano/config': 0.0.6_@babel+core@7.18.9
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
       '@mui/styles': 5.9.1_react@17.0.2
       form: link:../../packages/form
@@ -131,8 +131,8 @@ importers:
       react-text-mask: ^5.4.3
     dependencies:
       lodash: 4.17.21
-      react-color: 2.19.3
-      react-text-mask: 5.4.3
+      react-color: 2.19.3_react@16.14.0
+      react-text-mask: 5.4.3_react@16.14.0
 
   packages/image:
     specifiers:
@@ -146,8 +146,8 @@ importers:
       react-dom: ^17.0.2
       react-easy-crop: ^3.5.3
     dependencies:
-      '@emotion/react': 11.9.3_react@17.0.2
-      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
       '@mui/icons-material': 5.8.4_@mui+material@5.9.1+react@17.0.2
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
       '@mui/styles': 5.9.1_react@17.0.2
@@ -162,7 +162,7 @@ importers:
       '@apollo/client': ^3.4.16
       '@emotion/react': ^11.5.0
       '@emotion/styled': ^11.3.0
-      '@jibadano/config': 0.0.5
+      '@jibadano/config': 0.0.6
       '@mui/material': ^5.0.6
       apollo-link-context: ^1.0.8
       apollo-link-error: ^1.1.13
@@ -178,9 +178,9 @@ importers:
       react-i18next: ^11.4.0
     dependencies:
       '@apollo/client': 3.6.9_graphql@15.8.0+react@17.0.2
-      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
-      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
-      '@jibadano/config': 0.0.5_@babel+core@7.18.9
+      '@emotion/react': 11.9.3_react@17.0.2
+      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@jibadano/config': 0.0.6
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
       apollo-link-context: 1.0.20_graphql@15.8.0
       apollo-link-error: 1.1.13_graphql@15.8.0
@@ -190,14 +190,14 @@ importers:
       i18next: 19.9.2
       js-cookie: 3.0.1
       lodash: 4.17.21
-      next: 12.2.3_8530c319cc77dce1ab627155a67642c5
+      next: 12.2.3_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-i18next: 11.18.1_8f2a12f93b34591c18c344cd829419b1
 
   services:
     specifiers:
-      '@jibadano/config': 0.0.5
+      '@jibadano/config': 0.0.6
       '@jibadano/microservice': 0.3.15
       apollo-server: ^3.10.0
       dotenv: ^16.0.1
@@ -207,7 +207,7 @@ importers:
       mongoose: 6.4.6
       nodemon: ^2.0.19
     dependencies:
-      '@jibadano/config': 0.0.5
+      '@jibadano/config': 0.0.6
       '@jibadano/microservice': 0.3.15
       apollo-server: 3.10.0_graphql@15.8.0
       dotenv: 16.0.1
@@ -1802,10 +1802,12 @@ packages:
       graphql: 15.8.0
     dev: false
 
-  /@icons/material/0.2.4:
+  /@icons/material/0.2.4_react@16.14.0:
     resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
     peerDependencies:
       react: '*'
+    dependencies:
+      react: 16.14.0
     dev: false
 
   /@jibadano/config/0.0.3:
@@ -1825,25 +1827,8 @@ packages:
       - supports-color
     dev: false
 
-  /@jibadano/config/0.0.3_@babel+core@7.18.9:
-    resolution: {integrity: sha512-r+F+iIFplPRrS+V3RbkFqZe+SDdlaiWwXQ+QivE9by2aIRKI8qdqsIUMcy8m6OJze/9M7GWCZt1Nb2hmI6GcNQ==}
-    dependencies:
-      lodash: 4.17.21
-      mongoose: 6.4.6
-      next: 12.2.3_8530c319cc77dce1ab627155a67642c5
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-      - fibers
-      - node-sass
-      - sass
-      - supports-color
-    dev: false
-
-  /@jibadano/config/0.0.5:
-    resolution: {integrity: sha512-uDuz725Xcw9ZvGkjpoDh4J3Jzx/V2VnZcohaVQusBa2sQ6X3z5t+4LPqppjTEEkwfvUMvVPOJk44v7ePJuYpYg==}
+  /@jibadano/config/0.0.6:
+    resolution: {integrity: sha512-N2aDM8qBvcoYhs+NPn9ca5+KJv6Rd18jWdbnpmspSA8EDqh6/x5Z8Ut5teebhGQgwihG0mTUOFc7bava5SdG4w==}
     dependencies:
       lodash: 4.17.21
       mongoose: 6.4.6
@@ -1859,8 +1844,8 @@ packages:
       - supports-color
     dev: false
 
-  /@jibadano/config/0.0.5_@babel+core@7.18.9:
-    resolution: {integrity: sha512-uDuz725Xcw9ZvGkjpoDh4J3Jzx/V2VnZcohaVQusBa2sQ6X3z5t+4LPqppjTEEkwfvUMvVPOJk44v7ePJuYpYg==}
+  /@jibadano/config/0.0.6_@babel+core@7.18.9:
+    resolution: {integrity: sha512-N2aDM8qBvcoYhs+NPn9ca5+KJv6Rd18jWdbnpmspSA8EDqh6/x5Z8Ut5teebhGQgwihG0mTUOFc7bava5SdG4w==}
     dependencies:
       lodash: 4.17.21
       mongoose: 6.4.6
@@ -2778,6 +2763,7 @@ packages:
     transitivePeerDependencies:
       - '@types/node-fetch'
       - encoding
+      - supports-color
     dev: false
 
   /@vercel/routing-utils/2.0.0:
@@ -2956,6 +2942,8 @@ packages:
       async-retry: 1.3.3
       debug: 3.2.7
       node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@zeit/fetch/5.2.0_b060e83a96d210c6fba181816daeccc8:
@@ -2971,6 +2959,8 @@ packages:
       agentkeepalive: 3.4.1
       debug: 3.1.0
       node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /abbrev/1.1.1:
@@ -3296,6 +3286,7 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - encoding
+      - supports-color
       - utf-8-validate
     dev: false
 
@@ -3321,6 +3312,7 @@ packages:
       parseurl: 1.3.3
     transitivePeerDependencies:
       - encoding
+      - supports-color
     dev: false
 
   /apollo-server-plugin-base/0.13.0_graphql@15.8.0:
@@ -3388,6 +3380,7 @@ packages:
       graphql: 15.8.0
     transitivePeerDependencies:
       - encoding
+      - supports-color
     dev: false
 
   /apollo-tracing/0.15.0_graphql@15.8.0:
@@ -3624,6 +3617,8 @@ packages:
       raw-body: 2.5.1
       type-is: 1.6.18
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /brace-expansion/1.1.11:
@@ -3913,20 +3908,48 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: false
 
   /debug/3.1.0:
     resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: false
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
+    dev: false
+
+  /debug/3.2.7_supports-color@5.5.0:
+    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.3
+      supports-color: 5.5.0
+    dev: true
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -4250,6 +4273,8 @@ packages:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /extend/3.0.2:
@@ -4309,6 +4334,8 @@ packages:
       parseurl: 1.3.3
       statuses: 2.0.1
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /find-cache-dir/3.3.2:
@@ -5632,7 +5659,7 @@ packages:
     requiresBuild: true
     dependencies:
       chokidar: 3.5.3
-      debug: 3.2.7
+      debug: 3.2.7_supports-color@5.5.0
       ignore-by-default: 1.0.1
       minimatch: 3.1.2
       pstree.remy: 1.1.8
@@ -5988,17 +6015,18 @@ packages:
       react: 17.0.2
     dev: false
 
-  /react-color/2.19.3:
+  /react-color/2.19.3_react@16.14.0:
     resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
     peerDependencies:
       react: '*'
     dependencies:
-      '@icons/material': 0.2.4
+      '@icons/material': 0.2.4_react@16.14.0
       lodash: 4.17.21
       lodash-es: 4.17.21
       material-colors: 1.2.6
       prop-types: 15.8.1
-      reactcss: 1.2.3
+      react: 16.14.0
+      reactcss: 1.2.3_react@16.14.0
       tinycolor2: 1.4.2
     dev: false
 
@@ -6108,12 +6136,13 @@ packages:
       react-easy-swipe: 0.0.21
     dev: false
 
-  /react-text-mask/5.4.3:
+  /react-text-mask/5.4.3_react@16.14.0:
     resolution: {integrity: sha512-IQ26CO6YMhc2FBRxLVnckBEDkuMvBQOiHBeAxWdZzoqMMOQvGG6vrVW1Rv6RtqOYsqVQaQd+6zYDW2tEM8VXxA==}
     peerDependencies:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0
     dependencies:
       prop-types: 15.8.1
+      react: 16.14.0
     dev: false
 
   /react-transition-group/4.4.2_react-dom@17.0.2+react@17.0.2:
@@ -6130,6 +6159,15 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
+  /react/16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+    dev: false
+
   /react/17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
     engines: {node: '>=0.10.0'}
@@ -6137,10 +6175,13 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
 
-  /reactcss/1.2.3:
+  /reactcss/1.2.3_react@16.14.0:
     resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
+    peerDependencies:
+      react: '*'
     dependencies:
       lodash: 4.17.21
+      react: 16.14.0
     dev: false
 
   /readdirp/3.6.0:
@@ -6386,6 +6427,8 @@ packages:
       on-finished: 2.4.1
       range-parser: 1.2.1
       statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /serialize-javascript/4.0.0:
@@ -6408,6 +6451,8 @@ packages:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.18.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /setprototypeof/1.2.0:
