@@ -12,15 +12,15 @@
     "dev": "turbo run dev --parallel",
     "scope": "turbo run dev --scope=web",
     "start": "pnpm run start --auto-install-peers=true --filter services",
-    "heroku-postbuild": "npx turbo run build --scope=services --includeDependencies --no-deps"
+    "heroku-postbuild": "npx turbo run build --scope=services --no-deps"
   },
   "devDependencies": {
     "prettier": "^2.6.2",
-    "turbo": "^1.2.8"
+    "turbo": "^1.3.4"
   },
   "engines": {
-    "npm": "8.10.0",
-    "node": "16.13.0"
+    "npm": "8.x",
+    "node": "16.x"
   },
   "packageManager": "pnpm@6.31.0"
 }
