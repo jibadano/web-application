@@ -1,3 +1,5 @@
+import { userAgent } from 'next/server'
+
 const urls = ['/', '/contact', '/article']
 
 const traffic = async (req, res) => {
@@ -5,7 +7,8 @@ const traffic = async (req, res) => {
     const origin = req.nextUrl.href
     const geolocation = req.geo
     const ip = req.ip
-    const userAgent = req.ua && req.ua.ua
+    const { device, isBot } = userAgent(request)
+    const viewport = device.type === 'mobile' ? 'mobile' : 'desktop'
 
     const config = JSON.parse(process.env.CONFIG)
     const url =
@@ -22,7 +25,8 @@ const traffic = async (req, res) => {
         },
         body: JSON.stringify({
           ip,
-          userAgent,
+          viewport,
+          isBot,
           origin,
           geolocation
         })
