@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server')
-const ms = require('../..')
+const ms = require('@jibadano/microservice')
 const config = require('@jibadano/config')
 const typeDefs = gql`
   extend type Mutation {

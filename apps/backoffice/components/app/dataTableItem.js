@@ -14,8 +14,8 @@ export const DataTableItemSkeleton = ({ config = [], button }) => {
       {config.map(({ hiddenMobile }) => {
         if (hiddenMobile && mobile) return
         return (
-          <TableCell>
-            <Skeleton />
+          <TableCell sx={{ padding: 1.5 }}>
+            <Skeleton variant="text" />
           </TableCell>
         )
       })}

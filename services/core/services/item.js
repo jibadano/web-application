@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server')
 const get = require('lodash/get')
-const ms = require('../..')
+const ms = require('@jibadano/microservice')
 
 const typeDefs = gql`
   extend type Query {

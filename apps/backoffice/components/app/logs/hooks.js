@@ -90,9 +90,12 @@ const TRACE_FACETS = gql`
   }
 `
 
-export const useTraceFacets = () =>
-  useQuery(TRACE_FACETS, {
+export const useTraceFacets = () => {
+  const { data, ...query } = useQuery(TRACE_FACETS, {
     context: {
       clientName: 'sys'
     }
   })
+
+  return { traceFacets: data && data.traceFacets, data, ...query }
+}

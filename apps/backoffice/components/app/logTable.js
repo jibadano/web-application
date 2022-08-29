@@ -9,7 +9,7 @@ import JSONPretty from 'react-json-pretty'
 import Chip from '@mui/material/Chip'
 import Dialog from '@mui/material/Dialog'
 
-const LogTable = ({ traces, loading, ...props }) => {
+const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
   const [open, setOpen] = React.useState()
 
   return (
@@ -58,15 +58,31 @@ const LogTable = ({ traces, loading, ...props }) => {
                   {moment(log.timestamp).utc().format('YYYY-MM-DD HH:mm:ss')}
                 </Typography>,
                 <Chip
+                  onClick={() => onChange({ type: log.type })}
                   label={log.type}
                   color={log.type}
                   variant="outlined"
                   size="small"
                 />,
-                log.message,
                 <Typography
+                  onClick={() => onChange({ operation })}
                   variant="body1"
-                  style={{ display: 'flex', alignItems: 'center' }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {log.message}
+                </Typography>,
+                <Typography
+                  onClick={() => onChange({ operation })}
+                  variant="body1"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
                 >
                   <div
                     style={{
@@ -79,9 +95,34 @@ const LogTable = ({ traces, loading, ...props }) => {
                   />
                   {operation}
                 </Typography>,
-                <Typography variant="caption">{user}</Typography>,
-                <Typography variant="caption">{ip}</Typography>,
-                <Chip label={module} color="primary" size="small" />,
+                <Typography
+                  onClick={() => onChange({ user })}
+                  variant="caption"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {user}
+                </Typography>,
+                <Typography
+                  variant="caption"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => onChange({ ip })}
+                >
+                  {ip}
+                </Typography>,
+                <Chip
+                  onClick={() => onChange({ module })}
+                  label={module}
+                  color="primary"
+                  size="small"
+                />,
                 <IconButton
                   size="small"
                   disabled={!Boolean(log.data)}

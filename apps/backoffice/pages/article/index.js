@@ -36,16 +36,14 @@ const Articles = () => {
             </Breadcrumbs>
           }
           actions={
-            <Box mr={2}>
-              <Button
-                startIcon={<AddIcon />}
-                variant="contained"
-                color="primary"
-                onClick={() => router.push(`article/new`)}
-              >
-                New article
-              </Button>
-            </Box>
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              color="primary"
+              onClick={() => router.push(`article/new`)}
+            >
+              New article
+            </Button>
           }
         >
           Articles

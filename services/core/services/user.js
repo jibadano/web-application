@@ -1,5 +1,5 @@
 const { gql, ApolloError } = require('apollo-server')
-const ms = require('../..')
+const ms = require('@jibadano/microservice')
 const typeDefs = gql`
   extend type Query {
     user(_id: ID!): User @auth
@@ -21,7 +21,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    user: (_, user) => User.findOne(user).exec(),
+    user: (_, user) => ms.model.User.findOne(user).exec(),
     me: (_, __, { session }) =>
       ms.model.User.findOne({ _id: session.user._id }).exec()
   },

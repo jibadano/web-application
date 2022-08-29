@@ -9,10 +9,16 @@ export default ({ id, values, handleChange, options = [], ...props }) => (
     exclusive
     onChange={(e, value) => handleChange({ target: { id, value } })}
     size="medium"
+    fullWidth
+    color="primary"
     {...props}
   >
     {options.map((option) => (
-      <ToggleButton key={option.value} value={option.value}>
+      <ToggleButton
+        sx={{ color: 'text.primary', borderColor: 'rgba(0,0,0,0.23)' }}
+        key={option.value}
+        value={option.value}
+      >
         {option.name}
       </ToggleButton>
     ))}

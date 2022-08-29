@@ -62,13 +62,13 @@ const DataTable = ({
     <TableContainer component={Paper} {...props}>
       {head}
       <Table size={size}>
-        <TableHead>
+        <TableHead style={{ position: 'sticky' }}>
           <TableRow>
             {config.map(({ title, _id, sortable, hiddenMobile, props }) => {
               if (hiddenMobile && mobile) return
               return (
                 <DataTableHeadCell
-                  key={_id}
+                  key={title + _id}
                   onClick={sortable && onSortChange}
                   sort={sort}
                   value={_id}
@@ -82,10 +82,15 @@ const DataTable = ({
             {!mobile && button && <DataTableHeadCell align="right" />}
           </TableRow>
         </TableHead>
-
         <TableBody>
           {loading ? (
             <React.Fragment>
+              <DataTableItemSkeleton config={config} button={button} />
+              <DataTableItemSkeleton config={config} button={button} />
+              <DataTableItemSkeleton config={config} button={button} />
+              <DataTableItemSkeleton config={config} button={button} />
+              <DataTableItemSkeleton config={config} button={button} />
+              <DataTableItemSkeleton config={config} button={button} />
               <DataTableItemSkeleton config={config} button={button} />
               <DataTableItemSkeleton config={config} button={button} />
               <DataTableItemSkeleton config={config} button={button} />

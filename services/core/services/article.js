@@ -1,5 +1,5 @@
 const { gql, ApolloError } = require('apollo-server')
-const ms = require('../..')
+const ms = require('@jibadano/microservice')
 const config = require('@jibadano/config')
 const PAGE_SIZE = config.get('..settings.app.articles.pageSize') || 6
 const typeDefs = gql`

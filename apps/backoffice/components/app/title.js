@@ -8,20 +8,20 @@ const Title = ({ children, overtitle, subtitle, actions }) => (
     justifyContent="flex-end"
     alignItems="flex-end"
   >
-    <Box flexGrow={1}>
+    <Box flexGrow={1} mx={2}>
       <Typography variant="button" gutterBottom color="textSecondary">
         {overtitle}
       </Typography>
       <Typography variant="h4">{children}</Typography>
-      <Typography
-        style={{ paddingTop: 5 }}
-        variant="body1"
-        color="textSecondary"
-      >
-        {subtitle}
-      </Typography>
+      {subtitle && (
+        <Box py={1}>
+          <Typography variant="body1" color="textSecondary">
+            {subtitle}
+          </Typography>
+        </Box>
+      )}
     </Box>
-    <Box pt={2}>{actions}</Box>
+    <Box mt={{ xs: 2, sm: 0 }}>{actions}</Box>
   </Box>
 )
 

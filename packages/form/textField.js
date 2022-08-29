@@ -47,6 +47,7 @@ const TextField = ({
     id={id}
     type={type}
     disabled={disabled}
+    defaultValue={get(values, id)}
     value={get(values, id)}
     error={Boolean(get(touched, id) && get(errors, id))}
     helperText={
@@ -60,7 +61,7 @@ const TextField = ({
     rows={rows}
     multiline={multi}
     InputLabelProps={{
-      shrink: type == 'date' ? true : undefined
+      shrink: get(values, id) ? true : undefined
     }}
     InputProps={getInputProps({
       id,
