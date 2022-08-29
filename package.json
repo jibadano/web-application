@@ -11,7 +11,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "scope": "turbo run dev --scope=web",
-    "start": "pnpm start --filter services",
+    "start": "turbo run start --filter=services",
     "heroku-postbuild": "npx turbo run build --scope=services --no-deps"
   },
   "devDependencies": {

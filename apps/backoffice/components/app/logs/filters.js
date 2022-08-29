@@ -7,7 +7,7 @@ import RemoveIcon from '@mui/icons-material/Close'
 import Loading from '@backoffice/components/app/loading'
 import TextField from '@mui/material/TextField'
 import Chip from '@mui/material/Chip'
-
+import Toggle from 'form/toggle'
 const LogsFilters = ({ onChange }) => {
   const router = useRouter()
 
