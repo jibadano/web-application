@@ -11,8 +11,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "scope": "turbo run dev --scope=web",
-    "build-services": "pnpm i -r && ./node_modules/turbo/bin/turbo run build --scope=services",
-    "start-services": "./node_modules/turbo/bin/turbo run start --filter=services",
+    "build-services": "npm i -g turbo@1.4.3 && turbo run build --scope=services",
+    "start-services": "turbo run start --filter=services",
     "start": "npx turbo run start --filter=services",
     "heroku-postbuild": "npx turbo run build --scope=services"
   },
