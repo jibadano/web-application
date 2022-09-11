@@ -1,17 +1,15 @@
 import React from 'react'
 
 import Actions from '@backoffice/components/app/actions'
-import DataList from '@backoffice/components/app/dataList'
-import DataListItem from '@backoffice/components/app/dataListItem'
+import Divider from '@mui/material/Divider'
 
-import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
-import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-
-import { useRemoveCredential } from '../auth/hooks'
+import UserEdit from './edit'
+import UserSecurity from './security'
 
 const User = ({
   _id,
@@ -20,71 +18,31 @@ const User = ({
   name,
   avatar,
   jobTitle,
-  onEdit = () => {},
-  onSecurity = () => {},
   onDone = () => {}
 }) => {
-  const [removeCredential] = useRemoveCredential()
-
-  if (!_id)
-    return (
-      <Paper>
-        <Box
-          height="50vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Button
-            endIcon={<EditIcon />}
-            variant="contained"
-            color="primary"
-            onClick={onEdit}
-          >
-            Configure profile
+  return (
+    <Box>
+      <UserEdit _id={_id} name={name} avatar={avatar} jobTitle={jobTitle} />
+      <Divider />
+      <UserSecurity _id={_id} />
+      <Divider />
+      {(role == 'ADMIN' || currentUser) && (
+        <Box sx={{ my: 3 }}>
+          <Typography sx={{ mb: 2 }} variant="h5" color="error">
+            Dangerous zone
+          </Typography>
+          <Button variant="contained" color="error" endIcon={<DeleteIcon />}>
+            Delete user
           </Button>
         </Box>
-      </Paper>
-    )
-
-  return (
-    <DataList images={avatar ? [avatar] : []}>
-      <DataListItem label="Name" primary={name} />
-      <DataListItem label="E-mail" primary={_id} />
-      <DataListItem label="Job Title" primary={jobTitle} />
-
-      <Box p={2} width="100%">
+      )}
+      <Divider />
+      <Box sx={{ my: 3 }}>
         <Actions
           left={[{ children: 'Back', variant: 'text', onClick: onDone }]}
-          right={[
-            {
-              display: Boolean(role == 'ADMIN' || currentUser),
-              endIcon: <DeleteIcon />,
-              children: 'Delete',
-              variant: 'outlined',
-              color: 'secondary',
-              onClick: () =>
-                removeCredential({ variables: { _id } }).then(onDone)
-            },
-            {
-              display: Boolean(role == 'ADMIN' || currentUser),
-              children: 'Security',
-              variant: 'outlined',
-              color: 'primary',
-              onClick: onSecurity
-            },
-            {
-              display: Boolean(role == 'ADMIN' || currentUser),
-              endIcon: <EditIcon />,
-              children: 'Edit',
-              variant: 'contained',
-              color: 'primary',
-              onClick: onEdit
-            }
-          ]}
         />
       </Box>
-    </DataList>
+    </Box>
   )
 }
 

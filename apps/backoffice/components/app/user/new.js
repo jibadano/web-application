@@ -16,12 +16,9 @@ import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4),
+    maxWidth: theme.breakpoints.values.sm,
     '& > *': {
       marginBottom: theme.spacing(4)
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3)
     }
   }
 }))
@@ -32,71 +29,69 @@ const UserNew = ({ onDone = () => {} }) => {
   const exists = useExists()
 
   return (
-    <Paper>
-      <Formik
-        enableReinitialize
-        validateOnChange={false}
-        initialValues={{ _id: '' }}
-        validationSchema={Yup.object().shape({
-          _id: Yup.string()
-            .nullable()
-            .email(t('This is not a valid e-mail'))
-            .required(t('We need this to proceed'))
-            .test('alreadyExists', t('This user already exists'), async (_id) =>
-              _id
-                ? exists.refetch({ _id }).then(({ data }) => !data.exists)
-                : false
-            ),
-          password: Yup.string().nullable(),
-          role: Yup.string().nullable()
-        })}
-        onSubmit={(variables) =>
-          signup({
-            variables
-          }).then(onDone)
-        }
-      >
-        {({ handleSubmit, handleReset, dirty, ...props }) => (
-          <form autoComplete="off" onSubmit={handleSubmit}>
-            <div className={classes.root}>
-              <TextField id="_id" asyncValidation={exists} {...props}>
-                {t('E-mail')}
-              </TextField>
+    <Formik
+      enableReinitialize
+      validateOnChange={false}
+      initialValues={{ _id: '' }}
+      validationSchema={Yup.object().shape({
+        _id: Yup.string()
+          .nullable()
+          .email(t('This is not a valid e-mail'))
+          .required(t('We need this to proceed'))
+          .test('alreadyExists', t('This user already exists'), async (_id) =>
+            _id
+              ? exists.refetch({ _id }).then(({ data }) => !data.exists)
+              : false
+          ),
+        password: Yup.string().nullable(),
+        role: Yup.string().nullable()
+      })}
+      onSubmit={(variables) =>
+        signup({
+          variables
+        }).then(onDone)
+      }
+    >
+      {({ handleSubmit, handleReset, dirty, ...props }) => (
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div className={classes.root}>
+            <TextField id="_id" asyncValidation={exists} {...props}>
+              {t('E-mail')}
+            </TextField>
 
-              <Password id="password" {...props}>
-                {t('Password')}
-              </Password>
+            <Password id="password" {...props}>
+              {t('Password')}
+            </Password>
 
-              <Select
-                id="role"
-                options={[
-                  { value: 'USER', name: 'User' },
-                  { value: 'GUEST', name: 'Guest' },
-                  { value: 'ADMIN', name: 'Admin' }
-                ]}
-                {...props}
-              >
-                {t('Role')}
-              </Select>
+            <Select
+              id="role"
+              options={[
+                { value: 'USER', name: 'User' },
+                { value: 'GUEST', name: 'Guest' },
+                { value: 'ADMIN', name: 'Admin' }
+              ]}
+              {...props}
+            >
+              {t('Role')}
+            </Select>
 
-              <Actions
-                left={[
-                  { children: t('Cancel'), variant: 'text', onClick: onDone }
-                ]}
-                right={[
-                  {
-                    color: 'primary',
-                    children: t('Create'),
-                    variant: 'outlined',
-                    onClick: handleSubmit
-                  }
-                ]}
-              />
-            </div>
-          </form>
-        )}
-      </Formik>
-    </Paper>
+            <Actions
+              left={[
+                { children: t('Cancel'), variant: 'text', onClick: onDone }
+              ]}
+              right={[
+                {
+                  color: 'primary',
+                  children: t('Create'),
+                  variant: 'outlined',
+                  onClick: handleSubmit
+                }
+              ]}
+            />
+          </div>
+        </form>
+      )}
+    </Formik>
   )
 }
 

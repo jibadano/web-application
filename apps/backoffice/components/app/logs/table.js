@@ -1,33 +1,50 @@
 import React from 'react'
 import moment from 'moment'
-
-import DataTable from './dataTable'
+import { useRouter } from 'next/router'
+import DataTable from '../dataTable'
 import Typography from '@mui/material/Typography'
 import LogIcon from '@mui/icons-material/Subject'
 import IconButton from '@mui/material/IconButton'
-import JSONPretty from 'react-json-pretty'
 import Chip from '@mui/material/Chip'
-import Dialog from '@mui/material/Dialog'
+import { useTraces } from '@backoffice/components/app/logs/hooks'
 
-const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
-  const [open, setOpen] = React.useState()
+import LogsFilter from './filter'
+import LogData from './data'
+
+const LogTable = () => {
+  const router = useRouter()
+  const [data, setData] = React.useState()
+  const [sort, setSort] = React.useState()
+  const [page, setPage] = React.useState(0)
+  const [filters, setFilters] = React.useState({})
+  const { traces, hasMore, loading } = useTraces({
+    page,
+    sort,
+    size: 12,
+    ...filters
+  })
+
+  React.useEffect(() => {
+    setFilters(router.query)
+  }, [router.query])
+
+  const onChange = (filters) => {
+    setFilters(filters)
+    router.replace({ query: filters })
+  }
 
   return (
-    <React.Fragment>
-      <Dialog maxWidth="md" onClose={() => setOpen()} open={Boolean(open)}>
-        {open && (
-          <div>
-            <JSONPretty
-              data={open.data}
-              mainStyle="padding:40px;margin:0"
-              errorStyle="padding:40px;margin:0"
-            ></JSONPretty>
-          </div>
-        )}
-      </Dialog>
+    <>
+      <LogData data={data} onClose={() => setData()} />
       <DataTable
         size="small"
         loading={loading}
+        head={<LogsFilter filters={filters} onChange={onChange} />}
+        sort={sort}
+        onSortChange={setSort}
+        page={page}
+        onPageChange={setPage}
+        hasMore={hasMore}
         config={[
           { title: 'Date', _id: 'date', sortable: true },
           { title: 'Type' },
@@ -58,14 +75,19 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
                   {moment(log.timestamp).utc().format('YYYY-MM-DD HH:mm:ss')}
                 </Typography>,
                 <Chip
-                  onClick={() => onChange({ type: log.type })}
+                  onClick={() => onChange({ ...filters, type: log.type })}
                   label={log.type}
                   color={log.type}
                   variant="outlined"
                   size="small"
                 />,
                 <Typography
-                  onClick={() => onChange({ operation })}
+                  onClick={() =>
+                    setFilters({
+                      ...filters,
+                      message: log.message
+                    })
+                  }
                   variant="body1"
                   style={{
                     display: 'flex',
@@ -76,7 +98,7 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
                   {log.message}
                 </Typography>,
                 <Typography
-                  onClick={() => onChange({ operation })}
+                  onClick={() => onChange({ ...filters, operation })}
                   variant="body1"
                   style={{
                     display: 'flex',
@@ -96,7 +118,7 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
                   {operation}
                 </Typography>,
                 <Typography
-                  onClick={() => onChange({ user })}
+                  onClick={() => onChange({ ...filters, user })}
                   variant="caption"
                   style={{
                     display: 'flex',
@@ -113,12 +135,12 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
                     alignItems: 'center',
                     cursor: 'pointer'
                   }}
-                  onClick={() => onChange({ ip })}
+                  onClick={() => onChange({ ...filters, ip })}
                 >
                   {ip}
                 </Typography>,
                 <Chip
-                  onClick={() => onChange({ module })}
+                  onClick={() => onChange({ ...filters, module })}
                   label={module}
                   color="primary"
                   size="small"
@@ -126,7 +148,7 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
                 <IconButton
                   size="small"
                   disabled={!Boolean(log.data)}
-                  onClick={() => setOpen(log)}
+                  onClick={() => setData(log)}
                 >
                   <LogIcon />
                 </IconButton>
@@ -137,9 +159,8 @@ const LogTable = ({ onChange = () => {}, traces, loading, ...props }) => {
           },
           []
         )}
-        {...props}
       />
-    </React.Fragment>
+    </>
   )
 }
 

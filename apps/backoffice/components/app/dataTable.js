@@ -60,7 +60,10 @@ const DataTable = ({
   const button = rows.some(({ onClick }) => Boolean(onClick))
   return (
     <TableContainer component={Paper} {...props}>
-      {head}
+      <Box w={'100%'} display="block">
+        {head}{' '}
+      </Box>
+
       <Table size={size}>
         <TableHead style={{ position: 'sticky' }}>
           <TableRow>
@@ -106,7 +109,7 @@ const DataTable = ({
         </TableBody>
       </Table>
       {onPageChange && (
-        <Box p={size == 'small' ? 1 : 2}>
+        <Box p={size == 'small' ? 1 : 2} my={2}>
           <Pagination
             size={size}
             page={page || 0}

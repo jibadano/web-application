@@ -36,10 +36,14 @@ const DataTableItem = ({ config, onClick, values }) => {
       {values.map((value, i) => {
         if (config[i].hiddenMobile && mobile) return
 
-        return <TableCell {...config[i].props}>{value}</TableCell>
+        return (
+          <TableCell sx={{ border: 'none' }} {...config[i].props}>
+            {value}
+          </TableCell>
+        )
       })}
       {!mobile && onClick && (
-        <TableCell align="right">
+        <TableCell align="right" sx={{ border: 'none' }}>
           <IconButton size="small">
             <ChevronRightIcon />
           </IconButton>

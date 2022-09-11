@@ -5,12 +5,12 @@ import ActionsSet from './actionsSet'
 const Actions = ({ optional, left, right }) => (
   <Box width="100%">
     <ActionsSet fullWidth set={optional} />
-    <Box display={{ xs: 'block', md: 'flex' }}>
+    <Box display={{ xs: 'block', md: 'flex' }} alignItems="center">
       <Box flexGrow={1}>
-        <ActionsSet fullWidth set={left} />
+        {left instanceof Array ? <ActionsSet fullWidth set={left} /> : left}
       </Box>
       <Box>
-        <ActionsSet fullWidth set={right} />
+        {right instanceof Array ? <ActionsSet fullWidth set={right} /> : right}
       </Box>
     </Box>
   </Box>

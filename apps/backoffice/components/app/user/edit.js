@@ -13,12 +13,9 @@ import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4),
+    maxWidth: theme.breakpoints.values.sm,
     '& > *': {
       marginBottom: theme.spacing(4)
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3)
     }
   }
 }))
@@ -27,60 +24,55 @@ const UserEdit = ({ _id, name, avatar, jobTitle, onDone = () => {} }) => {
   const { t } = useTranslation()
   const [updateUser] = useUpdateUser()
   return (
-    <Paper>
-      <Formik
-        enableReinitialize
-        validateOnBlur={false}
-        initialValues={{ name, avatar, jobTitle }}
-        validationSchema={Yup.object().shape({
-          name: Yup.string().nullable(),
-          avatar: Yup.string().nullable(),
-          jobTitle: Yup.string().nullable()
-        })}
-        onSubmit={(variables) =>
-          updateUser({
-            variables: { _id, ...variables }
-          }).then(onDone)
-        }
-      >
-        {({ handleSubmit, handleReset, dirty, ...props }) => (
-          <form autoComplete="off" onSubmit={handleSubmit}>
-            <div className={classes.root}>
-              <ImageUpload
-                id="avatar"
-                buttonText={t('Add image')}
-                preview
-                crop={{ aspect: 1 }}
-                cloudName={config.get('core.cloudinary.cloud_name')}
-                {...props}
-              >
-                Avatar
-              </ImageUpload>
-              <TextField id="name" {...props}>
-                {t('Name')}
-              </TextField>
-              <TextField id="jobTitle" {...props}>
-                {t('Job title')}
-              </TextField>
+    <Formik
+      enableReinitialize
+      validateOnBlur={false}
+      initialValues={{ name, avatar, jobTitle }}
+      validationSchema={Yup.object().shape({
+        name: Yup.string().nullable(),
+        avatar: Yup.string().nullable(),
+        jobTitle: Yup.string().nullable()
+      })}
+      onSubmit={(variables) =>
+        updateUser({
+          variables: { _id, ...variables }
+        }).then(onDone)
+      }
+    >
+      {({ handleSubmit, handleReset, dirty, ...props }) => (
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div className={classes.root}>
+            <ImageUpload
+              id="avatar"
+              buttonText={t('Add image')}
+              preview
+              crop={{ aspect: 1 }}
+              cloudName={config.get('core.cloudinary.cloud_name')}
+              {...props}
+            >
+              Avatar
+            </ImageUpload>
+            <TextField id="name" {...props}>
+              {t('Name')}
+            </TextField>
+            <TextField id="jobTitle" {...props}>
+              {t('Job title')}
+            </TextField>
 
-              <Actions
-                left={[
-                  { children: 'Cancel', variant: 'text', onClick: onDone }
-                ]}
-                right={[
-                  {
-                    children: 'Save',
-                    variant: 'contained',
-                    color: 'primary',
-                    onClick: handleSubmit
-                  }
-                ]}
-              />
-            </div>
-          </form>
-        )}
-      </Formik>
-    </Paper>
+            <Actions
+              left={[
+                {
+                  children: 'Save',
+                  variant: 'contained',
+                  color: 'primary',
+                  onClick: handleSubmit
+                }
+              ]}
+            />
+          </div>
+        </form>
+      )}
+    </Formik>
   )
 }
 

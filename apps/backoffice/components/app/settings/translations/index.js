@@ -11,8 +11,6 @@ import LanguageIcon from '@mui/icons-material/LanguageOutlined'
 
 import Loading from '@backoffice/components/app/loading'
 import SideMenu from '@backoffice/components/app/sideMenu'
-import DataList from '@backoffice/components/app/dataList'
-import DataListItem from '@backoffice/components/app/dataListItem'
 
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import ListField from 'form/listField'
@@ -20,12 +18,19 @@ import Select from 'form/select'
 
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import Actions from '@backoffice/components/app/actions'
 
 import Paper from '@mui/material/Paper'
 import TextField from 'form/textField'
 import ListSubheader from '@mui/material/ListSubheader'
 import Fade from '@mui/material/Fade'
 import Translation from './item'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import {
+  useSettings,
+  useUpdateSettings
+} from '@backoffice/components/app/settings/hooks'
 
 const Translations = (props) => {
   const router = useRouter()
@@ -36,11 +41,60 @@ const Translations = (props) => {
   )
 
   const { translations, loading } = useTranslations()
+  const [updateSettings, { loading: refreshing }] = useUpdateSettings()
+
+  const formik = useFormik({
+    initialValues: {},
+    enableReinitialize: true,
+    validationSchema: Yup.object().shape({
+      i18next: Yup.object().shape({
+        fallbackLng: Yup.string().nullable(),
+        whitelist: Yup.array().of(Yup.string()),
+        keySeparator: Yup.boolean().nullable()
+      })
+    }),
+    onSubmit: (settings, { resetForm }) => {
+      updateSettings({ variables: { settings } }).then(() =>
+        resetForm(settings)
+      )
+    }
+  })
+  const { settings, loading: settingsLoading } = useSettings()
+
+  React.useEffect(() => {
+    formik.setValues(settings)
+  }, [settingsLoading])
+
+  if (settingsLoading) return <Loading />
+
   if (loading) return <Loading />
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12} md={3}>
+      <Grid item xs={12} md={8}>
+        <Fade in={selected} unmountOnExit mountOnEnter>
+          <div>
+            <Translation
+              key={selected && selected.key}
+              onDone={(newTranslation) => setSelected(newTranslation)}
+              translation={selected}
+            />
+          </div>
+        </Fade>
+        {!selected && (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="50vh"
+          >
+            <Typography color="textSecondary" variant="h5">
+              <LanguageIcon fontSize="small" /> Select a translation key to edit
+            </Typography>
+          </Box>
+        )}
+      </Grid>
+      <Grid item xs={12} md={4}>
         <SideMenu title="Translations list">
           <Paper
             style={{
@@ -89,48 +143,33 @@ const Translations = (props) => {
           </Paper>
         </SideMenu>
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Fade in={selected} unmountOnExit mountOnEnter>
-          <div>
-            <Translation
-              key={selected && selected.key}
-              onDone={(newTranslation) => setSelected(newTranslation)}
-              translation={selected}
-            />
-          </div>
-        </Fade>
-        {!selected && (
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            height="50vh"
+      <Grid item xs={12}>
+        <Box sx={{ maxWidth: 'sm', display: 'grid', gap: 3 }}>
+          <Typography variant="h5">I18Next</Typography>
+          <ListField id="i18next.whitelist" {...formik}>
+            Languages
+          </ListField>
+          <Select
+            id="i18next.fallbackLng"
+            options={(get(formik, 'values.i18next.whitelist') || []).map(
+              (value) => ({ name: value, value })
+            )}
+            {...formik}
           >
-            <Typography color="textSecondary" variant="h5">
-              <LanguageIcon fontSize="small" /> Select a translation key to edit
-            </Typography>
-          </Box>
-        )}
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <DataList title="I18Next">
-          <DataListItem
-            label="Languages"
-            primary={<ListField id="i18next.whitelist" {...props} />}
+            Default language
+          </Select>
+          <Actions
+            left={[
+              {
+                disabled: !formik.dirty,
+                children: 'Save',
+                onClick: formik.handleSubmit,
+                variant: 'contained',
+                color: 'primary'
+              }
+            ]}
           />
-          <DataListItem
-            label="Default Language"
-            primary={
-              <Select
-                id="i18next.fallbackLng"
-                options={(get(props, 'values.i18next.whitelist') || []).map(
-                  (value) => ({ name: value, value })
-                )}
-                {...props}
-              />
-            }
-          />
-        </DataList>
+        </Box>
       </Grid>
     </Grid>
   )

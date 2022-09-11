@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(2, 1)
+    padding: theme.spacing(2, 1),
+    textAlign: 'center'
   }
 }))
 

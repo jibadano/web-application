@@ -47,8 +47,7 @@ const TextField = ({
     id={id}
     type={type}
     disabled={disabled}
-    defaultValue={get(values, id)}
-    value={get(values, id)}
+    value={get(values, id) || ''}
     error={Boolean(get(touched, id) && get(errors, id))}
     helperText={
       Boolean(get(touched, id) && get(errors, id)) ? get(errors, id) : helpText

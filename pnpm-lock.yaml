@@ -178,9 +178,9 @@ importers:
       react-i18next: ^11.4.0
     dependencies:
       '@apollo/client': 3.6.9_graphql@15.8.0+react@17.0.2
-      '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
-      '@emotion/styled': 11.9.3_5e0dd1b76ef7422e18c393b147b1a30c
-      '@jibadano/config': 0.0.9_@babel+core@7.18.9
+      '@emotion/react': 11.9.3_react@17.0.2
+      '@emotion/styled': 11.9.3_f1827db29efe828050b107265e35c029
+      '@jibadano/config': 0.0.9
       '@mui/material': 5.9.1_0abd165ff17050c12cb32a01f18ae59f
       apollo-link-context: 1.0.20_graphql@15.8.0
       apollo-link-error: 1.1.13_graphql@15.8.0
@@ -190,7 +190,7 @@ importers:
       i18next: 19.9.2
       js-cookie: 3.0.1
       lodash: 4.17.21
-      next: 12.2.3_8530c319cc77dce1ab627155a67642c5
+      next: 12.2.3_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-i18next: 11.18.1_8f2a12f93b34591c18c344cd829419b1
@@ -198,7 +198,7 @@ importers:
   services:
     specifiers:
       '@jibadano/config': 0.0.9
-      '@jibadano/microservice': 0.3.26
+      '@jibadano/microservice': 0.3.28
       apollo-server: ^3.10.0
       dotenv: ^16.0.1
       graphql: ^15.0.0
@@ -208,7 +208,7 @@ importers:
       nodemon: ^2.0.19
     dependencies:
       '@jibadano/config': 0.0.9
-      '@jibadano/microservice': 0.3.26
+      '@jibadano/microservice': 0.3.28
       apollo-server: 3.10.0_graphql@15.8.0
       dotenv: 16.0.1
       graphql: 15.8.0
@@ -976,6 +976,15 @@ packages:
       '@babel/helper-plugin-utils': 7.18.9
     dev: false
 
+  /@babel/plugin-syntax-jsx/7.18.6:
+    resolution: {integrity: sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/helper-plugin-utils': 7.18.9
+    dev: false
+
   /@babel/plugin-syntax-jsx/7.18.6_@babel+core@7.18.9:
     resolution: {integrity: sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==}
     engines: {node: '>=6.9.0'}
@@ -1563,6 +1572,25 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
+  /@emotion/babel-plugin/11.9.2:
+    resolution: {integrity: sha512-Pr/7HGH6H6yKgnVFNEj2MVlreu3ADqftqjqwUvDy/OJzKFgxKeTQ+eeUf20FOTuHVkDON2iNa25rAXVYtWJCjw==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    dependencies:
+      '@babel/helper-module-imports': 7.18.6
+      '@babel/plugin-syntax-jsx': 7.18.6
+      '@babel/runtime': 7.18.9
+      '@emotion/hash': 0.8.0
+      '@emotion/memoize': 0.7.5
+      '@emotion/serialize': 1.0.4
+      babel-plugin-macros: 2.8.0
+      convert-source-map: 1.8.0
+      escape-string-regexp: 4.0.0
+      find-root: 1.1.0
+      source-map: 0.5.7
+      stylis: 4.0.13
+    dev: false
+
   /@emotion/babel-plugin/11.9.2_@babel+core@7.18.9:
     resolution: {integrity: sha512-Pr/7HGH6H6yKgnVFNEj2MVlreu3ADqftqjqwUvDy/OJzKFgxKeTQ+eeUf20FOTuHVkDON2iNa25rAXVYtWJCjw==}
     peerDependencies:
@@ -1630,6 +1658,28 @@ packages:
       react: 17.0.2
     dev: false
 
+  /@emotion/react/11.9.3_react@17.0.2:
+    resolution: {integrity: sha512-g9Q1GcTOlzOEjqwuLF/Zd9LC+4FljjPjDfxSM7KmEakm+hsHXk+bYZ2q+/hTJzr0OUNkujo72pXLQvXj6H+GJQ==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.18.9
+      '@emotion/babel-plugin': 11.9.2
+      '@emotion/cache': 11.9.3
+      '@emotion/serialize': 1.0.4
+      '@emotion/utils': 1.1.0
+      '@emotion/weak-memoize': 0.2.5
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+    dev: false
+
   /@emotion/serialize/1.0.4:
     resolution: {integrity: sha512-1JHamSpH8PIfFwAMryO2bNka+y8+KA5yga5Ocf2d7ZEiJjb7xlLW7aknBGZqJLajuLOvJ+72vN+IBSwPlXD1Pg==}
     dependencies:
@@ -1662,6 +1712,28 @@ packages:
       '@emotion/babel-plugin': 11.9.2_@babel+core@7.18.9
       '@emotion/is-prop-valid': 1.1.3
       '@emotion/react': 11.9.3_@babel+core@7.18.9+react@17.0.2
+      '@emotion/serialize': 1.0.4
+      '@emotion/utils': 1.1.0
+      react: 17.0.2
+    dev: false
+
+  /@emotion/styled/11.9.3_f1827db29efe828050b107265e35c029:
+    resolution: {integrity: sha512-o3sBNwbtoVz9v7WB1/Y/AmXl69YHmei2mrVnK7JgyBJ//Rst5yqPZCecEJlMlJrFeWHp+ki/54uN265V2pEcXA==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      '@emotion/react': ^11.0.0-rc.0
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.18.9
+      '@emotion/babel-plugin': 11.9.2
+      '@emotion/is-prop-valid': 1.1.3
+      '@emotion/react': 11.9.3_react@17.0.2
       '@emotion/serialize': 1.0.4
       '@emotion/utils': 1.1.0
       react: 17.0.2
@@ -1793,8 +1865,8 @@ packages:
       - react-native
     dev: false
 
-  /@jibadano/microservice/0.3.26:
-    resolution: {integrity: sha512-Wm+HB+AukfIC0l4zFX/TV7+V4fzFSGYpKF/cRvIqJBn3ETCfKMOIrbdGc5s9FFxLVIem96snIDF0eHnJTzoiQA==}
+  /@jibadano/microservice/0.3.28:
+    resolution: {integrity: sha512-p0k/LBfFMJFhGtYCYOgrfKfRIi0xsz8N4EoZ8TK4lV92jmNSrAZiH3pappTt5ysEnbhXrsarF9XwB8zw8mtNag==}
     dependencies:
       '@jibadano/config': 0.0.9
       '@types/node-fetch': 2.6.2

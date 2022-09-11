@@ -25,7 +25,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4),
+    maxWidth: theme.breakpoints.values.sm,
     '& > *': {
       marginBottom: theme.spacing(4)
     },
@@ -65,76 +65,74 @@ const Article = () => {
           {_id ? 'Editing article' : 'New article'}
         </Title>
       </Box>
-      <Paper>
-        <Formik
-          enableReinitialize
-          validateOnBlur={false}
-          initialValues={article || {}}
-          validationSchema={Yup.object().shape({
-            title: Yup.string().nullable(),
-            images: Yup.array().of(Yup.string()),
-            body: Yup.string().nullable()
-          })}
-          onSubmit={(variables) =>
-            _id
-              ? updateArticle({
-                  variables
-                }).then(() => router.push('/article'))
-              : insertArticle({
-                  variables
-                }).then(() => router.push('/article'))
-          }
-        >
-          {({ handleSubmit, handleReset, dirty, ...props }) => (
-            <form autoComplete="off" onSubmit={handleSubmit}>
-              <div className={classes.root}>
-                <ImageUpload
-                  id="images"
-                  preview
-                  multi
-                  crop={{ aspect: 1 }}
-                  cloudName={config.get('core.cloudinary.cloud_name')}
-                  {...props}
-                >
-                  Avatar
-                </ImageUpload>
-                <TextField id="title" {...props}>
-                  {t('Title')}
-                </TextField>
-                <TextField id="body" multi {...props}>
-                  {t('Body')}
-                </TextField>
+      <Formik
+        enableReinitialize
+        validateOnBlur={false}
+        initialValues={article || {}}
+        validationSchema={Yup.object().shape({
+          title: Yup.string().nullable(),
+          images: Yup.array().of(Yup.string()),
+          body: Yup.string().nullable()
+        })}
+        onSubmit={(variables) =>
+          _id
+            ? updateArticle({
+                variables
+              }).then(() => router.push('/article'))
+            : insertArticle({
+                variables
+              }).then(() => router.push('/article'))
+        }
+      >
+        {({ handleSubmit, handleReset, dirty, ...props }) => (
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <div className={classes.root}>
+              <ImageUpload
+                id="images"
+                preview
+                multi
+                crop={{ aspect: 1 }}
+                cloudName={config.get('core.cloudinary.cloud_name')}
+                {...props}
+              >
+                Avatar
+              </ImageUpload>
+              <TextField id="title" {...props}>
+                {t('Title')}
+              </TextField>
+              <TextField id="body" multi {...props}>
+                {t('Body')}
+              </TextField>
 
-                <Actions
-                  left={[
-                    {
-                      children: 'Cancel',
-                      variant: 'text',
-                      onClick: () => router.back()
-                    }
-                  ]}
-                  right={[
-                    {
-                      display: Boolean(_id),
-                      children: 'Remove',
-                      variant: 'outlined',
-                      color: 'secondary',
-                      onClick: () =>
-                        removeArticle(_id).then(() => router.push('/article'))
-                    },
-                    {
-                      children: _id ? 'Save' : 'Publish',
-                      variant: 'contained',
-                      color: 'primary',
-                      onClick: handleSubmit
-                    }
-                  ]}
-                />
-              </div>
-            </form>
-          )}
-        </Formik>
-      </Paper>
+              <Actions
+                left={[
+                  {
+                    children: 'Cancel',
+                    variant: 'text',
+                    onClick: () => router.back()
+                  }
+                ]}
+                right={[
+                  {
+                    display: Boolean(_id),
+                    children: 'Remove',
+                    variant: 'outlined',
+                    color: 'secondary',
+                    onClick: () =>
+                      removeArticle(_id).then(() => router.push('/article'))
+                  },
+                  {
+                    children: _id ? 'Save' : 'Publish',
+                    variant: 'contained',
+                    color: 'primary',
+                    onClick: handleSubmit
+                  }
+                ]}
+              />
+            </div>
+          </form>
+        )}
+      </Formik>
     </>
   )
 }

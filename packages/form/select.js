@@ -14,18 +14,15 @@ export default ({
 }) => {
   return (
     <FormControl fullWidth>
-      <InputLabel {...props} shrink={Boolean(get(values, id))} htmlFor={id}>
+      <InputLabel {...props} htmlFor={id}>
         {children}
       </InputLabel>
       <Select
         native
         label={children}
         id={id}
-        value={get(values, id)}
+        value={get(values, id) || ''}
         onChange={handleChange}
-        InputLabelProps={{
-          shrink: Boolean(get(values, id))
-        }}
         {...props}
       >
         {options.map(({ name, value }) => (

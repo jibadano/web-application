@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@mui/styles'
-
+import { theme } from './_app'
 class MyDocument extends Document {
   render() {
     return (
@@ -10,7 +10,7 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
 
           {/* PWA primary color */}
-          <meta name="theme-color" content={'#fff'} />
+          <meta name="theme-color" content={theme.palette.background.default} />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
           <meta name="description" content="Description" />
@@ -27,7 +27,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body style={{ background: '#fff' }}>
+        <body style={{ background: theme.palette.background.default }}>
           <Main />
           <NextScript />
         </body>

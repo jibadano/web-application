@@ -77,7 +77,14 @@ const Translation = ({ onDone, translation }) => {
                 ))}
               <Actions
                 left={[
-                  { children: 'Cancel', variant: 'text', onClick: handleReset }
+                  {
+                    children: dirty ? 'Cancel' : 'Back',
+                    variant: 'text',
+                    onClick: () => {
+                      handleReset()
+                      onDone()
+                    }
+                  }
                 ]}
                 right={[
                   {

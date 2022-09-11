@@ -47,7 +47,7 @@ const items = [
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: theme.palette.background.default,
     display: 'flex',
     minHeight: '100%',
     overflow: 'hidden',
@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: '100%',
-    padding: theme.spacing(3, 3, 5, 3),
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(4, 4, 5, 4)
+    padding: theme.spacing(2, 5, 5, 5),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(4, 2, 8, 2)
     }
   }
 }))

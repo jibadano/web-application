@@ -44,9 +44,7 @@ const DataList = ({
               </ListItem>
             )}
             {children.map((item, i) => (
-              <ListItem key={i} divider={Boolean(i + 1 != children.length)}>
-                {item}
-              </ListItem>
+              <ListItem key={i}>{item}</ListItem>
             ))}
           </List>
         </Box>
