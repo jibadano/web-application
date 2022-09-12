@@ -106,7 +106,14 @@ const Users = () => {
               inprogress={status == 'info'}
               severity={status}
             >
-              {status}
+              {
+                {
+                  info: 'Deploying',
+                  ok: 'Ready',
+                  error: 'Error',
+                  warning: 'Warning'
+                }[status]
+              }
             </Status>,
             <Box display="flex" justifyContent="right">
               <Box px={1}>
