@@ -198,7 +198,7 @@ importers:
   services:
     specifiers:
       '@jibadano/config': 0.0.9
-      '@jibadano/microservice': 0.3.32
+      '@jibadano/microservice': 0.3.33
       apollo-server: ^3.10.0
       dotenv: ^16.0.1
       graphql: ^15.0.0
@@ -208,7 +208,7 @@ importers:
       nodemon: ^2.0.19
     dependencies:
       '@jibadano/config': 0.0.9
-      '@jibadano/microservice': 0.3.32
+      '@jibadano/microservice': 0.3.33
       apollo-server: 3.10.0_graphql@15.8.0
       dotenv: 16.0.1
       graphql: 15.8.0
@@ -1865,8 +1865,8 @@ packages:
       - react-native
     dev: false
 
-  /@jibadano/microservice/0.3.32:
-    resolution: {integrity: sha512-eIOXVy+9AIbZVtTu7pRMN5stIuaI66h1qJIru3OmeL4nsXxDLqOFEii4SIxlydx/tsk/aM2xMs34/YxDvIOGRw==}
+  /@jibadano/microservice/0.3.33:
+    resolution: {integrity: sha512-f1XGboukKodSPBVPU7VC+j5A7b2QqGepf2obnz/l9vI5xHQkeAJQpbTmxK1AZjLbPJd5hKgDy9tzYp61YmR2MQ==}
     dependencies:
       '@jibadano/config': 0.0.9
       '@types/node-fetch': 2.6.2
