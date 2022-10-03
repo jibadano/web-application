@@ -92,7 +92,7 @@ const Article = () => {
                 preview
                 multi
                 crop={{ aspect: 1 }}
-                cloudName={config.get('core.cloudinary.cloud_name')}
+                cloudName={config.get('..services.core.cloudinary.cloud_name')}
                 {...props}
               >
                 Avatar

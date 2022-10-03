@@ -216,12 +216,15 @@ const upload = (files, cloudName) =>
       form.set('file', file)
       form.set('multiple', true)
       form.set('upload_preset', cloudName)
+
       return axios({
         method: 'post',
         url: `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
         data: form,
         headers: { 'Content-Type': 'multipart/form-data' }
-      }).then((res) => res && res.data && res.data.secure_url)
+      })
+        .then((res) => res && res.data && res.data.secure_url)
+        .catch(console.log)
     })
   )
 

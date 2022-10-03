@@ -13,6 +13,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
 import Deployments from '@backoffice/components/app/settings/deployments'
+import ThemeSettings from '@backoffice/components/app/settings/theme'
 
 import Badge from '@mui/material/Badge'
 import MainSettings from '@backoffice/components/app/settings/main'
@@ -48,6 +49,7 @@ const Settings = () => {
         >
           <Tab label="Main" />
           <Tab label="Translations" />
+          <Tab label="Theme" />
           <Tab
             label={
               <Badge
@@ -63,7 +65,9 @@ const Settings = () => {
       </Box>
       {nav == 0 && <MainSettings />}
       {nav == 1 && <TranslationsSettings />}
-      {nav == 2 && <Deployments />}
+      {nav == 2 && <ThemeSettings />}
+
+      {nav == 3 && <Deployments />}
     </>
   )
 }

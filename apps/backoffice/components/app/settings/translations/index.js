@@ -34,17 +34,20 @@ import {
 
 const Translations = (props) => {
   const router = useRouter()
+  const [edit, setEdit] = React.useState()
 
   const [selected, setSelected] = React.useState()
   const [searchText, setSearchText] = React.useState(
     router.query.searchText || ''
   )
 
-  const { translations, loading } = useTranslations()
+  let { translations, loading } = useTranslations()
   const [updateSettings, { loading: refreshing }] = useUpdateSettings()
 
+  const { settings, loading: settingsLoading } = useSettings()
+
   const formik = useFormik({
-    initialValues: {},
+    initialValues: settings,
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
       i18next: Yup.object().shape({
@@ -54,124 +57,172 @@ const Translations = (props) => {
       })
     }),
     onSubmit: (settings, { resetForm }) => {
-      updateSettings({ variables: { settings } }).then(() =>
-        resetForm(settings)
-      )
+      updateSettings({ variables: { settings } })
     }
   })
-  const { settings, loading: settingsLoading } = useSettings()
-
-  React.useEffect(() => {
-    formik.setValues(settings)
-  }, [settingsLoading])
 
   if (settingsLoading) return <Loading />
 
   if (loading) return <Loading />
 
+  formik.disabled = !edit
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12} md={8}>
-        <Fade in={selected} unmountOnExit mountOnEnter>
-          <div>
-            <Translation
-              key={selected && selected.key}
-              onDone={(newTranslation) => setSelected(newTranslation)}
-              translation={selected}
-            />
-          </div>
-        </Fade>
-        {!selected && (
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            height="50vh"
-          >
-            <Typography color="textSecondary" variant="h5">
-              <LanguageIcon fontSize="small" /> Select a translation key to edit
-            </Typography>
-          </Box>
-        )}
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <SideMenu title="Translations list">
-          <Paper
-            style={{
-              maxHeight: '80vh',
-              overflowY: 'auto',
-              overflowX: 'hidden'
-            }}
-          >
-            <List>
-              <ListSubheader disableGutters>
-                <Box p={2} style={{ backgroundColor: 'white' }}>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    value={searchText}
-                    onClick={(e) => e.stopPropagation()}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    label="Search"
-                  ></TextField>
-                </Box>
-              </ListSubheader>
-              {translations
-                .filter(({ key }) => new RegExp(`.*${searchText}.*`).test(key))
-                .map((translation) => {
-                  const missing = translation.values.some(
-                    ({ text }) => !Boolean(text)
-                  )
-                  return (
-                    <ListItem
-                      key={translation.key}
-                      button
-                      selected={selected && translation.key == selected.key}
-                      onClick={() => setSelected(translation)}
+    <>
+      <Paper>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
+            <Box
+              style={{
+                maxHeight: '80vh',
+                overflowY: 'auto',
+                overflowX: 'hidden'
+              }}
+            >
+              <SideMenu title="Translations list">
+                <List>
+                  <ListSubheader style={{ borderRadius: 20 }} disableGutters>
+                    <Box
+                      p={2}
+                      style={{ borderRadius: 20, backgroundColor: 'white' }}
                     >
-                      <ListItemText primary={translation.key} />
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        value={searchText}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        label="Search"
+                      ></TextField>
+                    </Box>
+                  </ListSubheader>
+                  {translations
+                    .filter(({ key }) =>
+                      new RegExp(`.*${searchText}.*`).test(key)
+                    )
+                    .map((translation) => {
+                      const missing = translation.values.some(
+                        ({ text }) => !Boolean(text)
+                      )
+                      return (
+                        <ListItem
+                          key={translation.key}
+                          button
+                          selected={selected && translation.key == selected.key}
+                          onClick={() => setSelected(translation)}
+                        >
+                          <ListItemText primary={translation.key} />
 
-                      {missing && (
-                        <ListItemSecondaryAction>
-                          <Chip label="Untranslated" />
-                        </ListItemSecondaryAction>
-                      )}
-                    </ListItem>
-                  )
-                })}
-            </List>
-          </Paper>
-        </SideMenu>
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ maxWidth: 'sm', display: 'grid', gap: 3 }}>
-          <Typography variant="h5">I18Next</Typography>
-          <ListField id="i18next.whitelist" {...formik}>
-            Languages
-          </ListField>
-          <Select
-            id="i18next.fallbackLng"
-            options={(get(formik, 'values.i18next.whitelist') || []).map(
-              (value) => ({ name: value, value })
+                          {missing && (
+                            <ListItemSecondaryAction>
+                              <Chip label="Untranslated" />
+                            </ListItemSecondaryAction>
+                          )}
+                        </ListItem>
+                      )
+                    })}
+                </List>
+              </SideMenu>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Fade in={selected} unmountOnExit mountOnEnter>
+              <div>
+                <Translation
+                  key={selected && selected.key}
+                  onDone={(newTranslation) => setSelected(newTranslation)}
+                  translation={selected}
+                  languages={get(formik, 'values.i18next.whitelist') || []}
+                />
+              </div>
+            </Fade>
+            {!selected && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '100%',
+                  minHeight: '50vh'
+                }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Box
+                  sx={{
+                    textAlign: 'center'
+                  }}
+                >
+                  <LanguageIcon fontSize="large" />
+                  <Typography color="textSecondary" variant="h4">
+                    Select a translation key to edit
+                  </Typography>
+                </Box>
+              </Box>
             )}
-            {...formik}
-          >
-            Default language
-          </Select>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Box
+        sx={{
+          maxWidth: 'sm',
+          mt: 3,
+          px: { md: 1, sm: 0 },
+          display: 'grid',
+          gap: 3
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{ px: 1, color: !edit && 'text.disabled' }}
+        >
+          Languages
+        </Typography>
+        <ListField id="i18next.whitelist" {...formik}>
+          Languages
+        </ListField>
+        <Select
+          id="i18next.fallbackLng"
+          options={(get(formik, 'values.i18next.whitelist') || []).map(
+            (value) => ({ name: value, value })
+          )}
+          {...formik}
+        >
+          Default
+        </Select>
+        <Box sx={{ py: 2 }}>
           <Actions
             left={[
               {
-                disabled: !formik.dirty,
+                children: 'Edit',
+                onClick: () => setEdit(true),
+                color: 'primary',
+                display: !edit
+              },
+              {
+                children: 'Cancel',
+                onClick: () => {
+                  formik.setValues(settings)
+                  setEdit()
+                },
+                color: 'inherit',
+                display: !!edit
+              }
+            ]}
+            right={[
+              {
+                display: !!edit,
                 children: 'Save',
                 onClick: formik.handleSubmit,
                 variant: 'contained',
-                color: 'primary'
+                color: 'primary',
+                disabled: !formik.dirty
               }
             ]}
           />
         </Box>
-      </Grid>
-    </Grid>
+      </Box>
+    </>
   )
 }
 

@@ -20,7 +20,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import FacebookIcon from '@mui/icons-material/Facebook'
-import { useTraffic } from './hooks'
+import { useTrafficStats } from './hooks'
 
 import CardSkeleton from '@backoffice/components/app/cardSkeleton'
 const useStyles = makeStyles(() => ({
@@ -40,9 +40,9 @@ const TrafficByDevice = ({ className, ...rest }) => {
   const classes = useStyles()
   const theme = useTheme()
   const [view, setView] = React.useState(0)
-  const { data: dataTraffic, loading } = useTraffic()
+  const { data: dataTraffic, loading } = useTrafficStats()
 
-  const traffic = dataTraffic && dataTraffic.traffic
+  const traffic = dataTraffic && dataTraffic.trafficStats
   if (loading) return <CardSkeleton height={'100%'} />
   if (!traffic) return ''
   const dataDevice = {

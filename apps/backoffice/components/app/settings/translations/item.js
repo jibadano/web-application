@@ -31,76 +31,74 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Translation = ({ onDone, translation }) => {
+const Translation = ({ onDone, languages, translation }) => {
   const classes = useStyles()
   const { t } = useTranslation()
   const [updateTranslation] = useUpdateTranslation()
   return (
-    <Paper>
-      <Formik
-        enableReinitialize
-        validateOnBlur={false}
-        initialValues={translation}
-        validationSchema={Yup.object().shape({
-          key: Yup.string().nullable(),
-          values: Yup.array().of(
-            Yup.object().shape({
-              language: Yup.string().nullable(),
-              text: Yup.string().nullable()
-            })
-          )
-        })}
-        onSubmit={({ key, values }) =>
-          updateTranslation({
-            variables: { key: translation.key, values }
-          }).then(() => onDone({ key, values }))
-        }
-      >
-        {({ handleSubmit, handleReset, dirty, ...props }) => (
-          <form autoComplete="off" onSubmit={handleSubmit}>
-            <div className={classes.root}>
-              <TextField id="key" disabled {...props}>
-                {t('Key')}
-              </TextField>
-              {props.values &&
-                props.values.values &&
-                props.values.values.map(({ language }, index) => (
-                  <TextField
-                    key={index + language}
-                    id={`values.${index}.text`}
-                    multi
-                    rows={2}
-                    {...props}
-                  >
-                    {language}
-                  </TextField>
-                ))}
-              <Actions
-                left={[
-                  {
-                    children: dirty ? 'Cancel' : 'Back',
-                    variant: 'text',
-                    onClick: () => {
-                      handleReset()
-                      onDone()
-                    }
+    <Formik
+      enableReinitialize
+      validateOnBlur={false}
+      initialValues={translation}
+      validationSchema={Yup.object().shape({
+        key: Yup.string().nullable(),
+        values: Yup.array().of(
+          Yup.object().shape({
+            language: Yup.string().nullable(),
+            text: Yup.string().nullable()
+          })
+        )
+      })}
+      onSubmit={({ key, values }) =>
+        updateTranslation({
+          variables: { key: translation.key, values }
+        }).then(() => onDone({ key, values }))
+      }
+    >
+      {({ handleSubmit, handleReset, dirty, ...props }) => (
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div className={classes.root}>
+            <TextField id="key" disabled {...props}>
+              {t('Key')}
+            </TextField>
+            {props.values &&
+              props.values.values &&
+              props.values.values.map(({ language }, index) => (
+                <TextField
+                  key={index + language}
+                  id={`values.${index}.text`}
+                  multi
+                  rows={2}
+                  {...props}
+                >
+                  {language}
+                </TextField>
+              ))}
+            <Actions
+              left={[
+                {
+                  children: dirty ? 'Cancel' : 'Back',
+                  variant: 'text',
+                  onClick: () => {
+                    handleReset()
+                    onDone()
                   }
-                ]}
-                right={[
-                  {
-                    disabled: !dirty,
-                    children: 'Save',
-                    variant: 'contained',
-                    color: 'primary',
-                    onClick: handleSubmit
-                  }
-                ]}
-              />
-            </div>
-          </form>
-        )}
-      </Formik>
-    </Paper>
+                }
+              ]}
+              right={[
+                {
+                  disabled: !dirty,
+                  children: 'Save',
+                  variant: 'contained',
+                  color: 'primary',
+                  onClick: handleSubmit
+                }
+              ]}
+            />
+          </div>
+        </form>
+      )}
+    </Formik>
   )
 }
 

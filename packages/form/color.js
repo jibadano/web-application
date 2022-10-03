@@ -5,16 +5,17 @@ import Fade from '@mui/material/Fade'
 import { ChromePicker } from 'react-color'
 import Typography from '@mui/material/Typography'
 
-export default ({ id, values, children, handleChange, style }) => {
+export default ({ id, values, children, handleChange, style, disabled }) => {
   const [open, setOpen] = React.useState(false)
   return (
     <Box
       display="flex"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      justifyContent="space-between"
     >
-      <Box mx={2} display="flex" alignItems="center">
-        <Typography>{children}</Typography>
+      <Box display="flex" alignItems="center">
+        <Typography color={disabled && 'text.disabled'}>{children}</Typography>
       </Box>
       <div
         style={
@@ -27,15 +28,15 @@ export default ({ id, values, children, handleChange, style }) => {
           }
         }
       />
-      <Fade in={open}>
+      <Fade in={open && !disabled}>
         <div
           style={{
             position: 'absolute',
-            marginLeft: '-62px',
             zIndex: 9999
           }}
         >
           <ChromePicker
+            styles={{ body: { 'border-radius': '30px' } }}
             disableAlpha
             color={get(values, id)}
             onChange={({ hex }) => handleChange({ target: { id, value: hex } })}

@@ -47,7 +47,7 @@ const UserEdit = ({ _id, name, avatar, jobTitle, onDone = () => {} }) => {
               buttonText={t('Add image')}
               preview
               crop={{ aspect: 1 }}
-              cloudName={config.get('core.cloudinary.cloud_name')}
+              cloudName={config.get('..services.core.cloudinary.cloud_name')}
               {...props}
             >
               Avatar

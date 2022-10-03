@@ -4,10 +4,28 @@ const ms = require('@jibadano/microservice')
 
 const typeDefs = gql`
   extend type Query {
-    traffic: Traffic @auth
+    trafficStats: TrafficStats @auth
+    traffic: [Traffic] @auth
   }
 
   type Traffic {
+    ip: String
+    device: String
+    origin: String
+    geolocation: Geolocation
+    date: Date
+    total: Int
+  }
+
+  type Geolocation {
+    city: String
+    country: String
+    latitude: Float
+    longitude: Float
+    region: String
+  }
+
+  type TrafficStats {
     current: Int
     previous: Int
     device: [DeviceStats]
@@ -28,7 +46,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    traffic: async () => {
+    traffic: () => ms.model.Traffic.find(),
+    trafficStats: async () => {
       const today = moment()
       const firstDayOfCurrentMonth = moment()
         .date(1)

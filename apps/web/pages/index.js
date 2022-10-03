@@ -39,17 +39,20 @@ const Home = () => {
               <Grid item xs={12} md={7}>
                 <div>
                   <Box p={1}>
-                    <Typography variant="h2">
-                      Taking care of your mind, body and soul.
-                    </Typography>
+                    <Typography variant="h2">{t('home.title')}</Typography>
 
                     <Typography variant="h6">
                       Familiarize yourself with our studio and course offering
                       by signing up for a complimentary drop-in class now.
                     </Typography>
                   </Box>
-                  <Button variant="text" size="large" color="secondary">
-                    Book a Class
+                  <Button
+                    variant="text"
+                    size="large"
+                    color="secondary"
+                    onClick={() => alert('hola')}
+                  >
+                    {t('setAnAppointment')}
                   </Button>
                 </div>
               </Grid>

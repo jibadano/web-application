@@ -11,11 +11,13 @@ export default ({
   errors,
   values,
   children,
+  disabled,
   handleChange = () => {},
   handleBlur = () => {},
   multi
 }) => (
   <Autocomplete
+    disabled={disabled}
     fullWidth
     multiple
     freeSolo

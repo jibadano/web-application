@@ -117,12 +117,13 @@ const TRANSLATIONS = gql`
   }
 `
 
-export const useTranslations = () => {
+export const useTranslations = (languages) => {
   const query = useQuery(TRANSLATIONS, {
     context: {
       clientName: 'sys'
     }
   })
+
   return { ...query, translations: get(query, 'data.translations') || [] }
 }
 

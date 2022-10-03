@@ -11,15 +11,18 @@ export default ({
   handleChange,
   min,
   max,
-  sensibility
+  sensibility,
+  disabled
 }) => (
   <FormControl fullWidth size="small">
     <FormControlLabel
       style={{ width: '100%', margin: 0 }}
-      labelPlacement="top"
+      labelPlacement="start"
       label={children}
       control={
         <Slider
+          sx={{ mr: 2, ml: 5 }}
+          disabled={disabled}
           id={id}
           name={children}
           valueLabelDisplay

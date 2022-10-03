@@ -65,7 +65,7 @@ const DataTable = ({
       </Box>
 
       <Table size={size}>
-        <TableHead style={{ position: 'sticky' }}>
+        <TableHead>
           <TableRow>
             {config.map(({ title, _id, sortable, hiddenMobile, props }) => {
               if (hiddenMobile && mobile) return

@@ -1,8 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 
-import StatCard, { StatCardSkeleton } from './card'
-import StatDifference from './difference'
+import StatCard, { StatCardSkeleton } from '../../stats/card'
+import StatDifference from '../../stats/difference'
 import AccountIcon from '@mui/icons-material/SupervisorAccount'
 import Avatar from '@mui/material/Avatar'
 import { useTraffic } from './hooks'

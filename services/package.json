@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@jibadano/config": "0.0.9",
+    "@jibadano/config": "0.0.10",
     "@jibadano/microservice": "0.3.35",
     "apollo-server": "^3.10.0",
     "dotenv": "^16.0.1",
