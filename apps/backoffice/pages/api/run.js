@@ -4,7 +4,7 @@ export default async (req, res) => {
   const browser = await chrome.puppeteer.launch(
     process.env.NODE_ENV === 'production'
       ? {
-          headless: false,
+          headless: true,
           args: chrome.args,
           executablePath: await chrome.executablePath,
           headless: chrome.headless
