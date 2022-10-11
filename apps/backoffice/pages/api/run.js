@@ -5,9 +5,16 @@ export default async (req, res) => {
     process.env.NODE_ENV === 'production'
       ? {
           headless: true,
-          args: chrome.args,
-          executablePath: await chrome.executablePath,
-          headless: chrome.headless
+          args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-infobars',
+            '--disable-dev-shm-usage',
+            '--window-position=0,0',
+            '--window-size=1920,1080',
+            '--ignore-certificate-errors',
+            '--ignore-certificate-errors-spki-list'
+          ]
         }
       : {
           headless: false,
