@@ -23,7 +23,7 @@ importers:
       '@mui/styles': ^5.0.2
       chart.js: ^3.7.1
       cheerio: ^1.0.0-rc.12
-      chrome-aws-lambda: 7.0.0
+      chrome-aws-lambda: 5.5.0
       form: workspace:*
       formik: ^2.2.9
       graphql: ^15.0.0
@@ -59,7 +59,7 @@ importers:
       '@mui/styles': 5.9.1_react@17.0.2
       chart.js: 3.8.2
       cheerio: 1.0.0-rc.12
-      chrome-aws-lambda: 7.0.0_puppeteer-core@7.1.0
+      chrome-aws-lambda: 5.5.0_puppeteer-core@7.1.0
       form: link:../../packages/form
       formik: 2.2.9_react@17.0.2
       graphql: 15.8.0
@@ -3689,11 +3689,11 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: false
 
-  /chrome-aws-lambda/7.0.0_puppeteer-core@7.1.0:
-    resolution: {integrity: sha512-GbYXRPYtaA0DLfmxQpuZw1SKTP7rOA4UXiATwiFRJ4Ea6PBYSzqK0YjS7B2WimUBe//ybPfNpPIs8A3WpF0xvA==}
-    engines: {node: '>= 10.16'}
+  /chrome-aws-lambda/5.5.0_puppeteer-core@7.1.0:
+    resolution: {integrity: sha512-nYSDzTsVEVsvIFaUUAUN53ulXBLKSRXFS+eVYZOLZD5SA1If59rqBAiy4raMgorQwXWqjSsjK1SF4As+qzPLqA==}
+    engines: {node: '>= 8.10'}
     peerDependencies:
-      puppeteer-core: 7.0.x
+      puppeteer-core: 5.5.x
     dependencies:
       lambdafs: 2.1.1
       puppeteer-core: 7.1.0

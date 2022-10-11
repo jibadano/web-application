@@ -24,7 +24,7 @@
     "@mui/styles": "^5.0.2",
     "chart.js": "^3.7.1",
     "cheerio": "^1.0.0-rc.12",
-    "chrome-aws-lambda": "7.0.0",
+    "chrome-aws-lambda": "5.5.0",
     "form": "workspace:*",
     "formik": "^2.2.9",
     "graphql": "^15.0.0",
