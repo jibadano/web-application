@@ -1,35 +1,67 @@
+// Shout outs to the following repositories:
+
+// https://github.com/vercel/og-image
+// https://github.com/ireade/netlify-puppeteer-screenshot-demo
+
+// The maximum execution timeout is 10
+// seconds when deployed on a Personal Account (Hobby plan).
+// For Teams, the execution timeout is 60 seconds (Pro plan)
+// or 900 seconds (Enterprise plan).
+
+const puppeteer = require('puppeteer-core')
 const chrome = require('chrome-aws-lambda')
 
-export default async (req, res) => {
-  const browser = await chrome.puppeteer.launch(
-    process.env.NODE_ENV === 'production'
-      ? {
-          headless: true,
-          args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-infobars',
-            '--disable-dev-shm-usage',
-            '--window-position=0,0',
-            '--window-size=1920,1080',
-            '--ignore-certificate-errors',
-            '--ignore-certificate-errors-spki-list'
-          ]
-        }
-      : {
-          headless: false,
-          args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-infobars',
-            '--disable-dev-shm-usage',
-            '--window-position=0,0',
-            '--window-size=1920,1080',
-            '--ignore-certificate-errors',
-            '--ignore-certificate-errors-spki-list'
-          ]
-        }
-  )
+/** The code below determines the executable location for Chrome to
+ * start up and take the screenshot when running a local development environment.
+ *
+ * If the code is running on Windows, find chrome.exe in the default location.
+ * If the code is running on Linux, find the Chrome installation in the default location.
+ * If the code is running on MacOS, find the Chrome installation in the default location.
+ * You may need to update this code when running it locally depending on the location of
+ * your Chrome installation on your operating system.
+ */
+
+const exePath =
+  process.platform === 'win32'
+    ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+    : process.platform === 'linux'
+    ? '/usr/bin/google-chrome'
+    : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+
+async function getOptions(isDev) {
+  let options
+  if (isDev) {
+    options = {
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-infobars',
+        '--disable-dev-shm-usage',
+        '--window-position=0,0',
+        '--window-size=1920,1080',
+        '--ignore-certificate-errors',
+        '--ignore-certificate-errors-spki-list'
+      ],
+      executablePath: exePath,
+      headless: true
+    }
+  } else {
+    options = {
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless
+    }
+  }
+  return options
+}
+
+module.exports = async (req, res) => {
+  // pass in this parameter if you are developing locally
+  // to ensure puppeteer picks up your machine installation of
+  // Chrome via the configurable options
+  const isDev = process.env.NODE_ENV !== 'production'
+
+  const browser = await puppeteer.launch(getOptions(isDev))
 
   const page = await browser.newPage()
   await page.goto(
