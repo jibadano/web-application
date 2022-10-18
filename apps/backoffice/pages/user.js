@@ -1,40 +1,28 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import get from 'lodash/get'
-import Grid from '@mui/material/Grid'
-import { useCredentials, useRole } from '@backoffice/components/app/auth/hooks'
-import { useUser, useMe } from '@backoffice/components/app/user/hooks'
-
+import { useCredentials, useRole } from '@backoffice/components/auth/hooks'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
-
-import Title from '@backoffice/components/app/title'
-import DataTable from '@backoffice/components/app/dataTable'
-
+import Title from '@backoffice/components/common/title'
+import DataTable from '@backoffice/components/common/data/table'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
-import Container from '@mui/material/Container'
-
-import UserProfile from '@backoffice/components/app/user/profile'
-import User from '@backoffice/components/app/user'
-import UserNew from '@backoffice/components/app/user/new'
-import UserSecurity from '@backoffice/components/app/user/security'
-import UserEdit from '@backoffice/components/app/user/edit'
+import UserProfile from '@backoffice/components/user/profile'
+import User from '@backoffice/components/user'
+import UserNew from '@backoffice/components/user/new'
 
 const Users = () => {
   const router = useRouter()
-  const [edit, setEdit] = React.useState()
-  const [security, setSecurity] = React.useState()
-  const [selected, setSelected] = React.useState(router && router.query._id)
+  const [selected, setSelected] = React.useState()
   const [create, setCreate] = React.useState()
-  const role = useRole()
   const { credentials, loading } = useCredentials()
-  const { user, loading: loadingUser } = useUser(selected)
-  const { me, loading: loadingMe } = useMe()
+  const role = useRole()
 
-  const currentUser = get(me, '_id') == get(user, '_id')
+  React.useEffect(() => {
+    setSelected(router && router.query._id)
+  }, [router && router.query._id])
 
   return (
     <>
@@ -56,6 +44,7 @@ const Users = () => {
               onClick={() => {
                 setSelected()
                 setCreate(true)
+                router.replace({ query: {} })
               }}
             >
               New user
@@ -66,43 +55,17 @@ const Users = () => {
         Users
       </Title>
       <Box my={4}>
-        {selected && (
-          <Box>
-            {edit && !security && (
-              <UserEdit
-                onDone={() => setEdit()}
-                role={role}
-                currentUser={currentUser}
-                _id={selected}
-                {...user}
-              />
-            )}
-            {!edit && !security && (
-              <User
-                {...user}
-                role={role}
-                currentUser={currentUser}
-                onDone={() => setSelected()}
-                onEdit={() => setEdit(true)}
-                onSecurity={() => {
-                  setEdit()
-                  setSecurity(true)
-                }}
-              />
-            )}
-
-            {security && !edit && (
-              <UserSecurity
-                {...user}
-                role={role}
-                currentUser={currentUser}
-                onDone={() => setSecurity()}
-              />
-            )}
-          </Box>
+        {selected && !create && (
+          <User
+            _id={selected}
+            onDone={() => {
+              setSelected()
+              router.replace({ query: {} })
+            }}
+          />
         )}
-        {create && !selected && <UserNew onDone={() => setCreate()} />}
-        {!selected && !create && !edit && (
+        {create && <UserNew onDone={() => setCreate()} />}
+        {!selected && !create && (
           <DataTable
             config={[
               {
@@ -128,8 +91,7 @@ const Users = () => {
               onClick: () => {
                 setSelected(_id)
                 setCreate()
-                setEdit()
-                setSecurity()
+                router.replace({ query: { _id } })
               }
             }))}
             loading={loading}

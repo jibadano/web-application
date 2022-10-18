@@ -26,6 +26,7 @@ const Carousel = ({
   loading,
   multi,
   preview,
+  disabled,
   onChange = () => {}
 }) => {
   const [nav, setNav] = React.useState(0)
@@ -44,7 +45,10 @@ const Carousel = ({
           height="100%"
           display="flex"
           alignItems="flex-end"
-          style={{ background: '#222' }}
+          sx={{
+            borderRadius: (theme) => theme.shape.borderRadius + 'px',
+            background: '#222'
+          }}
         >
           {images.map((src, i) => (
             <Box
@@ -70,106 +74,111 @@ const Carousel = ({
               )}
             </Box>
           ))}
-          <Box
-            p={2}
-            width="100%"
-            position="absolute"
-            display="flex"
-            justifyContent="center"
-            alignItems="flex-end"
-          >
-            {!cropping && (
-              <Box display="flex">
-                <Box p={1}>
-                  <Fab
-                    size="small"
-                    onClick={() => {
-                      images.splice(nav, 1)
-                      onChange(images)
-                    }}
-                  >
-                    <RemoveIcon />
-                  </Fab>
-                </Box>
-                {cropConfig && (
-                  <Box p={1}>
-                    <Fab size="small" onClick={() => setCropping(true)}>
-                      <CropIcon />
-                    </Fab>
-                  </Box>
-                )}
-                {cropConfig && (
-                  <Box p={1}>
-                    <Fab
-                      size="small"
-                      onClick={() => {
-                        images[nav] = images[nav].replace(
-                          /upload\/c_crop,.*\//,
-                          'upload/'
-                        )
-
-                        onChange(images)
-                      }}
-                    >
-                      <ResetIcon />
-                    </Fab>
-                  </Box>
-                )}
-                {multi && (
-                  <React.Fragment>
+          {!disabled && (
+            <>
+              <Box
+                p={2}
+                width="100%"
+                position="absolute"
+                display="flex"
+                justifyContent="center"
+                alignItems="flex-end"
+              >
+                {!cropping && (
+                  <Box display="flex">
                     <Box p={1}>
                       <Fab
                         size="small"
-                        disabled={cropping || !nav}
-                        onClick={() => setNav((nav) => --nav)}
+                        onClick={() => {
+                          images.splice(nav, 1)
+                          onChange(images)
+                        }}
                       >
-                        <ChevronLeftIcon />
+                        <RemoveIcon />
+                      </Fab>
+                    </Box>
+                    {cropConfig && (
+                      <Box p={1}>
+                        <Fab size="small" onClick={() => setCropping(true)}>
+                          <CropIcon />
+                        </Fab>
+                      </Box>
+                    )}
+                    {cropConfig && (
+                      <Box p={1}>
+                        <Fab
+                          size="small"
+                          onClick={() => {
+                            images[nav] = images[nav].replace(
+                              /upload\/c_crop,.*\//,
+                              'upload/'
+                            )
+
+                            onChange(images)
+                          }}
+                        >
+                          <ResetIcon />
+                        </Fab>
+                      </Box>
+                    )}
+                    {multi && (
+                      <React.Fragment>
+                        <Box p={1}>
+                          <Fab
+                            size="small"
+                            disabled={cropping || !nav}
+                            onClick={() => setNav((nav) => --nav)}
+                          >
+                            <ChevronLeftIcon />
+                          </Fab>
+                        </Box>
+                        <Box p={1}>
+                          <Fab
+                            size="small"
+                            disabled={cropping || nav == images.length - 1}
+                            onClick={() => setNav((nav) => ++nav)}
+                          >
+                            <ChevronRightIcon />
+                          </Fab>
+                        </Box>
+                      </React.Fragment>
+                    )}
+                  </Box>
+                )}
+                {cropping && (
+                  <Box display="flex">
+                    <Box p={1}>
+                      <Fab size="small" onClick={() => setCropping()}>
+                        <CloseIcon />
                       </Fab>
                     </Box>
                     <Box p={1}>
                       <Fab
                         size="small"
-                        disabled={cropping || nav == images.length - 1}
-                        onClick={() => setNav((nav) => ++nav)}
+                        onClick={() => {
+                          setCropping()
+                          images[nav] = images[nav].replace(
+                            /upload\//,
+                            `upload/c_crop,h_${result.height},w_${result.width},x_${result.x},y_${result.y}/`
+                          )
+
+                          onChange(images)
+
+                          setCrop({ x: 0, y: 0 })
+                          setZoom(0)
+                        }}
                       >
-                        <ChevronRightIcon />
+                        <DoneIcon />
                       </Fab>
                     </Box>
-                  </React.Fragment>
+                  </Box>
                 )}
               </Box>
-            )}
-            {cropping && (
-              <Box display="flex">
-                <Box p={1}>
-                  <Fab size="small" onClick={() => setCropping()}>
-                    <CloseIcon />
-                  </Fab>
-                </Box>
-                <Box p={1}>
-                  <Fab
-                    size="small"
-                    onClick={() => {
-                      setCropping()
-                      images[nav] = images[nav].replace(
-                        /upload\//,
-                        `upload/c_crop,h_${result.height},w_${result.width},x_${result.x},y_${result.y}/`
-                      )
-
-                      onChange(images)
-
-                      setCrop({ x: 0, y: 0 })
-                      setZoom(0)
-                    }}
-                  >
-                    <DoneIcon />
-                  </Fab>
-                </Box>
-              </Box>
-            )}
-          </Box>
+            </>
+          )}
         </Box>
       )}
+
       {multi && (
         <Box display="flex">
           <Box py={2} display="flex" flexGrow={1}>
@@ -238,6 +247,7 @@ const Upload = ({
   buttonHeight = 250,
   buttonText,
   preview,
+  disabled,
   crop
 }) => {
   const inputId = `inputfile-${id}`
@@ -253,6 +263,7 @@ const Upload = ({
     <Box width={fullWidth ? '100%' : 'auto'}>
       {hasValue ? (
         <Carousel
+          disabled={disabled}
           preview={preview}
           multi={multi}
           images={images}

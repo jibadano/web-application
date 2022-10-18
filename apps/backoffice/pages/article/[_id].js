@@ -7,9 +7,9 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import ImageUpload from 'image/upload'
-import Actions from '@backoffice/components/app/actions'
-import Title from '@backoffice/components/app/title'
-import CardSkeleton from '@backoffice/components/app/cardSkeleton'
+import Actions from '@backoffice/components/common/actions'
+import Title from '@backoffice/components/common/title'
+import CardSkeleton from '@backoffice/components/common/card/skeleton'
 
 import config from '@jibadano/config'
 import {

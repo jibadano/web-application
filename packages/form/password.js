@@ -14,13 +14,15 @@ export default ({
   children,
   handleChange,
   handleBlur,
-  helpText
+  helpText,
+  disabled
 }) => {
   const [displayType, setDisplayType] = React.useState(type)
 
   return (
     <TextField
       id={id}
+      disabled={disabled}
       type={displayType}
       value={get(values, id)}
       error={Boolean(get(touched, id) && get(errors, id))}
@@ -37,6 +39,7 @@ export default ({
         endAdornment:
           displayType == 'password' ? (
             <IconButton
+              disabled={disabled}
               size="small"
               tabIndex={32}
               onClick={() => setDisplayType('text')}
@@ -46,6 +49,7 @@ export default ({
           ) : (
             <IconButton
               size="small"
+              disabled={disabled}
               tabIndex={32}
               onClick={() => setDisplayType('password')}
             >

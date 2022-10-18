@@ -1,18 +1,18 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 
-import Traffic from '@backoffice/components/app/traffic/stats'
-import TrafficMap from '@backoffice/components/app/traffic/map'
+import Traffic from '@backoffice/components/traffic/stats'
+import TrafficMap from '@backoffice/components/traffic/map'
 
-import Device from '@backoffice/components/stats/device'
-import { useMe } from '@backoffice/components/app/user/hooks'
+import Device from '@backoffice/components/traffic/device'
+import { useMe } from '@backoffice/components/user/hooks'
 
-import Title from '@backoffice/components/app/title'
+import Title from '@backoffice/components/common/title'
 
 const Dashboard = () => {
   const { me } = useMe()
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Title
           overtitle="Overview"

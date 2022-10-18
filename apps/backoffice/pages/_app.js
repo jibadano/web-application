@@ -4,11 +4,11 @@ import Head from 'next/head'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { blue, cyan, blueGrey, common } from '@mui/material/colors'
 import 'lib/i18next/init'
-import Layout from '@backoffice/components/app/layout'
+import Layout from '@backoffice/components/layout'
 import { SnackbarProvider } from 'notistack'
 import { makeStyles, createStyles } from '@mui/styles'
-import SignIn from '@backoffice/components/app/auth/signin'
-import Email from '@backoffice/components/app/email'
+import SignIn from '@backoffice/components/auth/signin'
+import Email from '@backoffice/components/email'
 
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from 'lib/apollo'
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() =>
         width: '100%'
       },
       body: {
-        backgroundColor: '#f4f6f8',
+        backgroundColor: '#fdfdfe',
         height: '100%',
         width: '100%',
         margin: 0,
@@ -58,7 +58,7 @@ export const theme = createTheme({
   palette: {
     background: {
       dark: '#ccc',
-      default: '#f8fafc',
+      default: '#fdfdfe',
       paper: common.white
     },
     primary: {

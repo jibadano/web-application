@@ -1,23 +1,26 @@
 import React from 'react'
-import Title from '@backoffice/components/app/title'
+import Title from '@backoffice/components/common/title'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
 import {
   useDeployStatus,
   useStartDeploy
-} from '@backoffice/components/app/settings/hooks'
-import TranslationsSettings from '@backoffice/components/app/settings/translations'
+} from '@backoffice/components/settings/hooks'
 
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
-import Deployments from '@backoffice/components/app/settings/deployments'
-import ThemeSettings from '@backoffice/components/app/settings/theme'
+import DeploymentList from '@backoffice/components/deployment/list'
+import ThemeEditor from '@backoffice/components/theme/editor'
+
+import TranslationEditor from '@backoffice/components/translation/editor'
+import TranslationSettings from '@backoffice/components/translation/settings'
 
 import Badge from '@mui/material/Badge'
-import MainSettings from '@backoffice/components/app/settings/main'
+import MainSettings from '@backoffice/components/settings/main'
 import DeployIcon from '@mui/icons-material/FlightTakeoff'
+
 const Settings = () => {
   const [nav, setNav] = React.useState(0)
   const [startDeploy] = useStartDeploy()
@@ -64,10 +67,13 @@ const Settings = () => {
         </Tabs>
       </Box>
       {nav == 0 && <MainSettings />}
-      {nav == 1 && <TranslationsSettings />}
-      {nav == 2 && <ThemeSettings />}
-
-      {nav == 3 && <Deployments />}
+      {nav == 1 && (
+        <Box sx={{ display: 'grid', gap: 3 }}>
+          <TranslationEditor /> <TranslationSettings />
+        </Box>
+      )}
+      {nav == 2 && <ThemeEditor />}
+      {nav == 3 && <DeploymentList />}
     </>
   )
 }

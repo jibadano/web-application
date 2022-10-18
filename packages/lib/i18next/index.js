@@ -7,7 +7,7 @@ export const useTranslation = () => {
 
   return {
     t: (input, options) => {
-      return (
+      /* return (
         <div
           style={{ cursor: 'pointer' }}
           onClick={(e) => {
@@ -23,7 +23,7 @@ export const useTranslation = () => {
         >
           {t(input)}
         </div>
-      )
+      ) */
       if (typeof input == 'object') return input[i18n.language] || ''
       return t(input, options)
     },

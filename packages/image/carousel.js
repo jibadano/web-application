@@ -19,7 +19,10 @@ const Carousel = ({ children, height, ...props }) => {
         height="100%"
         display="flex"
         alignItems="flex-end"
-        style={{ background: '#222' }}
+        sx={{
+          borderRadius: (theme) => theme.shape.borderRadius,
+          background: '#222'
+        }}
       >
         {images.map((image, i) => (
           <Box

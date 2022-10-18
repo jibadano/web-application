@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@backoffice/components/*": ["components/*"],
-      "@components/*": ["../web/components/*"]
+      "@components/*": ["../web/components/*"],
+      "@web/pages/*": ["../web/pages/*"]
     }
   }
 }
