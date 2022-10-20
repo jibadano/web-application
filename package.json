@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "preinstall": "rm -rf apps packages package-lock.json",
-    "postbuild": "du -sh * && ls -lah dist",
+    "build": "du -sh * && ls -lah dist",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
