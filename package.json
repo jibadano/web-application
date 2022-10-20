@@ -8,7 +8,7 @@
     "services/"
   ],
   "scripts": {
-    "preinstall": "rm -rf apps",
+    "preinstall": "rm -rf apps packages",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
