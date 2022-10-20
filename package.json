@@ -13,7 +13,7 @@
     "scope": "turbo run dev --scope=web",
     "build-services": "npm i -g turbo@1.4.3 && pnpm i -r  && turbo run build --scope=services",
     "start-services": "turbo run start --filter=services",
-    "start": "npx turbo run start --filter=services",
+    "start": "turbo run start --filter=services",
     "heroku-postbuild": "npx turbo run build --scope=services"
   },
   "devDependencies": {
