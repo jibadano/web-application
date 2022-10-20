@@ -8,13 +8,12 @@
     "services/"
   ],
   "scripts": {
-    "build2": "turbo run build",
+    "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "scope": "turbo run dev --scope=web",
-    "install": "npx pnmp i -r",
-    "build": "npx turbo run build --scope=services",
+    "build-services": "npm i -g turbo@1.4.3 && pnpm i -r  && turbo run build --scope=services",
+    "start-services": "turbo run start --filter=services",
     "start": "npx turbo run start --filter=services",
-    "start2": "npx turbo run start --filter=services",
     "heroku-postbuild": "npx turbo run build --scope=services"
   },
   "devDependencies": {
@@ -24,6 +23,5 @@
   "engines": {
     "npm": "8.x",
     "node": "16.x"
-  },
-  "packageManager": "pnpm@6.33.1"
+  }
 }

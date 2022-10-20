@@ -11,10 +11,10 @@ export const DataTableItemSkeleton = ({ config = [], button }) => {
   const mobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   return (
     <TableRow>
-      {config.map(({ hiddenMobile }) => {
+      {config.map(({ hiddenMobile }, i) => {
         if (hiddenMobile && mobile) return
         return (
-          <TableCell sx={{ padding: 1.5, border: 'none' }}>
+          <TableCell key={i} sx={{ padding: 1.5, border: 'none' }}>
             <Skeleton variant="text" />
           </TableCell>
         )
