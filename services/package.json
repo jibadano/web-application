@@ -20,8 +20,5 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "mongoose": "6.4.6"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19"
   }
 }
