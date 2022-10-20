@@ -8,13 +8,9 @@
     "services/"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "scope": "turbo run dev --scope=web",
-    "build-services": "npm i -g turbo@1.4.3 && pnpm i -r  && turbo run build --scope=services",
-    "start-services": "turbo run start --filter=services",
+    "build": "turbo run build --scope=services",
     "start": "turbo run start --filter=services",
-    "heroku-postbuild": "npx turbo run build --scope=services"
+    "dev": "turbo run dev --parallel"
   },
   "devDependencies": {
     "prettier": "^2.6.2",
