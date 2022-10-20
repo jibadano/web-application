@@ -8,9 +8,9 @@
     "services/"
   ],
   "scripts": {
-    "preinstall": "rm -rf apps packages",
+    "preinstall": "rm -rf apps packages package-lock.json",
     "postinstall": "rm -rf node_modules",
-    "build": "npm i",
+    "build": "cd services && npm i",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
