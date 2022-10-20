@@ -8,8 +8,8 @@
     "services/"
   ],
   "scripts": {
-    "preinstall": "rm -rf apps packages package-lock.json",
-    "postinstall": "ls -lah node_modules",
+    "preinstall": "rm -rf apps packages",
+    "postinstall": "npm prune",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
