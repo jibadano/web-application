@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "preinstall": "rm -rf apps packages",
-    "postinstall": "du -sh *",
+    "postinstall": "du -sh dist",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
