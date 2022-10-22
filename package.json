@@ -8,6 +8,7 @@
     "services/"
   ],
   "scripts": {
+    "postinstall": "printenv",
     "start": "npm run -w services start",
     "dev": "turbo run dev --parallel"
   },
