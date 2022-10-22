@@ -8,8 +8,7 @@
     "services/"
   ],
   "scripts": {
-    "postinstall": "rm -rf node_modules",
-    "prebuild": "npm i --workspace=services",
+    "postbuild": "rm -rf node_modules && npm i --workspace=services",
     "start": "npx turbo run start --filter=services",
     "dev": "turbo run dev --parallel"
   },
