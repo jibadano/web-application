@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "postbuild": "npm prune",
-    "start": "npx turbo run start",
+    "start": "npx turbo run start --filter=services",
     "dev": "turbo run dev --parallel"
   },
   "devDependencies": {
