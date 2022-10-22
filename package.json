@@ -8,6 +8,7 @@
     "services/"
   ],
   "scripts": {
+    "build": "rm -rf node_modules && cd services && npm i",
     "start": "npx turbo run start --filter=services",
     "dev": "turbo run dev --parallel"
   },
