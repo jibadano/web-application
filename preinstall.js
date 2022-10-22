@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './.env' })
 const { exec } = require('child_process')
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV != 'development') {
   if (process.env.WORKSPACE) {
     if (process.env.WORKSPACE.startsWith('services')) {
       exec('rm -rf apps packages', (err) => {
