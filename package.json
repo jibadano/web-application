@@ -8,7 +8,8 @@
     "services/"
   ],
   "scripts": {
-    "start": "npx turbo run start --filter=services",
+    "preinstall": "node preinstall.js",
+    "start": "npx turbo run start",
     "dev": "turbo run dev --parallel"
   },
   "devDependencies": {
