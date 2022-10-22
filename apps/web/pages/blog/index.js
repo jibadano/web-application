@@ -43,7 +43,10 @@ const Classes = () => {
           <FadeOnScreen>
             <Grid container spacing={8}>
               <Grid item xs={12} md={5}>
-                <img src="./images/blog.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373938/web-application/blog_qyppy0.jpg"
+                  width="100%"
+                />
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box
@@ -75,7 +78,10 @@ const Classes = () => {
           <FadeOnScreen>
             <Grid container spacing={8} direction="row-reverse">
               <Grid item xs={12} md={5}>
-                <img src="./images/blog2.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373938/web-application/blog2_sxw710.jpg"
+                  width="100%"
+                />
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box
@@ -107,7 +113,10 @@ const Classes = () => {
           <FadeOnScreen>
             <Grid container spacing={8}>
               <Grid item xs={12} md={5}>
-                <img src="./images/classes.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/classes_rvupcx.jpg"
+                  width="100%"
+                />
               </Grid>
               <Grid item xs={12} md={7}>
                 <Box

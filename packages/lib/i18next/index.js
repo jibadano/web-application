@@ -1,8 +1,6 @@
 import { useTranslation as originalUseTranslation } from 'react-i18next'
-import { useRouter } from '../router'
 
 export const useTranslation = () => {
-  const router = useRouter()
   const { t, i18n, ...rest } = originalUseTranslation()
 
   return {

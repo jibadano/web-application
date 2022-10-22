@@ -68,14 +68,17 @@ const Home = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FadeOnScreen>
-                <ImageButton src="./images/blog3.jpg">
+                <ImageButton src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373938/web-application/blog3_hlfuyb.jpg">
                   Yoga Aerobics
                 </ImageButton>
               </FadeOnScreen>
             </Grid>
             <Grid item xs={12} md={6}>
               <FadeOnScreen index={1}>
-                <ImageButton index={1} src="./images/classes3.jpeg">
+                <ImageButton
+                  index={1}
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/classes3_i7sqbd.jpg"
+                >
                   Instructor Training
                 </ImageButton>
               </FadeOnScreen>
@@ -125,7 +128,8 @@ const Home = () => {
       </div>
       <div
         style={{
-          background: 'url(/images/background2.jpg)',
+          background:
+            'url(https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/background2_vl1lfz.jpg)',
           width: '100%',
           height: '100vh',
           backgroundSize: 'cover'

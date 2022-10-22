@@ -36,7 +36,10 @@ const Instructors = () => {
           <Grid container spacing={8}>
             <Grid item xs={12} md={6}>
               <FadeOnScreen>
-                <img src="./images/instructor.jpeg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/instructor_scepuv.jpg"
+                  width="100%"
+                />
               </FadeOnScreen>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -67,7 +70,10 @@ const Instructors = () => {
           <Grid container spacing={8} direction="row-reverse">
             <Grid item xs={12} md={6}>
               <FadeOnScreen>
-                <img src="./images/instructor2.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/instructor2_o98qqz.jpg"
+                  width="100%"
+                />
               </FadeOnScreen>
             </Grid>
             <Grid item xs={12} md={6}>

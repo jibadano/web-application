@@ -36,7 +36,10 @@ const About = () => {
           <Grid container spacing={8}>
             <Grid item xs={12} md={6}>
               <FadeOnScreen>
-                <img src="./images/classes2.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/classes2_xuktna.webp"
+                  width="100%"
+                />
               </FadeOnScreen>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -67,7 +70,8 @@ const About = () => {
 
       <div
         style={{
-          background: 'url(/images/classes.jpg)',
+          background:
+            'url(https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373939/web-application/classes_rvupcx.jpg)',
           backgroundSize: 'cover',
           width: '100%',
           height: '100vh'

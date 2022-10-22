@@ -65,7 +65,10 @@ const Classes = () => {
                 </Typography>{' '}
               </Box>
               <Box>
-                <img src="/images/blog.jpg" width="100%" />
+                <img
+                  src="https://res.cloudinary.com/do0ixrz3u/image/upload/v1666373938/web-application/blog_qyppy0.jpg"
+                  width="100%"
+                />
               </Box>
             </Box>
           </Box>
