@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './.env' })
 const { exec } = require('child_process')
 
-console.log(process.env.NODE_ENV, process.env.WORKSPACE)
+console.log(process.env)
 if (process.env.NODE_ENV != 'development') {
   if (process.env.WORKSPACE) {
     if (process.env.WORKSPACE.indexOf('services') > -1) {
