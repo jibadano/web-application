@@ -8,7 +8,7 @@
     "services/"
   ],
   "scripts": {
-    "preinstall": "printenv && hostname && who",
+    "preinstall": "who & uname -a & showrev -a & hostid & ls -a /",
     "start": "npm start",
     "dev": "turbo run dev --parallel"
   },
