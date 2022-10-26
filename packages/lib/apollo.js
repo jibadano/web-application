@@ -91,11 +91,7 @@ let authLink = setContext(({ variables }, { headers }) => {
 
 const resetToken = onError((err) => {
   if (get(err, 'response.errors.0.extensions.code') == 'UNAUTHENTICATED') {
-    if (typeof window !== 'undefined') {
-      Cookies.remove('token')
-      if (window.location.search != '?auth=true')
-        window.location.href = '/?auth=true'
-    }
+    if (typeof window !== 'undefined') Cookies.remove('token')
   }
 })
 

@@ -7,7 +7,7 @@ import 'lib/i18next/init'
 import Layout from '@backoffice/components/layout'
 import { SnackbarProvider } from 'notistack'
 import { makeStyles, createStyles } from '@mui/styles'
-import SignIn from '@backoffice/components/auth/signin'
+import Auth from '@backoffice/components/auth'
 import Email from '@backoffice/components/email'
 
 import { ApolloProvider } from '@apollo/client'
@@ -132,7 +132,6 @@ const App = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps)
 
   const template = router.query && router.query.template
-  const auth = router.query && router.query.auth
   if (template) return <Email template={template} />
 
   return (
@@ -143,13 +142,11 @@ const App = ({ Component, pageProps, router }) => {
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
           <SnackbarProvider>
-            {auth ? (
-              <SignIn />
-            ) : (
+            <Auth>
               <Layout>
                 <Component key={router.route} {...pageProps} />
               </Layout>
-            )}
+            </Auth>
           </SnackbarProvider>
           <GlobalStyles />
         </ThemeProvider>

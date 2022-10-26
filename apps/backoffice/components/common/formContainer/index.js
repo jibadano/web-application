@@ -1,6 +1,5 @@
 import React from 'react'
 import Box from '@mui/material/Box'
-import Loading from '@backoffice/components/common/loading'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'

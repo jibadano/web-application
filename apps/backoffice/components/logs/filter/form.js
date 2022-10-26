@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Box } from '@mui/material'
 import { useTraceFacets } from '@backoffice/components/logs/hooks'
 
-import { useFormik, Form } from 'formik'
+import { useFormik } from 'formik'
 
 import Actions from '@backoffice/components/common/actions'
 import Loading from '@backoffice/components/common/loading'
@@ -21,7 +21,7 @@ const LogFilterForm = ({ onChange = () => {}, filters }) => {
   const { traceFacets, loading } = useTraceFacets()
   const modules = traceFacets && traceFacets.modules
   const operations = traceFacets && traceFacets.operations
-  console.log(formik.values)
+
   if (loading) return <Loading />
 
   return (
