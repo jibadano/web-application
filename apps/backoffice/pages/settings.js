@@ -48,7 +48,7 @@ const Settings = () => {
         <Tabs
           variant="scrollable"
           value={nav}
-          onChange={(e, nav) => setNav(nav)}
+          onChange={(_, nav) => setNav(nav)}
         >
           <Tab label="Main" />
           <Tab label="Translations" />

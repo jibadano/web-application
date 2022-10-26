@@ -4,6 +4,7 @@ import Loading from '@backoffice/components/common/loading'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
+import FormSkeleton from './skeleton'
 
 const FormContainer = ({
   title,
@@ -26,7 +27,7 @@ const FormContainer = ({
     }}
   >
     {loading ? (
-      <Loading />
+      <FormSkeleton />
     ) : (
       <>
         <Box display="flex" alignItems="center">

@@ -12,14 +12,13 @@ const Layout = ({ children }) => (
         display: 'flex',
         minHeight: '100%',
         overflow: 'hidden',
-        pt: 6,
         pl: { md: '256px', xs: 0 }
       }}
     >
       <Box
         sx={{
           width: '100%',
-          pt: { xs: 4, md: 2 },
+          pt: { xs: 3, md: 5 },
           pr: { xs: 2, md: 5 },
           pb: { xs: 8, md: 5 },
           pl: { xs: 2, md: 5 }

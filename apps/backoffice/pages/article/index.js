@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar'
 
 import DataTable from '@backoffice/components/common/data/table'
 import Title from '@backoffice/components/common/title'
+import Date from '@backoffice/components/common/date'
 
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
@@ -75,7 +76,7 @@ const Articles = () => {
               </Box>
             ),
             title,
-            new Date(date).toLocaleDateString()
+            <Date value={date} />
           ],
           _id,
           onClick: () => router.push(`article/${_id}`)

@@ -4,8 +4,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardHeader,
-  Divider,
   Typography,
   useTheme,
   Tab,
@@ -158,8 +156,6 @@ const TrafficByDevice = ({ className, ...rest }) => {
 
   return (
     <Card {...rest}>
-      <CardHeader title="Traffic" />
-      <Divider />
       <Tabs
         variant="fullWidth"
         value={view}
@@ -172,7 +168,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
       </Tabs>
       {view != 1 ? (
         <CardContent>
-          <Box height={200} position="relative">
+          <Box height={240} position="relative">
             <Doughnut data={dataDevice} options={options} />
           </Box>
           <Box display="flex" justifyContent="center" mt={2}>
@@ -191,7 +187,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
         </CardContent>
       ) : (
         <CardContent>
-          <Box height={200} position="relative">
+          <Box height={240} position="relative">
             <Doughnut data={dataSource} options={options} />
           </Box>
           <Box display="flex" justifyContent="center" mt={2}>

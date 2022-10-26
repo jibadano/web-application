@@ -43,6 +43,13 @@ const useStyles = makeStyles(() =>
       },
       'body > div': {
         height: '100%'
+      },
+      '.map-container': {
+        height: 400
+      },
+      '.sidebar': {
+        backgroundColor: '#000',
+        color: '#000'
       }
     }
   })

@@ -20,7 +20,7 @@ const DataTableHeadCell = ({ onClick, sort, value, children, ...props }) => {
   const active = Boolean(sort && sort.endsWith(value))
   const direction = active && sort.startsWith('-') ? 'desc' : 'asc'
   return onClick ? (
-    <TableCell variant="head" {...props}>
+    <TableCell sx={{ fontSize: 16 }} variant="head" {...props}>
       <Tooltip enterDelay={300} title="Sort">
         <TableSortLabel
           onClick={() => {
@@ -36,7 +36,7 @@ const DataTableHeadCell = ({ onClick, sort, value, children, ...props }) => {
       </Tooltip>
     </TableCell>
   ) : (
-    <TableCell variant="head" {...props}>
+    <TableCell sx={{ fontSize: 16 }} variant="head" {...props}>
       {children}
     </TableCell>
   )

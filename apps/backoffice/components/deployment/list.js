@@ -97,7 +97,7 @@ const Users = () => {
         ]}
         rows={deployments.map(({ _id, date, settings, status }) => ({
           values: [
-            _id,
+            `...${_id.substr(-6)}`,
             new Date(parseInt(date)).toLocaleDateString() +
               ' ' +
               new Date(parseInt(date)).toLocaleTimeString(),

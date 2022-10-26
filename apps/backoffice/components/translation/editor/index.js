@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip'
 import Box from '@mui/material/Box'
 import LanguageIcon from '@mui/icons-material/LanguageOutlined'
 
-import Loading from '@backoffice/components/common/loading'
+import Loading from '@backoffice/components/common/card/skeleton'
 import SideMenu from '@backoffice/components/common/sideMenu'
 
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
@@ -31,7 +31,6 @@ import {
 
 const Translations = (props) => {
   const router = useRouter()
-  const [edit, setEdit] = React.useState()
 
   const [selected, setSelected] = React.useState()
   const [searchText, setSearchText] = React.useState(
@@ -58,11 +57,13 @@ const Translations = (props) => {
     }
   })
 
-  if (settingsLoading) return <Loading />
+  if (settingsLoading || loading)
+    return (
+      <Box sx={{ display: 'flex', maxWidth: 'md' }}>
+        <Loading />
+      </Box>
+    )
 
-  if (loading) return <Loading />
-
-  formik.disabled = !edit
   return (
     <Box component={Paper} sx={{ display: 'flex', maxWidth: 'md' }}>
       <Box

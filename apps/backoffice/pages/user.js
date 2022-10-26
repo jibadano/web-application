@@ -12,6 +12,7 @@ import Link from '@mui/material/Link'
 import UserProfile from '@backoffice/components/user/profile'
 import User from '@backoffice/components/user'
 import UserNew from '@backoffice/components/user/new'
+import Date from '@backoffice/components/common/date'
 
 const Users = () => {
   const router = useRouter()
@@ -85,7 +86,7 @@ const Users = () => {
                 <UserProfile _id={_id} />,
                 _id,
                 role,
-                new Date(createdAt).toLocaleDateString()
+                <Date value={createdAt} />
               ],
               _id,
               onClick: () => {

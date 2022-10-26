@@ -49,10 +49,7 @@ const Menu = ({ language, route }) => {
                   key={item.title}
                   title={item.title}
                   icon={item.icon}
-                  onClick={() => {
-                    setOpen()
-                    router.push(item.href)
-                  }}
+                  onClick={() => setOpen()}
                 />
               ))}
             </List>

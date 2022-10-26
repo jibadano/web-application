@@ -15,7 +15,7 @@ export const DataTableItemSkeleton = ({ config = [], button }) => {
         if (hiddenMobile && mobile) return
         return (
           <TableCell key={i} sx={{ padding: 1.5, border: 'none' }}>
-            <Skeleton variant="text" />
+            <Skeleton variant="text" height={30} />
           </TableCell>
         )
       })}

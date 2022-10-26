@@ -1,12 +1,10 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-
 import Traffic from '@backoffice/components/traffic/stats'
 import TrafficMap from '@backoffice/components/traffic/map'
-
 import Device from '@backoffice/components/traffic/device'
+import DeploymentList from '@backoffice/components/deployment/list'
 import { useMe } from '@backoffice/components/user/hooks'
-
 import Title from '@backoffice/components/common/title'
 
 const Dashboard = () => {
@@ -38,6 +36,9 @@ const Dashboard = () => {
       </Grid>
       <Grid item lg={4} md={6} xl={3} xs={12}>
         <Device />
+      </Grid>
+      <Grid item xs={12}>
+        <DeploymentList />
       </Grid>
     </Grid>
   )

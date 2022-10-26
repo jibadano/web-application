@@ -25,7 +25,7 @@ const CardSkeleton = (props) => {
       <div className={classes.text}>
         <div className={classes.title}>
           <div className={classes.avatar}>
-            <Skeleton variant="circle" height={60} width={60} />
+            <Skeleton variant="rounded" height={60} width={60} />
           </div>
 
           <Skeleton variant="text" height={60} width="70%" />
