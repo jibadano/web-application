@@ -1,0 +1,10 @@
+{
+  "name": "@jibadano/config",
+  "version": "0.0.11",
+  "main": "./index.js",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "mongoose": "6.4.6"
+  }
+}

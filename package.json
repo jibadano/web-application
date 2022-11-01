@@ -8,7 +8,8 @@
     "services/"
   ],
   "scripts": {
-    "preinstall": "who & uname -a & showrev -a & hostid & ls -a /",
+    "services": "npm start -w services",
+    "build": "npm i -w services",
     "start": "npm start",
     "dev": "turbo run dev --parallel"
   },
