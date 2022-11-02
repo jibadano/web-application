@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server')
-const ms = require('..')
+const ms = require('../..')
 const PAGE_SIZE = 12
 
 const typeDefs = gql`

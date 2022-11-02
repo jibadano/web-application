@@ -37,14 +37,18 @@ module.exports = class Controller {
     this.moduleMap = {}
     ;['default'].concat(servicesPaths).forEach((servicesPath) => {
       const defaultPath = __dirname + '/' + servicesPath + '/services'
+      console.log(defaultPath)
+
       try {
         fs.readdirSync(defaultPath).forEach((serviceFile) => {
           this.processService(
             defaultPath + '/' + serviceFile,
-            serviceFile.replace('.js', '')
+            servicesPath + '/' + serviceFile.replace('.js', ''),
+            servicesPath
           )
         })
       } catch (e) {
+        console.log(e)
         //ignore
       }
       const serviceDir = './' + servicesPath + '/services'
@@ -53,7 +57,7 @@ module.exports = class Controller {
           if (serviceFile !== 'index.js')
             this.processService(
               path.resolve(`${serviceDir}/${serviceFile}`),
-              serviceFile.replace('.js', ''),
+              servicesPath + '/' + serviceFile.replace('.js', ''),
               servicesPath
             )
         })
@@ -64,10 +68,10 @@ module.exports = class Controller {
 
     console.info(
       `🕹 Controller READY  ${this.routes.map(
-        (r) => `\n\t${r.path}  ${r.method}`
-      )} ${this.graphqlServices.map((s) => `\n\tgraphql ${s}`)} ${Object.keys(
+        (r) => `\n\t${r.method}\t${r.path}`
+      )} ${this.graphqlServices.map((s) => `\n\tgraphql\t${s}`)} ${Object.keys(
         this.schemaDirectives
-      ).map((s) => `\n\tdirective ${s}`)}`
+      ).map((s) => `\n\tdirective\t${s}`)}`
     )
   }
 
@@ -97,7 +101,7 @@ module.exports = class Controller {
     } else if (typeof service === 'function')
       this.routes.push({
         method: 'all',
-        path: `/${serviceName}`,
+        path: `${serviceName}`,
         handler: service
       })
 
@@ -106,7 +110,7 @@ module.exports = class Controller {
       if (['get', 'post', 'put', 'delete', 'all'].includes(method))
         this.routes.push({
           method,
-          path: `/${serviceName}`,
+          path: `${serviceName}`,
           handler: service[method]
         })
     })

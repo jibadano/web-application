@@ -1,5 +1,5 @@
 const { gql, ApolloError } = require('apollo-server')
-const ms = require('..')
+const ms = require('../..')
 const crypto = require('crypto')
 const config = require('@jibadano/config')
 

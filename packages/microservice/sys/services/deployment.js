@@ -1,7 +1,7 @@
 const { gql, ApolloError } = require('apollo-server')
 const { print } = require('graphql')
 const fetch = require('node-fetch')
-const ms = require('..')
+const ms = require('../..')
 const config = require('@jibadano/config')
 
 const typeDefs = gql`
