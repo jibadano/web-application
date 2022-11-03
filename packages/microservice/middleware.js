@@ -2,11 +2,11 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = class Middleware {
-  constructor(config) {
+  constructor({ config }) {
     const middlewarePaths = config.get('selectedServices')
 
-    this.list = []
-    const middlewares = []
+    this.handlers = []
+    this.middlewares = []
     try {
       middlewarePaths.forEach((middlewarePath) => {
         const middlewareDir = './' + middlewarePath + '/middleware'
@@ -17,16 +17,14 @@ module.exports = class Middleware {
             ))
 
             if (middleware instanceof Array)
-              this.list = this.list.concat(middleware)
-            else if (middleware) this.list.push(middleware)
+              this.handlers = this.handlers.concat(middleware)
+            else if (middleware) this.handlers.push(middleware)
 
-            if (middleware) middlewares.push(middlewareFile.replace('.js', ''))
+            if (middleware)
+              this.middlewares.push(middlewareFile.replace('.js', ''))
           }
         })
       })
     } catch (e) {}
-
-    this.list.length &&
-      console.info(`🔗Middleware  READY ${middlewares.map((m) => `\n\t${m}`)}`)
   }
 }

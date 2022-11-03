@@ -10,48 +10,50 @@ const getSchemaName = (schemaFile) => {
   return schemaName
 }
 module.exports = class Model {
-  async init(config) {
+  constructor({ config }) {
     const modelPaths = config.get('selectedServices')
-    const modelConnection = await mongoose.createConnection(
-      config.get('mongo'),
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+    this.mongo = config.get('mongo')
+    this.schemas = {}
+    ;['default'].concat(modelPaths).forEach((modelPath) => {
+      const defaultModelDir = __dirname + '/' + modelPath + '/model'
+      try {
+        fs.readdirSync(defaultModelDir).forEach((schemaFile) => {
+          const schema = require(defaultModelDir + '/' + schemaFile)({ config })
+          let schemaName = getSchemaName(schemaFile)
+          this.schemas[schemaName] = schema
+        })
+      } catch (e) {
+        //ignore
       }
-    )
-    const schemas = []
-    try {
-      ;['default'].concat(modelPaths).forEach((modelPath) => {
-        const defaultModelDir = __dirname + '/' + modelPath + '/model'
-        try {
-          fs.readdirSync(defaultModelDir).forEach((schemaFile) => {
-            const schema = require(defaultModelDir + '/' + schemaFile)
-            let schemaName = getSchemaName(schemaFile)
-            this[schemaName] = modelConnection.model(schemaName, schema)
-            schemas.push(schemaName)
-          })
-        } catch (e) {
-          //ignore
-        }
 
-        const modelDir = './' + modelPath + '/model'
-        try {
-          fs.readdirSync(modelDir).forEach((schemaFile) => {
-            if (schemaFile !== 'index.js') {
-              const schema = require(path.resolve(`${modelDir}/${schemaFile}`))
-              let schemaName = getSchemaName(schemaFile)
-              this[schemaName] = modelConnection.model(schemaName, schema)
-              schemas.push(schemaName)
-            }
-          })
-        } catch (e) {
-          //ignore
-        }
-      })
-    } catch (e) {
-      console.error(e)
+      const modelDir = './' + modelPath + '/model'
+      try {
+        fs.readdirSync(modelDir).forEach((schemaFile) => {
+          if (schemaFile !== 'index.js') {
+            const schema = require(path.resolve(`${modelDir}/${schemaFile}`))({
+              config
+            })
+            let schemaName = getSchemaName(schemaFile)
+            this.schemas[schemaName] = schema
+          }
+        })
+      } catch (e) {
+        //ignore
+      }
+    })
+  }
+
+  init = async () => {
+    const modelConnection = await mongoose.createConnection(this.mongo, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+
+    for (let schemaName in this.schemas) {
+      this[schemaName] = modelConnection.model(
+        schemaName,
+        this.schemas[schemaName]
+      )
     }
-    schemas.length &&
-      console.info(`🌎Model READY ${schemas.map((s) => `\n\t${s}`)}`)
   }
 }

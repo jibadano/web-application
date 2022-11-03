@@ -7,7 +7,6 @@
   "author": "jibadano@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "@jibadano/config": "0.0.11",
     "apollo-server": "^3.10.0",
     "apollo-server-express": "^2.15.1",
     "body-parser": "^1.20.0",

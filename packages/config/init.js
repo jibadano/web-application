@@ -1,15 +1,27 @@
 const mongoose = require('mongoose')
 const merge = require('lodash/merge')
-const path = require('path')
-
 const get = require('lodash/get')
 const set = require('lodash/set')
 
+const Config = require('./Config')
+
+const getConfigItem = (configList, item) => {
+  const itemConfig = configList.find(({ _id }) => _id == item)
+  return itemConfig ? itemConfig.toObject() : null
+}
+
 const getRemoteConfig = async (configUrl) => {
-  await mongoose.connect(configUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  if (!configUrl)
+    throw new Error('You must provide a database url to fetch the config data')
+
+  try {
+    await mongoose.connect(configUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+  } catch (e) {
+    throw new Error("Couldn't connect to the config database " + e.message)
+  }
 
   if (!mongoose.models.Config)
     mongoose.model(
@@ -18,27 +30,20 @@ const getRemoteConfig = async (configUrl) => {
     )
 
   let configList = await mongoose.models.Config.find().exec()
-  const config = configList.find(({ _id }) => _id == 'main').toObject()
-  const settings = configList.find(({ _id }) => _id == 'settings').toObject()
-  const translations = configList
-    .find(({ _id }) => _id == 'translations')
-    .toObject()
 
-  return { config, settings, translations }
+  if (!configList || !configList.length)
+    throw new Error(
+      'No config found on database, did you load the config? Remember to use the Config table.'
+    )
+
+  const config = getConfigItem(configList, 'main')
+  const settings = getConfigItem(configList, 'settings')
+  const translations = getConfigItem(configList, 'translations')
+
+  if (!config) throw new Error('The "main" config is missing')
+
+  return { config, settings, translations: translations.translations }
 }
-
-const getLocalConfig = async () => {
-  const config = require('../../config.json')
-  const settings = require('../../settings.json')
-  const translations = require('../../translations.json')
-
-  return { config, settings, translations }
-}
-
-const load = async () =>
-  process.env.CONFIG_URL
-    ? getRemoteConfig(process.env.CONFIG_URL)
-    : getLocalConfig()
 
 const processSubmodule = (values = {}, name, def, mode) => {
   values.name = values.name || name
@@ -76,16 +81,18 @@ const processSubmodule = (values = {}, name, def, mode) => {
   return values
 }
 
-const mergeServices = (values = {}) => {
+const mergeServices = (values = {}, selected) => {
   let newValues = {}
 
   for (let service in values) {
-    newValues = merge(newValues, values[service], (objValue, srcValue) =>
-      typeof objValue == 'object'
-        ? merge(objValue, srcValue, mergePolicy)
-        : objValue
-    )
+    if (selected.indexOf(service) > -1)
+      newValues = merge(newValues, values[service], (objValue, srcValue) =>
+        typeof objValue == 'object'
+          ? merge(objValue, srcValue, mergePolicy)
+          : objValue
+      )
   }
+
   return newValues
 }
 
@@ -102,26 +109,46 @@ const processModule = (values = {}, mode) => {
         mode
       )
 
-  return values
+  return newValues
 }
 
-const processConfig = ({ config, settings, translations }, mode) => {
-  const apps = processModule(config.apps)
-  const services = processModule(config.services, mode)
+const processConfig = (
+  { config, settings, translations },
+  { appId, serviceId }
+) => {
+  if (appId && serviceId)
+    throw new Error(
+      "Can't process configuration for apps and services simultaneously"
+    )
 
   let current
-  if (mode == 'private') {
+  let services
+  let apps
+
+  if (appId) {
+    apps = processModule(config.apps)
+
+    if (!apps[appId]) throw new Error('appId not found in apps')
+    services = processModule(config.services, 'public')
+
+    current = apps[appId]
+  } else {
+    apps = processModule(config.apps)
+    services = processModule(config.services, 'private')
+
     const selectedServices =
-      (process.argv[2] && process.argv[2].split(',')) ||
+      (serviceId && serviceId.split(',')) ||
       Object.keys(services).filter((service) => service != 'default')
 
-    current = mergeServices(services)
+    if (!selectedServices.length) throw new Error('No services found')
+    selectedServices.forEach((serviceId) => {
+      if (!services[serviceId])
+        throw new Error('serviceId not found in services')
+    })
+
+    current = mergeServices(services, selectedServices)
     current.name = selectedServices.toString()
     current.selectedServices = selectedServices
-  } else {
-    const pjson = require(path.resolve(`./package.json`))
-
-    current = apps[pjson.name]
   }
 
   return {
@@ -129,27 +156,26 @@ const processConfig = ({ config, settings, translations }, mode) => {
     apps,
     services,
     settings,
-    translations: translations.translations
+    translations
   }
 }
 
-const initConfig = async (mode = 'private') => {
-  mode = process.env.npm_package_name == 'services' ? 'private' : 'public'
-  const configRaw = await load()
-  const config = processConfig(configRaw, mode) || {}
-  process.env.CONFIG = JSON.stringify(config)
-
-  return config
+const initConfig = async ({ dbUrl, serviceId, appId }) => {
+  const configRaw = await getRemoteConfig(dbUrl)
+  const config = processConfig(configRaw, { serviceId, appId }) || {}
+  return new Config(config)
 }
 
-const withConfig = async (nextConfig = { env: {} }) => {
-  const conf = await initConfig('public')
-  nextConfig.publicRuntimeConfig = nextConfig.publicRuntimeConfig || {}
-  nextConfig.publicRuntimeConfig.config = conf
-  nextConfig.env = nextConfig.env || {}
-  nextConfig.env.CONFIG = JSON.stringify(conf)
+const withConfig =
+  ({ dbUrl, appId }) =>
+  async (nextConfig = { env: {} }) => {
+    const configRaw = await getRemoteConfig(dbUrl)
+    const config = processConfig(configRaw, { appId }) || {}
 
-  return nextConfig
-}
+    nextConfig.env = nextConfig.env || {}
+    nextConfig.env.CONFIG = JSON.stringify(config)
+
+    return nextConfig
+  }
 
 module.exports = { withConfig, initConfig }

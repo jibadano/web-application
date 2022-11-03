@@ -1,9 +1,5 @@
-const lodashGet = require('lodash/get')
-const config = process.env.CONFIG ? JSON.parse(process.env.CONFIG) : {}
+const Config = require('./Config')
 
-const get = (field = '') =>
-  field.startsWith('..')
-    ? lodashGet(config, field.replace('..', ''))
-    : lodashGet(config, `current.${field}`)
-
-module.exports = { get }
+module.exports = new Config(
+  process.env.CONFIG ? JSON.parse(process.env.CONFIG) : {}
+)

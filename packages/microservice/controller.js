@@ -1,10 +1,14 @@
 const fs = require('fs')
 const { gql } = require('apollo-server')
 const path = require('path')
+const { ApolloServer } = require('apollo-server-express')
+const Context = require('./context')
 
 module.exports = class Controller {
-  constructor(config) {
-    const servicesPaths = config.get('selectedServices')
+  constructor(ms) {
+    this.context = new Context(ms)
+    this.graphqlPath = ms.config.get('graphql.path') || '/graphql'
+    const servicesPaths = ms.config.get('selectedServices')
     this.typeDefs = [
       gql`
         type Query {
@@ -37,18 +41,17 @@ module.exports = class Controller {
     this.moduleMap = {}
     ;['default'].concat(servicesPaths).forEach((servicesPath) => {
       const defaultPath = __dirname + '/' + servicesPath + '/services'
-      console.log(defaultPath)
 
       try {
         fs.readdirSync(defaultPath).forEach((serviceFile) => {
           this.processService(
             defaultPath + '/' + serviceFile,
             servicesPath + '/' + serviceFile.replace('.js', ''),
-            servicesPath
+            servicesPath,
+            ms
           )
         })
       } catch (e) {
-        console.log(e)
         //ignore
       }
       const serviceDir = './' + servicesPath + '/services'
@@ -58,25 +61,18 @@ module.exports = class Controller {
             this.processService(
               path.resolve(`${serviceDir}/${serviceFile}`),
               servicesPath + '/' + serviceFile.replace('.js', ''),
-              servicesPath
+              servicesPath,
+              ms
             )
         })
       } catch (e) {
         //ignore
       }
     })
-
-    console.info(
-      `🕹 Controller READY  ${this.routes.map(
-        (r) => `\n\t${r.method}\t${r.path}`
-      )} ${this.graphqlServices.map((s) => `\n\tgraphql\t${s}`)} ${Object.keys(
-        this.schemaDirectives
-      ).map((s) => `\n\tdirective\t${s}`)}`
-    )
   }
 
-  processService(servicePath, serviceName, module) {
-    const service = require(servicePath)
+  processService = (servicePath, serviceName, module, ms) => {
+    const service = require(servicePath)(ms)
 
     if (service.directives) {
       this.schemaDirectives = {
@@ -98,7 +94,7 @@ module.exports = class Controller {
       gqlServices.forEach((service) => {
         this.moduleMap[service] = module
       })
-    } else if (typeof service === 'function')
+    } else if (typeof service === 'function' && serviceName != this.graphqlPath)
       this.routes.push({
         method: 'all',
         path: `${serviceName}`,
@@ -116,5 +112,48 @@ module.exports = class Controller {
     })
 
     this.moduleMap[serviceName] = module
+  }
+
+  init = (app) => {
+    const context = {}
+    this.context.handlers.forEach((contextItem) => {
+      context[contextItem.name] = contextItem.handler(req, res)
+    })
+
+    this.routes.forEach(({ method, path, handler }) => {
+      app[method](path, (req, res, next) => {
+        req.context = context
+        next()
+      })
+      app[method](path, handler)
+    })
+
+    if (this.resolvers && this.resolvers.length > 1) {
+      this.server = new ApolloServer(this)
+      this.server.createGraphQLServerOptions = (req, res) => {
+        return {
+          schema: this.server.schema,
+          context: {
+            session: req.user,
+            trace: req.trace,
+            log: req.log,
+            ...context
+          },
+          formatError: (res) => {
+            req.log && req.log('Response', JSON.stringify(res), 'error')
+            return res
+          },
+          formatResponse: (res) => {
+            req.log && req.log('Response', JSON.stringify(res.data))
+            return res
+          }
+        }
+      }
+
+      this.server.applyMiddleware({
+        app,
+        path: this.graphqlPath
+      })
+    }
   }
 }

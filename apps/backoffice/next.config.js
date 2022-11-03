@@ -4,7 +4,10 @@ const path = require('path')
 const withTM = require('next-transpile-modules')(['form', 'image'])
 const { withConfig } = require('@jibadano/config/init')
 
-module.exports = withConfig(
+module.exports = withConfig({
+  dbUrl: process.env.CONFIG_URL,
+  appId: 'backoffice'
+})(
   withTM({
     webpack: (config) => {
       config.module.rules.forEach((rule) => {

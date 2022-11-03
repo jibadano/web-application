@@ -2,16 +2,15 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = class Context {
-  constructor(config) {
+  constructor({ config }) {
     const contextPaths = config.get('selectedServices')
-
     this.handlers = []
 
     try {
-      contextPaths.forEach((contextPath) => {
+      ;['default'].concat(contextPaths).forEach((contextPath) => {
         const contextDir = './' + contextPath + '/context'
         fs.readdirSync(contextDir).forEach((contextFile) => {
-          const contextName = contextFile.replace('.js', '')
+          const contextName = contextPath + '/' + contextFile.replace('.js', '')
 
           if (contextFile !== 'index.js') {
             const context = require(path.resolve(
@@ -27,10 +26,5 @@ module.exports = class Context {
         })
       })
     } catch (e) {}
-
-    this.handlers.length &&
-      console.info(
-        `📰Context  READY ${this.handlers.map((h) => `\n\t${h.name}`)}`
-      )
   }
 }
