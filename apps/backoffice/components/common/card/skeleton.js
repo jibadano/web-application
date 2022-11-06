@@ -1,45 +1,27 @@
 import React from 'react'
 import Paper from '@mui/material/Paper'
 import Skeleton from '@mui/material/Skeleton'
-import { makeStyles } from '@mui/styles'
+import Box from '@mui/material/Box'
 
-const useStyles = makeStyles((theme) => ({
-  root: ({ height = '100%' }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    height,
-    padding: theme.spacing(4)
-  }),
-  title: { display: 'flex', paddingBottom: theme.spacing(2) },
-  avatar: { paddingRight: theme.spacing(2) },
-  text: { flexGrow: 1 },
-
-  buttons: { display: 'flex', justifyContent: 'flex-end' }
-}))
-
-const CardSkeleton = (props) => {
-  const classes = useStyles(props)
-  return (
-    <Paper className={classes.root}>
-      <div className={classes.text}>
-        <div className={classes.title}>
-          <div className={classes.avatar}>
-            <Skeleton variant="rounded" height={60} width={60} />
-          </div>
-
-          <Skeleton variant="text" height={60} width="70%" />
-        </div>
-        <Skeleton variant="text" height={30} />
-        <Skeleton variant="text" height={30} />
-        <Skeleton variant="text" height={30} />
-        <Skeleton variant="text" height={30} width="40%" />
-      </div>
-      <div className={classes.buttons}>
-        <Skeleton variant="text" height={50} width={120} />
-      </div>
-    </Paper>
-  )
-}
+const CardSkeleton = () => (
+  <Box
+    component={Paper}
+    sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}
+  >
+    <Box display="flex" alignItems="center" flexGrow={1}>
+      <Skeleton variant="rounded" height={60} width={60} />
+      <Skeleton variant="text" height={50} width="70%" sx={{ ml: 2 }} />
+    </Box>
+    <Box py={2} flexGrow={2}>
+      <Skeleton variant="text" height={30} />
+      <Skeleton variant="text" height={30} />
+      <Skeleton variant="text" height={30} />
+      <Skeleton variant="text" height={30} width="40%" />
+    </Box>
+    <Box>
+      <Skeleton variant="text" height={50} width={120} />
+    </Box>
+  </Box>
+)
 
 export default CardSkeleton

@@ -2,10 +2,8 @@ import React from 'react'
 import { useRouter } from 'lib/router'
 import TextField from 'form/textField'
 import { useTranslation } from 'lib/i18next'
-import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-
 import ImageUpload from 'image/upload'
 import Actions from '@backoffice/components/common/actions'
 import Title from '@backoffice/components/common/title'
@@ -20,22 +18,10 @@ import {
 } from '@backoffice/components/article/hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { makeStyles } from '@mui/styles'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: theme.breakpoints.values.sm,
-    '& > *': {
-      marginBottom: theme.spacing(4)
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3)
-    }
-  }
-}))
+
 const Article = () => {
-  const classes = useStyles()
   const router = useRouter()
   const _id = router.query._id != 'new' && router.query._id
 
@@ -86,7 +72,9 @@ const Article = () => {
       >
         {({ handleSubmit, handleReset, dirty, ...props }) => (
           <form autoComplete="off" onSubmit={handleSubmit}>
-            <div className={classes.root}>
+            <Box
+              sx={{ maxWidth: 'md', display: 'grid', gap: 3, width: '100%' }}
+            >
               <ImageUpload
                 id="images"
                 preview
@@ -129,7 +117,7 @@ const Article = () => {
                   }
                 ]}
               />
-            </div>
+            </Box>
           </form>
         )}
       </Formik>

@@ -21,7 +21,6 @@
     "@jibadano/language": "^0.0.1",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
-    "@mui/styles": "^5.0.2",
     "chart.js": "^3.7.1",
     "cheerio": "^1.0.0-rc.12",
     "form": "*",

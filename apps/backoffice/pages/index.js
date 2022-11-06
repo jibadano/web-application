@@ -9,7 +9,7 @@ import Title from '@backoffice/components/common/title'
 import FormattedDate from '@backoffice/components/common/formattedDate'
 import CardInfo from '@backoffice/components/common/card/info'
 import CardMetric from '@backoffice/components/common/card/metric'
-import LaunchIcon from '@mui/icons-material/launch'
+import LaunchIcon from '@mui/icons-material/Launch'
 
 import config from '@jibadano/config'
 

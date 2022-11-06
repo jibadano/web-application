@@ -6,16 +6,16 @@ import { blue, cyan, blueGrey, common } from '@mui/material/colors'
 import 'lib/i18next/init'
 import Layout from '@backoffice/components/layout'
 import { SnackbarProvider } from 'notistack'
-import { makeStyles, createStyles } from '@mui/styles'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import Auth from '@backoffice/components/auth'
 import Email from '@backoffice/components/email'
 
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from 'lib/apollo'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    '@global': {
+const inputGlobalStyles = (
+  <GlobalStyles
+    styles={{
       '*': {
         boxSizing: 'border-box',
         margin: 0,
@@ -51,15 +51,9 @@ const useStyles = makeStyles(() =>
         backgroundColor: '#000',
         color: '#000'
       }
-    }
-  })
+    }}
+  />
 )
-
-const GlobalStyles = () => {
-  useStyles()
-
-  return null
-}
 
 export const theme = createTheme({
   palette: {
@@ -148,7 +142,7 @@ const App = ({ Component, pageProps, router }) => {
               </Layout>
             </Auth>
           </SnackbarProvider>
-          <GlobalStyles />
+          {inputGlobalStyles}
         </ThemeProvider>
       </ApolloProvider>
     </>
