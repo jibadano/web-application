@@ -1,21 +1,20 @@
+import 'react-json-pretty/themes/1337.css'
 import React from 'react'
 import { useDeployments, useStartDeploy } from '../settings/hooks'
 import DataTable from '@backoffice/components/common/data/table'
 import Status from '@backoffice/components/common/status'
+import Modal from '@backoffice/components/common/modal'
 
 import IconButton from '@mui/material/IconButton'
 import Button from '@mui/material/Button'
 
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogActions from '@mui/material/DialogActions'
 
 import ReplayIcon from '@mui/icons-material/Replay'
 import FolderIcon from '@mui/icons-material/Folder'
 import Collapse from '@mui/material/Collapse'
+import Typography from '@mui/material/Typography'
 
 import JSONPretty from 'react-json-pretty'
 const Users = () => {
@@ -28,7 +27,12 @@ const Users = () => {
 
   return (
     <>
-      <Dialog maxWidth="md" onClose={() => setOpen()} open={Boolean(open)}>
+      <Dialog
+        maxWidth="md"
+        PaperProps={{ sx: { border: 'none' } }}
+        onClose={() => setOpen()}
+        open={Boolean(open)}
+      >
         {open && (
           <div>
             <JSONPretty
@@ -39,17 +43,35 @@ const Users = () => {
           </div>
         )}
       </Dialog>
-      <Dialog
-        maxWidth="md"
+
+      <Modal
         onClose={() => setConfirmRedeploy()}
         open={Boolean(confirmRedeploy)}
+        title={'Do you want to restore this settings?'}
+        actions={
+          <>
+            <Button sx={{ m: 1 }} onClick={() => setConfirmRedeploy()}>
+              Cancel
+            </Button>
+            <Button
+              sx={{ m: 1 }}
+              onClick={() =>
+                startDeploy({ variables: { _id: confirmRedeploy._id } })
+              }
+              color="primary"
+              variant="contained"
+              autoFocus
+            >
+              Redeploy
+            </Button>
+          </>
+        }
       >
-        <DialogTitle>Do you want to restore this settings?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            If you click Redeploy you will restore this settings
-          </DialogContentText>
-          <Collapse in={displaySettings}>
+        <Typography>
+          If you click Redeploy you will restore this settings
+        </Typography>
+        <Collapse in={displaySettings}>
+          <Box p={2}>
             {confirmRedeploy && (
               <div>
                 <JSONPretty
@@ -59,28 +81,14 @@ const Users = () => {
                 ></JSONPretty>
               </div>
             )}
-          </Collapse>
-          <Box p={2}>
-            <Button onClick={() => setDisplaySettings((d) => !d)}>
-              {displaySettings ? 'Hide settings' : 'Display settings'}
-            </Button>
           </Box>
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={() => setConfirmRedeploy()}>Cancel</Button>
-          <Button
-            onClick={() =>
-              startDeploy({ variables: { _id: confirmRedeploy._id } })
-            }
-            color="primary"
-            variant="contained"
-            autoFocus
-          >
-            Redeploy
+        </Collapse>
+        <Box p={2}>
+          <Button onClick={() => setDisplaySettings((d) => !d)}>
+            {displaySettings ? 'Hide settings' : 'Display settings'}
           </Button>
-        </DialogActions>
-      </Dialog>
+        </Box>
+      </Modal>
       <DataTable
         config={[
           {

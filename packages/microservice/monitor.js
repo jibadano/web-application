@@ -1,7 +1,30 @@
 const mongoose = require('mongoose')
 const moment = require('moment')
 const { v1: uuidv1 } = require('uuid')
-const TraceSchema = require('./trace')
+
+const TraceSchema = new mongoose.Schema({
+  _id: String,
+  user: String,
+  operation: String,
+  ip: String,
+  module: String,
+  date: { type: Date, default: Date.now },
+  environment: { type: String, enum: ['development', 'staging', 'production'] },
+  logs: [
+    {
+      timestamp: { type: Date, default: Date.now },
+      message: String,
+      data: mongoose.Schema.Types.Mixed,
+      type: { type: String, enum: ['log', 'info', 'error', 'warning'] }
+    }
+  ]
+})
+
+const ConsoleOutputSchema = new mongoose.Schema({
+  date: { type: Date, default: Date.now },
+  type: { type: String, enum: ['log', 'info', 'error', 'warning'] },
+  value: String
+})
 
 module.exports = class Monitor {
   static MODES = {
@@ -21,6 +44,12 @@ module.exports = class Monitor {
 
     this.config.moduleName = config.get('name')
   }
+  report = () =>
+    ({
+      [Monitor.MODES.OFF]: '❎',
+      [Monitor.MODES.CONSOLE]: '✅ - Console logging',
+      [Monitor.MODES.DB]: '✅ - Database logging'
+    }[this.config.mode])
 
   init = async () => {
     if (this.config.mode == Monitor.MODES.DB) {
@@ -33,6 +62,37 @@ module.exports = class Monitor {
       )
 
       this.Trace = monitorConnection.model('Trace', TraceSchema)
+      this.ConsoleOutput = monitorConnection.model(
+        'ConsoleOutput',
+        ConsoleOutputSchema
+      )
+
+      const originalConsoleLog = console.log
+      console.log = (...args) => {
+        originalConsoleLog(...args)
+        new this.ConsoleOutput({ type: 'log', value: args.toString() }).save()
+      }
+
+      const originalConsoleInfo = console.info
+      console.info = (...args) => {
+        originalConsoleInfo(...args)
+        new this.ConsoleOutput({ type: 'info', value: args.toString() }).save()
+      }
+
+      const originalConsoleErr = console.err
+      console.err = (...args) => {
+        originalConsoleErr(...args)
+        new this.ConsoleOutput({ type: 'error', value: args.toString() }).save()
+      }
+
+      const originalConsoleWarn = console.warn
+      console.warn = (...args) => {
+        originalConsoleWarn(...args)
+        new this.ConsoleOutput({
+          type: 'warning',
+          value: args.toString()
+        }).save()
+      }
 
       if (this.config.exp) {
         let amount = this.config.exp
@@ -41,6 +101,12 @@ module.exports = class Monitor {
         if (this.config.exp.unit) unit = this.config.exp.unit
 
         await this.Trace.deleteMany({
+          date: {
+            $lte: moment().subtract(parseInt(amount), unit).toDate()
+          }
+        }).exec()
+
+        await this.ConsoleOutput.deleteMany({
           date: {
             $lte: moment().subtract(parseInt(amount), unit).toDate()
           }

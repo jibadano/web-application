@@ -43,6 +43,11 @@ module.exports = class Model {
     })
   }
 
+  report = () =>
+    this.mongo
+      ? `✅ - ${Object.keys(this.schemas).join(', ')}`
+      : '❗️ - mongo database is missing'
+
   init = async () => {
     const modelConnection = await mongoose.createConnection(this.mongo, {
       useNewUrlParser: true,

@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
 const DifferenceValue = ({ previous = 1, current = 1, desc }) => {
   const classes = useStyles()
   const value = Math.abs(Math.round((current / previous - 1) * 100))
+  if (!value || !previous)
+    return (
+      <Typography variant="caption" color="textSecondary">
+        No updates since last month
+      </Typography>
+    )
   const up = current > previous
   return up ? (
     <>

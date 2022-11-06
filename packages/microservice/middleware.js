@@ -27,4 +27,7 @@ module.exports = class Middleware {
       })
     } catch (e) {}
   }
+
+  report = () =>
+    this.middlewares.length ? `✅ - ${this.middlewares}` : '❎ - Not configured'
 }

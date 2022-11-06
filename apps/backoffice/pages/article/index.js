@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar'
 
 import DataTable from '@backoffice/components/common/data/table'
 import Title from '@backoffice/components/common/title'
-import Date from '@backoffice/components/common/date'
+import FormattedDate from '@backoffice/components/common/formattedDate'
 
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
@@ -76,7 +76,7 @@ const Articles = () => {
               </Box>
             ),
             title,
-            <Date value={date} />
+            <FormattedDate value={date} />
           ],
           _id,
           onClick: () => router.push(`article/${_id}`)

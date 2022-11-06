@@ -7,11 +7,7 @@ import Paper from '@mui/material/Paper'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useMe } from './hooks'
 import { useRole, useRemoveCredential } from '../auth/hooks'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogActions from '@mui/material/DialogActions'
+import Modal from '@backoffice/components/common/modal'
 
 const UserRemove = ({ _id, onDone = () => {} }) => {
   const { me } = useMe()
@@ -22,27 +18,29 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
 
   return (
     <>
-      <Dialog maxWidth="md" onClose={() => setOpen()} open={open}>
-        <DialogTitle>
-          You are going to remove <strong>{_id}</strong>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure? this action cannot be undone
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen()}>Cancel</Button>
-          <Button
-            color="error"
-            onClick={() => removeCredential({ _id }).then(setDone)}
-            variant="contained"
-            autoFocus
-          >
-            Yes, remove user
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Modal
+        onClose={() => setOpen()}
+        open={open}
+        title={`You are going to remove ${_id}`}
+        actions={
+          <>
+            <Button color="inherit" onClick={() => setOpen()}>
+              Cancel
+            </Button>
+            <Button
+              color="error"
+              onClick={() => removeCredential({ _id }).then(onDone)}
+              variant="contained"
+              autoFocus
+            >
+              Yes, remove user
+            </Button>
+          </>
+        }
+      >
+        <Typography>Are you sure? this action cannot be undone</Typography>
+      </Modal>
+
       <Paper
         sx={{
           p: 4,

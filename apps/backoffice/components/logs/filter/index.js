@@ -14,7 +14,7 @@ const LogFilter = ({ onChange = () => {}, filters }) => {
   const hasFilter = Boolean(Object.keys(filters).length)
 
   return (
-    <Box sx={{ mx: 3, my: 1 }}>
+    <Box sx={{ m: 3 }}>
       <Actions
         left={
           <Box sx={{ flexGrow: 1, '& > *': { mr: 2 } }}>

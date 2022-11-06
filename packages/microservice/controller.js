@@ -37,8 +37,8 @@ module.exports = class Controller {
 
     this.routes = []
     this.schemaDirectives = {}
-    this.graphqlServices = []
-    this.moduleMap = {}
+
+    this.reportData = []
     ;['default'].concat(servicesPaths).forEach((servicesPath) => {
       const defaultPath = __dirname + '/' + servicesPath + '/services'
 
@@ -46,7 +46,7 @@ module.exports = class Controller {
         fs.readdirSync(defaultPath).forEach((serviceFile) => {
           this.processService(
             defaultPath + '/' + serviceFile,
-            servicesPath + '/' + serviceFile.replace('.js', ''),
+            serviceFile.replace('.js', ''),
             servicesPath,
             ms
           )
@@ -60,7 +60,7 @@ module.exports = class Controller {
           if (serviceFile !== 'index.js')
             this.processService(
               path.resolve(`${serviceDir}/${serviceFile}`),
-              servicesPath + '/' + serviceFile.replace('.js', ''),
+              serviceFile.replace('.js', ''),
               servicesPath,
               ms
             )
@@ -71,10 +71,52 @@ module.exports = class Controller {
     })
   }
 
+  reportServices = () => {
+    const columnLengths = this.reportData.reduce(
+      (acc, curr) => {
+        acc[0] = Math.max(acc[0], curr[0].length)
+        acc[1] = Math.max(acc[1], curr[1].length)
+        acc[2] = Math.max(acc[2], curr[2].length)
+        acc[3] = Math.max(acc[3], curr[3].length)
+
+        return acc
+      },
+      [0, 0, 0, 0]
+    )
+
+    const adjustLength = (value, length) =>
+      value + ' '.repeat(length - value.length)
+
+    return this.reportData.reduce((acc, cur) => {
+      acc +=
+        adjustLength(cur[0], columnLengths[0]) +
+        '\t' +
+        adjustLength(cur[1], columnLengths[1]) +
+        '\t' +
+        adjustLength(cur[2], columnLengths[2]) +
+        '\t' +
+        adjustLength(cur[3], columnLengths[3]) +
+        '\n'
+
+      return acc
+    }, '')
+  }
+
+  report = () => `✅ - ${this.reportData.length} entries`
+
   processService = (servicePath, serviceName, module, ms) => {
     const service = require(servicePath)(ms)
 
     if (service.directives) {
+      Object.keys(service.directives).forEach((directiveName) =>
+        this.reportData.push([
+          module,
+          serviceName,
+          'GRAPHQL Directive',
+          directiveName
+        ])
+      )
+
       this.schemaDirectives = {
         ...this.schemaDirectives,
         ...service.directives
@@ -84,34 +126,46 @@ module.exports = class Controller {
     if (service.typeDefs && service.resolvers) {
       this.typeDefs.push(service.typeDefs)
       this.resolvers.push(service.resolvers)
-      this.graphqlServices.push(serviceName)
 
-      const gqlServices = [
-        ...Object.keys(service.resolvers.Query || {}),
-        ...Object.keys(service.resolvers.Mutation || {})
-      ]
-
-      gqlServices.forEach((service) => {
-        this.moduleMap[service] = module
-      })
-    } else if (typeof service === 'function' && serviceName != this.graphqlPath)
+      Object.keys(service.resolvers.Query || {}).forEach((queryName) =>
+        this.reportData.push([module, serviceName, 'GRAPHQL Query', queryName])
+      )
+      Object.keys(service.resolvers.Mutation || {}).forEach((mutationName) =>
+        this.reportData.push([
+          module,
+          serviceName,
+          'GRAPHQL Mutation',
+          mutationName
+        ])
+      )
+    } else if (
+      typeof service === 'function' &&
+      serviceName != this.graphqlPath
+    ) {
       this.routes.push({
         method: 'all',
-        path: `${serviceName}`,
+        path: `/${serviceName}`,
         handler: service
       })
+      this.reportData.push([module, serviceName, 'ALL', '/' + serviceName])
+    }
 
     const methods = Object.keys(service)
     methods.forEach((method) => {
-      if (['get', 'post', 'put', 'delete', 'all'].includes(method))
+      if (['get', 'post', 'put', 'delete', 'all'].includes(method)) {
         this.routes.push({
           method,
-          path: `${serviceName}`,
+          path: `/${serviceName}`,
           handler: service[method]
         })
+        this.reportData.push([
+          module,
+          serviceName,
+          method.toUpperCase(),
+          '/' + serviceName
+        ])
+      }
     })
-
-    this.moduleMap[serviceName] = module
   }
 
   init = (app) => {
@@ -121,10 +175,6 @@ module.exports = class Controller {
     })
 
     this.routes.forEach(({ method, path, handler }) => {
-      app[method](path, (req, res, next) => {
-        req.context = context
-        next()
-      })
       app[method](path, handler)
     })
 

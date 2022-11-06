@@ -99,3 +99,24 @@ export const useTraceFacets = () => {
 
   return { traceFacets: data && data.traceFacets, data, ...query }
 }
+
+const CONSOLE_OUTPUTS = gql`
+  query consoleOutputs {
+    consoleOutputs {
+      _id
+      date
+      type
+      value
+    }
+  }
+`
+
+export const useConsoleOutputs = () => {
+  const { data, ...query } = useQuery(CONSOLE_OUTPUTS, {
+    context: {
+      clientName: 'sys'
+    }
+  })
+
+  return { consoleOutputs: data && data.consoleOutputs, data, ...query }
+}

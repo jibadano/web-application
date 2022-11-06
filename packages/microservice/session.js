@@ -13,6 +13,8 @@ module.exports = class Session {
     }
   }
 
+  report = () => (this.jwtOptions ? '✅ - Configured' : '❎ - Not configured')
+
   sign = (data, signOptions) => {
     return jsonwebtoken.sign(
       data,

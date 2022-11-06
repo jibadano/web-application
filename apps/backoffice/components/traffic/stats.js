@@ -1,36 +1,28 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
 
 import StatCard from '@backoffice/components/common/card/metric'
 import StatCardSkeleton from '@backoffice/components/common/card/metric/skeleton'
 import StatDifference from '@backoffice/components/common/card/metric/difference'
 import AccountIcon from '@mui/icons-material/SupervisorAccount'
 import Avatar from '@mui/material/Avatar'
-import { useTraffic } from './hooks'
+import { useTrafficStats } from './hooks'
 import Box from '@mui/material/Box'
 
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    backgroundColor: theme.palette.secondary.light,
-    height: 56,
-    width: 56
-  }
-}))
-
 const TrafficStat = () => {
-  const classes = useStyles()
-  const { data, loading } = useTraffic()
+  const { data, loading } = useTrafficStats()
 
-  const traffic = data && data.traffic
+  const traffic = data && data.trafficStats
   if (loading || !traffic) return <StatCardSkeleton />
 
   return (
     <StatCard
       title="TOTAL CUSTOMERS"
-      value={traffic.current}
+      value={traffic.current.toString()}
       icon={
-        <Avatar className={classes.avatar}>
-          <AccountIcon fontSize="large" />
+        <Avatar
+          sx={{ backgroundColor: 'secondary.light', height: 42, width: 42 }}
+        >
+          <AccountIcon />
         </Avatar>
       }
       desc={

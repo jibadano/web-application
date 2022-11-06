@@ -35,6 +35,8 @@ module.exports = class Mail {
     })
   }
 
+  report = () => (this.transport ? `✅ - ${this.from.address}` : '❎')
+
   send = (to, template, data = {}) => {
     return new Promise((resolve, reject) => {
       if (!to || !template)

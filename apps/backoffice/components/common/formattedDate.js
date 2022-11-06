@@ -4,10 +4,10 @@ import Box from '@mui/material/Box'
 import Tooltip from '@mui/material/Tooltip'
 import moment from 'moment'
 
-const Date = ({ value }) => {
+const FormattedDate = ({ value, ...props }) => {
   const date = moment(value)
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} {...props}>
       <Tooltip title={date.format('DD/MM/YYYY')}>
         <Box>
           <Typography
@@ -27,4 +27,4 @@ const Date = ({ value }) => {
   )
 }
 
-export default Date
+export default FormattedDate

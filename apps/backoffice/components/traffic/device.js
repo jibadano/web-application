@@ -9,7 +9,6 @@ import {
   Tab,
   Tabs
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
 
 import LaptopMacIcon from '@mui/icons-material/LaptopMac'
 import PhoneIcon from '@mui/icons-material/Smartphone'
@@ -21,21 +20,15 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import { useTrafficStats } from './hooks'
 
 import CardSkeleton from '@backoffice/components/common/card/skeleton'
-const useStyles = makeStyles(() => ({
-  root: {
-    height: '100%'
-  }
-}))
 
 const getRate = (list, stat, total) => {
   if (!total) return 0
   const s = list.find(({ _id }) => _id == stat)
   if (!s) return 0
-  return ((s.count / total) * 100).toFixed(1)
+  return (s.count / total) * 100
 }
 
 const TrafficByDevice = ({ className, ...rest }) => {
-  const classes = useStyles()
   const theme = useTheme()
   const [view, setView] = React.useState(0)
   const { data: dataTraffic, loading } = useTrafficStats()
@@ -174,12 +167,25 @@ const TrafficByDevice = ({ className, ...rest }) => {
           <Box display="flex" justifyContent="center" mt={2}>
             {listDevice.map(({ color, icon: Icon, title, value }) => (
               <Box key={title} px={2} textAlign="center">
-                <Icon color="action" />
-                <Typography color="textPrimary" variant="body1">
-                  {title}
+                <Typography sx={{ color }} variant="h3">
+                  {value}
+                  <Typography
+                    sx={{ position: 'absolute', mt: '10px', ml: '1px' }}
+                    variant="caption"
+                  >
+                    %
+                  </Typography>
                 </Typography>
-                <Typography style={{ color }} variant="h2">
-                  {value}%
+                <Typography color="textPrimary" variant="body2">
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <Icon color="action" fontSize="10px" /> {title}
+                  </Box>
                 </Typography>
               </Box>
             ))}
@@ -193,12 +199,25 @@ const TrafficByDevice = ({ className, ...rest }) => {
           <Box display="flex" justifyContent="center" mt={2}>
             {listSource.map(({ color, icon: Icon, title, value }) => (
               <Box key={title} px={2} textAlign="center">
-                <Icon color="action" />
-                <Typography color="textPrimary" variant="body1">
-                  {title}
+                <Typography sx={{ color }} variant="h3">
+                  {value}
+                  <Typography
+                    sx={{ position: 'absolute', mt: '10px', ml: '1px' }}
+                    variant="caption"
+                  >
+                    %
+                  </Typography>
                 </Typography>
-                <Typography style={{ color }} variant="h2">
-                  {value}%
+                <Typography color="textPrimary" variant="body2">
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <Icon color="action" fontSize="10px" /> {title}
+                  </Box>
                 </Typography>
               </Box>
             ))}
