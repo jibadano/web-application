@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import { Doughnut } from 'react-chartjs-2'
 import {
   Box,
@@ -25,10 +26,11 @@ const getRate = (list, stat, total) => {
   if (!total) return 0
   const s = list.find(({ _id }) => _id == stat)
   if (!s) return 0
-  return (s.count / total) * 100
+  return Math.round((s.count / total) * 100)
 }
 
 const TrafficByDevice = ({ className, ...rest }) => {
+  const { t } = useTranslation()
   const theme = useTheme()
   const [view, setView] = React.useState(0)
   const { data: dataTraffic, loading } = useTrafficStats()
@@ -56,7 +58,12 @@ const TrafficByDevice = ({ className, ...rest }) => {
         hoverBorderColor: 'white'
       }
     ],
-    labels: ['Desktop', 'Mobile', 'Tablet', 'Unknown']
+    labels: [
+      t('backoffice.device.desktop'),
+      t('backoffice.device.mobile'),
+      t('backoffice.device.tablet'),
+      t('backoffice.unknown')
+    ]
   }
 
   const dataSource = {
@@ -79,7 +86,12 @@ const TrafficByDevice = ({ className, ...rest }) => {
         hoverBorderColor: 'white'
       }
     ],
-    labels: ['Facebook', 'Instagram', 'WhatsApp', 'Unknown']
+    labels: [
+      t('backoffice.source.facebook'),
+      t('backoffice.source.instagram'),
+      t('backoffice.source.whatsapp'),
+      t('backoffice.unknown')
+    ]
   }
 
   const options = {
@@ -106,20 +118,20 @@ const TrafficByDevice = ({ className, ...rest }) => {
 
   const listDevice = [
     {
-      title: 'Desktop',
+      title: t('backoffice.device.desktop'),
       value: getRate(traffic.device, 'desktop', traffic.total),
       icon: LaptopMacIcon,
       color: theme.palette.primary.main
     },
 
     {
-      title: 'Mobile',
+      title: t('backoffice.device.mobile'),
       value: getRate(traffic.device, 'mobile', traffic.total),
       icon: PhoneIcon,
       color: theme.palette.secondary.main
     },
     {
-      title: 'Tablet',
+      title: t('backoffice.device.tablet'),
       value: getRate(traffic.device, 'tablet', traffic.total),
       icon: TabletIcon,
       color: theme.palette.primary.light
@@ -128,19 +140,19 @@ const TrafficByDevice = ({ className, ...rest }) => {
 
   const listSource = [
     {
-      title: 'Facebook',
+      title: t('backoffice.source.facebook'),
       value: getRate(traffic.source, 'facebook', traffic.total),
       icon: FacebookIcon,
       color: theme.palette.primary.main
     },
     {
-      title: 'Instagram',
+      title: t('backoffice.source.instagram'),
       value: getRate(traffic.source, 'instagram', traffic.total),
       icon: InstagramIcon,
       color: theme.palette.secondary.main
     },
     {
-      title: 'WhatsApp',
+      title: t('backoffice.source.whatsapp'),
       value: getRate(traffic.source, 'web', traffic.total),
       icon: WhatsAppIcon,
       color: theme.palette.primary.light
@@ -156,8 +168,8 @@ const TrafficByDevice = ({ className, ...rest }) => {
         textColor="primary"
         onChange={(e, value) => setView(value)}
       >
-        <Tab label="Device" />
-        <Tab label="Source" />
+        <Tab label={t('backoffice.device')} />
+        <Tab label={t('backoffice.source')} />
       </Tabs>
       {view != 1 ? (
         <CardContent>

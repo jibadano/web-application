@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import { useRouter } from 'next/router'
 import { useCredentials, useRole } from '@backoffice/components/auth/hooks'
 import Typography from '@mui/material/Typography'
@@ -16,6 +17,8 @@ import FormattedDate from '@backoffice/components/common/formattedDate'
 
 const Users = () => {
   const router = useRouter()
+  const { t } = useTranslation()
+
   const [selected, setSelected] = React.useState()
   const [create, setCreate] = React.useState()
   const { credentials, loading } = useCredentials()
@@ -31,7 +34,7 @@ const Users = () => {
         overtitle={
           <Breadcrumbs aria-label="breadcrumb">
             <Link color="inherit" href="/">
-              Overview
+              {t('backoffice.overview')}
             </Link>
             <Typography color="textPrimary"></Typography>
           </Breadcrumbs>
@@ -48,12 +51,12 @@ const Users = () => {
                 router.replace({ query: {} })
               }}
             >
-              New user
+              {t('backoffice.user.new')}
             </Button>
           )
         }
       >
-        Users
+        {t('backoffice.users')}
       </Title>
       <Box my={4}>
         {selected && !create && (
@@ -70,16 +73,16 @@ const Users = () => {
           <DataTable
             config={[
               {
-                title: 'Name'
+                title: t('backoffice.user.name')
               },
               {
-                title: 'User',
+                title: t('backoffice.user'),
                 _id: '_id'
               },
               {
-                title: 'Role'
+                title: t('backoffice.user.role')
               },
-              { title: 'Created at', _id: 'createdAt' }
+              { title: t('backoffice.user.createdAt'), _id: 'createdAt' }
             ]}
             rows={credentials.map(({ _id, role, createdAt }) => ({
               values: [

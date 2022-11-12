@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import Loading from '@backoffice/components/common/loading'
 import Grid from '@mui/material/Grid'
 import { useFormik } from 'formik'
@@ -14,6 +15,8 @@ import FormContainer from '@backoffice/components/common/formContainer'
 import ThemePreview from './preview'
 
 const ThemeSettings = () => {
+  const { t } = useTranslation()
+
   const [edit, setEdit] = React.useState()
   const [updateSettings] = useUpdateSettings()
 
@@ -35,7 +38,7 @@ const ThemeSettings = () => {
       <Grid item xs={12} md={4}>
         <FormContainer
           loading={loading}
-          title="Theme settings"
+          title={t('backoffice.theme')}
           edit={edit}
           onEdit={() => setEdit(true)}
           onCancel={() => {
@@ -45,25 +48,22 @@ const ThemeSettings = () => {
           onSave={formik.handleSubmit}
         >
           <Color id="theme.palette.primary.main" {...formik}>
-            Primary
+            {t('backoffice.theme.color.primary')}
           </Color>
           <Color id="theme.palette.secondary.main" {...formik}>
-            Secondary
+            {t('backoffice.theme.color.secondary')}
           </Color>
           <Slider id="theme.shape.borderRadius" min={0} max={360} {...formik}>
-            Border
+            {t('backoffice.theme.borderRadius')}
           </Slider>
           <Color id="theme.palette.text.primary" {...formik}>
-            Primary text
+            {t('backoffice.theme.text.color.primary')}
           </Color>
           <Color id="theme.palette.text.secondary" {...formik}>
-            Secondary text
+            {t('backoffice.theme.text.color.secondary')}
           </Color>
           <Slider id="theme.typography.fontSize" {...formik}>
-            Font size
-          </Slider>
-          <Slider id="theme.typography.fontSize" {...formik}>
-            Font size
+            {t('backoffice.theme.text.size')}
           </Slider>
         </FormContainer>
       </Grid>

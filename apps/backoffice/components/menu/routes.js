@@ -10,26 +10,26 @@ export default [
   {
     href: '/',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'backoffice.dashboard'
   },
   {
     href: '/article',
     icon: OrdersIcon,
-    title: 'Articles'
+    title: 'backoffice.articles'
   },
   {
     href: '/user',
     icon: UsersIcon,
-    title: 'Users'
+    title: 'backoffice.users'
   },
   {
     href: '/settings',
     icon: SettingsIcon,
-    title: 'Settings'
+    title: 'backoffice.settings'
   },
   {
     href: '/logs',
     icon: LogsIcon,
-    title: 'Logs'
+    title: 'backoffice.audition'
   }
 ]

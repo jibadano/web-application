@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import Title from '@backoffice/components/common/title'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -22,6 +23,7 @@ import MainSettings from '@backoffice/components/settings/main'
 import DeployIcon from '@mui/icons-material/FlightTakeoff'
 
 const Settings = () => {
+  const { t } = useTranslation()
   const [nav, setNav] = React.useState(0)
   const [startDeploy] = useStartDeploy()
   const { deployStatus, loading: deployStatusLoading } = useDeployStatus()
@@ -29,7 +31,7 @@ const Settings = () => {
   return (
     <>
       <Title
-        overtitle="Configuration"
+        overtitle={t('backoffice.configuration')}
         actions={
           <Button
             startIcon={<DeployIcon />}
@@ -38,11 +40,11 @@ const Settings = () => {
             color="primary"
             onClick={() => startDeploy().then(() => setNav(2))}
           >
-            Deploy
+            {t('backoffice.deployments.deploy')}
           </Button>
         }
       >
-        Settings
+        {t('backoffice.settings')}
       </Title>
       <Box my={4} mx={1}>
         <Tabs
@@ -50,9 +52,9 @@ const Settings = () => {
           value={nav}
           onChange={(_, nav) => setNav(nav)}
         >
-          <Tab label="Main" />
-          <Tab label="Translations" />
-          <Tab label="Theme" />
+          <Tab label={t('backoffice.settings.main')} />
+          <Tab label={t('backoffice.translations')} />
+          <Tab label={t('backoffice.theme')} />
           <Tab
             label={
               <Badge
@@ -60,7 +62,7 @@ const Settings = () => {
                 variant="dot"
                 color="secondary"
               >
-                Deployments
+                {t('backoffice.deployments')}
               </Badge>
             }
           />

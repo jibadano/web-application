@@ -13,48 +13,6 @@ import Email from '@backoffice/components/email'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from 'lib/apollo'
 
-const inputGlobalStyles = (
-  <GlobalStyles
-    styles={{
-      '*': {
-        boxSizing: 'border-box',
-        margin: 0,
-        padding: 0
-      },
-      html: {
-        '-webkit-font-smoothing': 'antialiased',
-        '-moz-osx-font-smoothing': 'grayscale',
-        height: '100%',
-        width: '100%'
-      },
-      body: {
-        backgroundColor: '#fdfdfe',
-        height: '100%',
-        width: '100%',
-        margin: 0,
-        overflowX: 'hidden'
-      },
-      a: {
-        textDecoration: 'none'
-      },
-      '#root': {
-        height: '100%',
-        width: '100%'
-      },
-      'body > div': {
-        height: '100%'
-      },
-      '.map-container': {
-        height: 400
-      },
-      '.sidebar': {
-        backgroundColor: '#000',
-        color: '#000'
-      }
-    }}
-  />
-)
-
 export const theme = createTheme({
   palette: {
     background: {
@@ -122,6 +80,48 @@ export const theme = createTheme({
   }
 })
 
+const inputGlobalStyles = (
+  <GlobalStyles
+    styles={{
+      '*': {
+        boxSizing: 'border-box',
+        margin: 0,
+        padding: 0
+      },
+      html: {
+        '-webkit-font-smoothing': 'antialiased',
+        '-moz-osx-font-smoothing': 'grayscale',
+        height: '100%',
+        width: '100%'
+      },
+      body: {
+        backgroundColor: theme.palette.background.default,
+        height: '100%',
+        width: '100%',
+        margin: 0,
+        overflowX: 'hidden'
+      },
+      a: {
+        textDecoration: 'none'
+      },
+      '#root': {
+        height: '100%',
+        width: '100%'
+      },
+      'body > div': {
+        height: '100%'
+      },
+      '.map-container': {
+        height: 400
+      },
+      '.sidebar': {
+        backgroundColor: '#000',
+        color: '#000'
+      }
+    }}
+  />
+)
+
 const App = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps)
 
@@ -132,6 +132,22 @@ const App = ({ Component, pageProps, router }) => {
     <>
       <Head>
         <title>Backoffice</title>
+        <meta charSet="utf-8" />
+        <meta name="theme-color" content={theme.palette.background.default} />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Description" />
+        <meta name="keywords" content="Keywords" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" type="image/png" href="favicon.ico" />
+        <link rel="apple-touch-icon" href="favicon.ico"></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+          rel="stylesheet"
+        ></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Source+Sans+Pro:wght@200;300;400;600&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>

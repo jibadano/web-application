@@ -1,10 +1,8 @@
 import React from 'react'
-
+import { useTranslation } from 'lib/i18next'
 import TextField from 'form/textField'
 import Typography from '@mui/material/Typography'
-
 import FormContainer from '@backoffice/components/common/formContainer'
-
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -13,6 +11,7 @@ import {
 } from '@backoffice/components/settings/hooks'
 
 const SettingsMain = () => {
+  const { t } = useTranslation()
   const [edit, setEdit] = React.useState()
   const [updateSettings] = useUpdateSettings()
   const { settings, loading } = useSettings()
@@ -40,7 +39,7 @@ const SettingsMain = () => {
   return (
     <FormContainer
       loading={loading}
-      title="Main settings"
+      title={t('backoffice.settings.main')}
       edit={edit}
       onEdit={() => setEdit(true)}
       onCancel={() => {
@@ -50,25 +49,25 @@ const SettingsMain = () => {
       onSave={formik.handleSubmit}
     >
       <Typography variant="h6" sx={{ px: 1, color: !edit && 'text.disabled' }}>
-        Brand
+        {t('backoffice.settings.main.brand')}
       </Typography>
       <TextField id="app.name" {...formik}>
-        Name
+        {t('backoffice.settings.main.name')}
       </TextField>
       <Typography
         sx={{ mt: 2, px: 1, color: !edit && 'text.disabled' }}
         variant="h6"
       >
-        Contact
+        {t('backoffice.settings.main.contact')}
       </Typography>
       <TextField id="contact.email" {...formik}>
-        E-mail
+        {t('backoffice.settings.main.contact.email')}
       </TextField>
       <TextField id="contact.phone" {...formik}>
-        Phone
+        {t('backoffice.settings.main.contact.phone')}
       </TextField>
       <TextField id="contact.address" {...formik}>
-        Address
+        {t('backoffice.settings.main.contact.address')}
       </TextField>
     </FormContainer>
   )

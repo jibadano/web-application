@@ -26,10 +26,14 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
       role: Yup.string().nullable(),
       password: Yup.string().nullable(),
       passwordConfirm: Yup.mixed()
-        .test('confirm', t('Passwords do not match'), function (confirm) {
-          return this.parent.password === confirm
-        })
-        .required(t('Must confirm your password'))
+        .test(
+          'confirm',
+          t('backoffice.user.passwordConfirm.error.notmatch'),
+          function (confirm) {
+            return this.parent.password === confirm
+          }
+        )
+        .required(t('backoffice.required'))
     }),
     onSubmit: (variables) =>
       updateCredential({
@@ -42,7 +46,7 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
   return (
     <form autoComplete="off" onSubmit={formik.handleSubmit}>
       <FormContainer
-        title="Security"
+        title={t('backoffice.user.security')}
         edit={edit}
         loading={loading}
         onEdit={allowedToEdit && (() => setEdit(true))}
@@ -55,10 +59,10 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
         <TextField
           id="_id"
           disabled
-          helpText={!!edit && "E-mail can't be updated"}
+          helpText={!!edit && t('backoffice.user.email.info.disabled')}
           {...formik}
         >
-          {t('E-mail')}
+          {t('backoffice.user.email')}
         </TextField>
         <Select
           id="role"
@@ -70,14 +74,14 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
           {...formik}
           disabled={!edit || credential.role != 'ADMIN'}
         >
-          {t('Role')}
+          {t('backoffice.user.role')}
         </Select>
         <Password id="password" {...formik}>
-          {t('Password')}
+          {t('backoffice.user.password')}
         </Password>
 
         <Password id="passwordConfirm" {...formik}>
-          {t('Password Confirm')}
+          {t('backoffice.user.passwordConfirm')}
         </Password>
       </FormContainer>
     </form>

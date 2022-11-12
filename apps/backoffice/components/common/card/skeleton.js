@@ -6,7 +6,13 @@ import Box from '@mui/material/Box'
 const CardSkeleton = () => (
   <Box
     component={Paper}
-    sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}
+    sx={{
+      p: 3,
+      height: '100%',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column'
+    }}
   >
     <Box display="flex" alignItems="center" flexGrow={1}>
       <Skeleton variant="rounded" height={60} width={60} />

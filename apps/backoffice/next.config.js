@@ -1,5 +1,4 @@
 !process.env.CONFIG_URL && require('dotenv').config({ path: '../../.env' })
-
 const path = require('path')
 const withTM = require('next-transpile-modules')(['form', 'image'])
 const { withConfig } = require('@jibadano/config/init')

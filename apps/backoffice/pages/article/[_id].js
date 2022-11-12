@@ -1,7 +1,7 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import { useRouter } from 'lib/router'
 import TextField from 'form/textField'
-import { useTranslation } from 'lib/i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import ImageUpload from 'image/upload'
@@ -40,15 +40,17 @@ const Article = () => {
           overtitle={
             <Breadcrumbs aria-label="breadcrumb">
               <Link color="inherit" href="/">
-                Overview
+                {t('backoffice.overview')}
               </Link>
 
-              <Typography color="textPrimary">Article</Typography>
+              <Typography color="textPrimary">
+                {t('backoffice.article')}
+              </Typography>
               <Typography color="textPrimary">{_id || 'New'}</Typography>
             </Breadcrumbs>
           }
         >
-          {_id ? 'Editing article' : 'New article'}
+          {_id ? t('backoffice.article.edit') : t('backoffice.article.new')}
         </Title>
       </Box>
       <Formik
@@ -83,19 +85,19 @@ const Article = () => {
                 cloudName={config.get('..services.core.cloudinary.cloud_name')}
                 {...props}
               >
-                Avatar
+                {t('backoffice.article.image')}
               </ImageUpload>
               <TextField id="title" {...props}>
-                {t('Title')}
+                {t('backoffice.article.title')}
               </TextField>
               <TextField id="body" multi {...props}>
-                {t('Body')}
+                {t('backoffice.article.body')}
               </TextField>
 
               <Actions
                 left={[
                   {
-                    children: 'Cancel',
+                    children: t('backoffice.cancel'),
                     variant: 'text',
                     onClick: () => router.back()
                   }
@@ -103,14 +105,14 @@ const Article = () => {
                 right={[
                   {
                     display: Boolean(_id),
-                    children: 'Remove',
+                    children: 'backoffice.remove',
                     variant: 'outlined',
                     color: 'secondary',
                     onClick: () =>
                       removeArticle(_id).then(() => router.push('/article'))
                   },
                   {
-                    children: _id ? 'Save' : 'Publish',
+                    children: _id ? 'backoffice.save' : 'backoffice.publish',
                     variant: 'contained',
                     color: 'primary',
                     onClick: handleSubmit

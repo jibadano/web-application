@@ -18,7 +18,7 @@ const FormContainer = ({
     component={Paper}
     sx={{
       minHeight: 300,
-      maxWidth: 'sm',
+      maxWidth: '100%',
       p: 4,
       pb: 6,
       display: 'grid',
@@ -35,15 +35,13 @@ const FormContainer = ({
               {title}
             </Typography>
           </Box>
-          <Box>
-            {edit ? (
-              <Button onClick={onCancel} variant="outlined" color="error">
-                Cancel
-              </Button>
-            ) : (
-              !!onEdit && <Button onClick={onEdit}>Edit</Button>
-            )}
-          </Box>
+          {edit ? (
+            <Button onClick={onCancel} variant="outlined" color="error">
+              Cancel
+            </Button>
+          ) : (
+            !!onEdit && <Button onClick={onEdit}>Edit</Button>
+          )}
         </Box>
 
         {children}

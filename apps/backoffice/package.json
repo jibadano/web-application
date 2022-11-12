@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
-    "@babel/core": "^7.18.9",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@jibadano/config": "*",
@@ -22,7 +21,7 @@
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
     "chart.js": "^3.7.1",
-    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.1",
     "form": "*",
     "formik": "^2.2.9",
     "graphql": "^15.0.0",
@@ -41,8 +40,7 @@
     "react-json-pretty": "^2.2.0",
     "react-map-gl": "^6.1.17",
     "react-responsive-carousel": "^3.2.9",
-    "yup": "^0.28.5",
-    "dotenv": "^16.0.1"
+    "yup": "^0.28.5"
   },
   "license": "ISC"
 }

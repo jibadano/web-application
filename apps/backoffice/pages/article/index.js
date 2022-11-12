@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import { useRouter } from 'next/router'
 import { useArticles } from '@backoffice/components/article/hooks'
 import Typography from '@mui/material/Typography'
@@ -16,8 +17,8 @@ import Link from '@mui/material/Link'
 import { scaleImage } from 'lib/utils'
 
 const Articles = () => {
+  const { t } = useTranslation()
   const router = useRouter()
-
   const [page, setPage] = React.useState(0)
   const { articles, hasMore, loading } = useArticles({
     page
@@ -30,7 +31,7 @@ const Articles = () => {
           overtitle={
             <Breadcrumbs aria-label="breadcrumb">
               <Link color="inherit" href="/">
-                Overview
+                {t('backoffice.overview')}
               </Link>
 
               <Typography color="textPrimary"></Typography>
@@ -43,22 +44,22 @@ const Articles = () => {
               color="primary"
               onClick={() => router.push(`article/new`)}
             >
-              New article
+              {t('backoffice.article.new')}
             </Button>
           }
         >
-          Articles
+          {t('backoffice.articles')}
         </Title>
       </Box>
       <DataTable
         config={[
           { props: { align: 'right' } },
           {
-            title: 'Title',
+            title: t('backoffice.article.title'),
             _id: 'title'
           },
           {
-            title: 'Date',
+            title: t('backoffice.article.date'),
             _id: 'date'
           }
         ]}

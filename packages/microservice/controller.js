@@ -16,7 +16,7 @@ module.exports = class Controller {
         }
 
         type Mutation {
-          refreshSettings: Boolean
+          refreshSettings: String
         }
 
         scalar Date
@@ -24,13 +24,14 @@ module.exports = class Controller {
       `
     ]
 
+    const version = ms.config.get('version')
     this.resolvers = [
       {
         Query: {
-          version: () => config.get('version')
+          version: () => version
         },
         Mutation: {
-          refreshSettings: () => config.refreshSettings()
+          refreshSettings: () => 'not implemented'
         }
       }
     ]

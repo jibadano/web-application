@@ -2,7 +2,7 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { useRouter } from 'lib/router'
 import get from 'lodash/get'
 import Cookies from 'js-cookie'
-import { useMe } from '../user/hooks'
+
 const CREDENTIALS = gql`
   query credentials {
     credentials {

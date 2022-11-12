@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
+import { useTranslation } from 'lib/i18next'
 
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useMe } from './hooks'
@@ -11,6 +12,7 @@ import Modal from '@backoffice/components/common/modal'
 
 const UserRemove = ({ _id, onDone = () => {} }) => {
   const { me } = useMe()
+  const { t } = useTranslation()
   const role = useRole()
   const [open, setOpen] = React.useState()
   const [removeCredential] = useRemoveCredential()
@@ -21,11 +23,11 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
       <Modal
         onClose={() => setOpen()}
         open={open}
-        title={`You are going to remove ${_id}`}
+        title={t('backoffice.user.remove.confirm.title', { _id })}
         actions={
           <>
             <Button color="inherit" onClick={() => setOpen()}>
-              Cancel
+              {t('backoffice.cancel')}
             </Button>
             <Button
               color="error"
@@ -33,12 +35,12 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
               variant="contained"
               autoFocus
             >
-              Yes, remove user
+              {t('backoffice.user.remove.confirm.button')}
             </Button>
           </>
         }
       >
-        <Typography>Are you sure? this action cannot be undone</Typography>
+        <Typography>{t('backoffice.user.remove.confirm.message')}</Typography>
       </Modal>
 
       <Paper
@@ -50,7 +52,7 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
       >
         <Box sx={{ my: 3 }}>
           <Typography sx={{ mb: 2 }} variant="h5" color="error">
-            Dangerous zone
+            {t('backoffice.user.remove.title')}
           </Typography>
           <Button
             variant="contained"
@@ -58,7 +60,7 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
             onClick={() => setOpen(true)}
             endIcon={<DeleteIcon />}
           >
-            Delete user
+            {t('backoffice.user.remove')}
           </Button>
         </Box>
       </Paper>

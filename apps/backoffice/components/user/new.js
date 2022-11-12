@@ -19,10 +19,15 @@ const UserNew = ({ onDone = () => {} }) => {
     validationSchema: Yup.object().shape({
       _id: Yup.string()
         .nullable()
-        .email(t('This is not a valid e-mail'))
-        .required(t('We need this to proceed'))
-        .test('alreadyExists', t('This user already exists'), async (_id) =>
-          _id ? exists.refetch({ _id }).then(({ data }) => !data.exists) : false
+        .email(t('backoffice.user.email.error.notEmail'))
+        .required(t('backoffice.required'))
+        .test(
+          'alreadyExists',
+          t('backoffice.user.email.error.alreadyExists'),
+          async (_id) =>
+            _id
+              ? exists.refetch({ _id }).then(({ data }) => !data.exists)
+              : false
         ),
       password: Yup.string().nullable(),
       role: Yup.string().nullable()
@@ -36,27 +41,27 @@ const UserNew = ({ onDone = () => {} }) => {
   return (
     <form autoComplete="off" onSubmit={formik.handleSubmit}>
       <FormContainer
-        title="New user"
+        title={t('backoffice.user.new')}
         edit
         onCancel={onDone}
         onSave={formik.handleSubmit}
       >
         <TextField id="_id" asyncValidation={exists} {...formik}>
-          {t('E-mail')}
+          {t('backoffice.user.email')}
         </TextField>
         <Password id="password" {...formik}>
-          {t('Password')}
+          {t('backoffice.user.password')}
         </Password>
         <Select
           id="role"
           options={[
-            { value: 'USER', name: 'User' },
-            { value: 'GUEST', name: 'Guest' },
-            { value: 'ADMIN', name: 'Admin' }
+            { value: 'USER', name: t('backoffice.user.role.user') },
+            { value: 'GUEST', name: t('backoffice.user.role.guest') },
+            { value: 'ADMIN', name: t('backoffice.user.role.admin') }
           ]}
           {...formik}
         >
-          {t('Role')}
+          {t('backoffice.user.role')}
         </Select>
       </FormContainer>
     </form>

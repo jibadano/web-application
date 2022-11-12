@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import Title from '@backoffice/components/common/title'
 import LogTable from '@backoffice/components/logs/table'
 import TrafficMap from '@backoffice/components/traffic/map'
@@ -10,11 +11,14 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
 const Logs = () => {
+  const { t } = useTranslation()
   const [nav, setNav] = React.useState(0)
 
   return (
     <>
-      <Title overtitle="Audition">Activity</Title>
+      <Title overtitle={t('backoffice.audition')}>
+        {t('backoffice.audition.activity')}
+      </Title>
 
       <Box my={4} mx={1}>
         <Tabs
@@ -22,10 +26,10 @@ const Logs = () => {
           value={nav}
           onChange={(e, nav) => setNav(nav)}
         >
-          <Tab label="Logs" />
-          <Tab label="Map" />
-          <Tab label="Device" />
-          <Tab label="Server output" />
+          <Tab label={t('backoffice.audition.logs')} />
+          <Tab label={t('backoffice.audition.map')} />
+          <Tab label={t('backoffice.audition.device')} />
+          <Tab label={t('backoffice.audition.serverOutput')} />
         </Tabs>
       </Box>
       {nav == 0 && <LogTable />}

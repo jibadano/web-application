@@ -35,7 +35,7 @@ const Translation = ({ onDone, languages, translation }) => {
         <form autoComplete="off" onSubmit={handleSubmit}>
           <Box sx={{ p: 4, display: 'grid', gap: 3, width: '100%' }}>
             <TextField id="key" disabled {...props}>
-              {t('Key')}
+              {t('backoffice.translations.key')}
             </TextField>
             {props.values &&
               props.values.values &&
@@ -53,7 +53,9 @@ const Translation = ({ onDone, languages, translation }) => {
             <Actions
               left={[
                 {
-                  children: dirty ? 'Cancel' : 'Back',
+                  children: dirty
+                    ? t('backoffice.cancel')
+                    : t('backoffice.back'),
                   variant: 'text',
                   onClick: () => {
                     handleReset()
@@ -64,7 +66,7 @@ const Translation = ({ onDone, languages, translation }) => {
               right={[
                 {
                   disabled: !dirty,
-                  children: 'Save',
+                  children: t('backoffice.save'),
                   variant: 'contained',
                   color: 'primary',
                   onClick: handleSubmit

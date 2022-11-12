@@ -1,17 +1,17 @@
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
 import { Box, Divider, Drawer, List, Fab } from '@mui/material'
-import { useRouter } from 'lib/router'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuItem from './item'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import UserProfile from '@backoffice/components/user/profile'
 import Logo from '@components/app/brand/logo'
-
 import LogOut from '../auth/logout'
 import routes from './routes'
+import Language from '@backoffice/components/common/language'
 
-const Menu = ({ language, route }) => {
-  const router = useRouter()
+const Menu = ({ route }) => {
+  const { t, i18n } = useTranslation()
   const mobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const [open, setOpen] = React.useState()
 
@@ -75,7 +75,9 @@ const Menu = ({ language, route }) => {
               <Box flexGrow={1}>
                 <LogOut />
               </Box>
-              <Box>{language}</Box>
+              <Box>
+                <Language i18n={i18n} />
+              </Box>
             </Box>
           </Box>
         </Box>

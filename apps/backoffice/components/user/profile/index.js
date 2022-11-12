@@ -1,5 +1,8 @@
 import React from 'react'
 import { useRouter } from 'lib/router'
+import { useTranslation } from 'lib/i18next'
+import { useMe } from '../../user/hooks'
+
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -9,6 +12,9 @@ import UserProfileSkeleton from './skeleton'
 
 const UserProfile = ({ _id }) => {
   const router = useRouter()
+  const { t } = useTranslation()
+  const { me } = useMe()
+
   const { user, loading } = useUser(_id)
 
   if (loading) return <UserProfileSkeleton />
@@ -17,9 +23,9 @@ const UserProfile = ({ _id }) => {
       <Button
         size="small"
         variant="link"
-        onClick={() => router.push('user?_id=' + _id)}
+        onClick={() => router.push('user?_id=' + (me && me._id))}
       >
-        Configure your account
+        {t('backoffice.user.configure')}
       </Button>
     )
 

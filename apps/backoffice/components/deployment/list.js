@@ -1,5 +1,7 @@
 import 'react-json-pretty/themes/1337.css'
 import React from 'react'
+import { useTranslation } from 'lib/i18next'
+
 import { useDeployments, useStartDeploy } from '../settings/hooks'
 import DataTable from '@backoffice/components/common/data/table'
 import Status from '@backoffice/components/common/status'
@@ -17,7 +19,10 @@ import Collapse from '@mui/material/Collapse'
 import Typography from '@mui/material/Typography'
 
 import JSONPretty from 'react-json-pretty'
+
 const Users = () => {
+  const { t } = useTranslation()
+
   const [startDeploy] = useStartDeploy()
   const [open, setOpen] = React.useState()
   const [confirmRedeploy, setConfirmRedeploy] = React.useState()
@@ -47,11 +52,11 @@ const Users = () => {
       <Modal
         onClose={() => setConfirmRedeploy()}
         open={Boolean(confirmRedeploy)}
-        title={'Do you want to restore this settings?'}
+        title={t('backoffice.deployment.restore.title')}
         actions={
           <>
             <Button sx={{ m: 1 }} onClick={() => setConfirmRedeploy()}>
-              Cancel
+              {t('backoffice.cancel')}
             </Button>
             <Button
               sx={{ m: 1 }}
@@ -62,14 +67,12 @@ const Users = () => {
               variant="contained"
               autoFocus
             >
-              Redeploy
+              {t('backoffice.deployment.restore.button')}
             </Button>
           </>
         }
       >
-        <Typography>
-          If you click Redeploy you will restore this settings
-        </Typography>
+        <Typography>{t('backoffice.deployment.restore.message')}</Typography>
         <Collapse in={displaySettings}>
           <Box p={2}>
             {confirmRedeploy && (
@@ -85,21 +88,23 @@ const Users = () => {
         </Collapse>
         <Box p={2}>
           <Button onClick={() => setDisplaySettings((d) => !d)}>
-            {displaySettings ? 'Hide settings' : 'Display settings'}
+            {displaySettings
+              ? t('backoffice.deployment.restore.hideSettings')
+              : t('backoffice.deployment.restore.displaySettings')}
           </Button>
         </Box>
       </Modal>
       <DataTable
         config={[
           {
-            title: 'ID'
+            title: t('backoffice.id')
           },
           {
-            title: 'Date',
+            title: t('backoffice.date'),
             _id: 'date'
           },
           {
-            title: 'Status'
+            title: t('backoffice.status')
           },
           {}
         ]}
@@ -116,10 +121,10 @@ const Users = () => {
             >
               {
                 {
-                  info: 'Deploying',
-                  ok: 'Ready',
-                  error: 'Error',
-                  warning: 'Warning'
+                  info: t('backoffice.deployment.status.deploying'),
+                  ok: t('backoffice.deployment.status.ready'),
+                  error: t('backoffice.deployment.status.error'),
+                  warning: t('backoffice.deployment.status.warning')
                 }[status]
               }
             </Status>,

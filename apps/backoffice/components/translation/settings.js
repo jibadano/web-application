@@ -1,5 +1,6 @@
 import React from 'react'
 import get from 'lodash/get'
+import { useTranslation } from 'lib/i18next'
 
 import ListField from 'form/listField'
 import Select from 'form/select'
@@ -13,10 +14,9 @@ import {
 import FormContainer from '@backoffice/components/common/formContainer'
 
 const TranslationSettings = () => {
+  const { t } = useTranslation()
   const [edit, setEdit] = React.useState()
-
   const [updateSettings, { loading: refreshing }] = useUpdateSettings()
-
   const { settings, loading } = useSettings()
 
   const formik = useFormik({
@@ -38,7 +38,7 @@ const TranslationSettings = () => {
   return (
     <FormContainer
       loading={loading}
-      title="Languages"
+      title={t('backoffice.translation.languages')}
       edit={edit}
       onEdit={() => setEdit(true)}
       onCancel={() => {
@@ -48,7 +48,7 @@ const TranslationSettings = () => {
       onSave={formik.handleSubmit}
     >
       <ListField id="i18next.whitelist" {...formik}>
-        Languages
+        {t('backoffice.translation.languages')}
       </ListField>
       <Select
         id="i18next.fallbackLng"
@@ -57,7 +57,7 @@ const TranslationSettings = () => {
         )}
         {...formik}
       >
-        Default
+        {t('backoffice.default')}
       </Select>
     </FormContainer>
   )

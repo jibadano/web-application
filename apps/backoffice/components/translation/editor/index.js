@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'lib/i18next'
+
 import { useTranslations } from '../../settings/hooks'
 import get from 'lodash/get'
 import List from '@mui/material/List'
@@ -29,7 +31,8 @@ import {
   useUpdateSettings
 } from '@backoffice/components/settings/hooks'
 
-const Translations = (props) => {
+const Translations = () => {
+  const { t } = useTranslation()
   const router = useRouter()
 
   const [selected, setSelected] = React.useState()
@@ -73,7 +76,7 @@ const Translations = (props) => {
           overflowX: 'hidden'
         }}
       >
-        <SideMenu title="Translations list">
+        <SideMenu title={t('backoffice.translations.list')}>
           <List>
             <ListSubheader style={{ borderRadius: 20 }} disableGutters>
               <Box p={2} style={{ borderRadius: 20, backgroundColor: 'white' }}>
@@ -83,7 +86,7 @@ const Translations = (props) => {
                   value={searchText}
                   onClick={(e) => e.stopPropagation()}
                   onChange={(e) => setSearchText(e.target.value)}
-                  label="Search"
+                  label={t('backoffice.search')}
                 ></TextField>
               </Box>
             </ListSubheader>
@@ -104,7 +107,9 @@ const Translations = (props) => {
 
                     {missing && (
                       <ListItemSecondaryAction>
-                        <Chip label="Untranslated" />
+                        <Chip
+                          label={t('backoffice.translations.untranslated')}
+                        />
                       </ListItemSecondaryAction>
                     )}
                   </ListItem>
@@ -145,7 +150,7 @@ const Translations = (props) => {
             >
               <LanguageIcon fontSize="large" />
               <Typography color="textSecondary" variant="h4">
-                Select a translation key to edit
+                {t('backoffice.translations.select')}
               </Typography>
             </Box>
           </Box>

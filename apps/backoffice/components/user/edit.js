@@ -18,7 +18,7 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
   const { t } = useTranslation()
   const [updateUser] = useUpdateUser()
   const formik = useFormik({
-    initialValues: user,
+    initialValues: user || { name: '', jobTitle: '' },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
       name: Yup.string().nullable(),
@@ -49,7 +49,7 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
       >
         <ImageUpload
           id="avatar"
-          buttonText={t('Add image')}
+          buttonText={t('backoffice.user.avatar.add')}
           preview
           crop={{ aspect: 1 }}
           cloudName={config.get('..services.core.cloudinary.cloud_name')}
@@ -58,10 +58,10 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
           Avatar
         </ImageUpload>
         <TextField id="name" {...formik}>
-          {t('Name')}
+          {t('backoffice.user.name')}
         </TextField>
         <TextField id="jobTitle" {...formik}>
-          {t('Job title')}
+          {t('backoffice.user.jobTitle')}
         </TextField>
       </FormContainer>
     </form>

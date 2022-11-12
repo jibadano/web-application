@@ -1,10 +1,10 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import config from '@jibadano/config'
-
+import localTranslations from '/translations.json'
 const i18nextConfig = config.get('..settings.i18next') || {
   fallbackLng: 'es',
-  whitelist: ['es'],
+  whitelist: ['es', 'en'],
   keySeparator: true, // we do not use keys in form messages.welcome
   interpolation: {
     escapeValue: false // react already safes from xss
@@ -20,6 +20,16 @@ translations.forEach(({ key, values }) =>
     resources[language].translation[key] = text
   })
 )
+
+for (const language in localTranslations) {
+  if (!resources[language]) resources[language] = { translation: {} }
+
+  resources[language].translation = {
+    ...resources[language].translation,
+    ...localTranslations[language]
+  }
+}
+
 i18nextConfig.resources = resources
 
 i18n
