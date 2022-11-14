@@ -34,7 +34,7 @@ const Users = () => {
         overtitle={
           <Breadcrumbs aria-label="breadcrumb">
             <Link color="inherit" href="/">
-              {t('backoffice.overview')}
+              {t('backoffice.dashboard')}
             </Link>
             <Typography color="textPrimary"></Typography>
           </Breadcrumbs>
@@ -59,16 +59,18 @@ const Users = () => {
         {t('backoffice.users')}
       </Title>
       <Box my={4}>
-        {selected && !create && (
-          <User
-            _id={selected}
-            onDone={() => {
-              setSelected()
-              router.replace({ query: {} })
-            }}
-          />
-        )}
-        {create && <UserNew onDone={() => setCreate()} />}
+        <Box sx={{ maxWidth: 'sm' }}>
+          {selected && !create && (
+            <User
+              _id={selected}
+              onDone={() => {
+                setSelected()
+                router.replace({ query: {} })
+              }}
+            />
+          )}
+          {create && <UserNew onDone={() => setCreate()} />}
+        </Box>
         {!selected && !create && (
           <DataTable
             config={[

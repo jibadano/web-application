@@ -2,9 +2,9 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
+import Divider from '@mui/material/Divider'
 import FormSkeleton from './skeleton'
-
+import EditIcon from '@mui/icons-material/Edit'
 const FormContainer = ({
   title,
   edit,
@@ -15,11 +15,9 @@ const FormContainer = ({
   children
 }) => (
   <Box
-    component={Paper}
     sx={{
       minHeight: 300,
       maxWidth: '100%',
-      p: 4,
       pb: 6,
       display: 'grid',
       gap: 4
@@ -29,6 +27,7 @@ const FormContainer = ({
       <FormSkeleton />
     ) : (
       <>
+        <Divider />
         <Box display="flex" alignItems="center">
           <Box flexGrow={1}>
             <Typography variant="h5" sx={{ px: 1 }}>
@@ -40,7 +39,11 @@ const FormContainer = ({
               Cancel
             </Button>
           ) : (
-            !!onEdit && <Button onClick={onEdit}>Edit</Button>
+            !!onEdit && (
+              <Button onClick={onEdit}>
+                <EditIcon />
+              </Button>
+            )
           )}
         </Box>
 
@@ -53,6 +56,7 @@ const FormContainer = ({
             </Button>
           </Box>
         )}
+        <Divider />
       </>
     )}
   </Box>

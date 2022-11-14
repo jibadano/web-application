@@ -47,17 +47,17 @@ const getRemoteConfig = async (configUrl) => {
 
 const processSubmodule = (values = {}, name, def, mode) => {
   values.name = values.name || name
-  let public = values.public || []
+  let public = values.public ? [...values.public] : []
   if (def) {
     const modConfig = values
+
+    public = public.concat(def.public || [])
 
     values = merge(modConfig, def, (objValue, srcValue) =>
       typeof objValue == 'object'
         ? merge(objValue, srcValue, mergePolicy)
         : objValue
     )
-
-    public = public.concat(values.public || [])
   }
 
   if (!values['url']) {
@@ -69,6 +69,7 @@ const processSubmodule = (values = {}, name, def, mode) => {
   values['host'] = values['host'] || '0.0.0.0'
   values['port'] = process.env.PORT || values['port'] || 80
 
+  console.log({ public })
   if (public.length && mode == 'public') {
     const newValues = {}
     for (let field of public) {
@@ -77,6 +78,8 @@ const processSubmodule = (values = {}, name, def, mode) => {
 
     values = newValues
   }
+
+  console.log({ values })
 
   return values
 }

@@ -1,21 +1,14 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 
-import Language from '@jibadano/language'
-
 import { useTranslation } from 'lib/i18next'
 import Button from '@mui/material/Button'
-
-const useStyles = makeStyles((theme) => ({
-  tab: { minWidth: 'auto', letterSpacing: 1.5 }
-}))
+import Language from '@components/app/language'
 
 const MenuDesktop = ({ menuItems = [], route, onChange }) => {
-  const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const handleChange = (_, i) => menuItems[i] && onChange(menuItems[i].value)
   const value = menuItems.findIndex(({ value }) => value == route)
@@ -28,11 +21,15 @@ const MenuDesktop = ({ menuItems = [], route, onChange }) => {
         textColor="primary"
       >
         {menuItems.map(({ name, value, badge }) => (
-          <Tab key={value} className={classes.tab} label={t(name)} />
+          <Tab
+            key={value}
+            sx={{ minWidth: 'auto', letterSpacing: 1.5 }}
+            label={t(name)}
+          />
         ))}
       </Tabs>
       <Box px={2}>
-        <Language />
+        <Language i18n={i18n} />
       </Box>
       <Box px={2}>
         <Button variant="contained" color="secondary">

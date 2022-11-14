@@ -35,7 +35,7 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
               variant="contained"
               autoFocus
             >
-              {t('backoffice.user.remove.confirm.button')}
+              {t('backoffice.user.remove.confirm')}
             </Button>
           </>
         }
@@ -46,14 +46,13 @@ const UserRemove = ({ _id, onDone = () => {} }) => {
       <Paper
         sx={{
           p: 4,
-          maxWidth: 'sm',
           borderColor: 'error.light'
         }}
       >
+        <Typography sx={{ mb: 2 }} variant="h5" color="error">
+          {t('backoffice.user.remove.title')}
+        </Typography>
         <Box sx={{ my: 3 }}>
-          <Typography sx={{ mb: 2 }} variant="h5" color="error">
-            {t('backoffice.user.remove.title')}
-          </Typography>
           <Button
             variant="contained"
             color="error"

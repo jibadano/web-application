@@ -1,23 +1,9 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar'
-import { makeStyles } from '@mui/styles'
 import Toolbar from '@mui/material/Toolbar'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Logo from '../brand/logo'
 import Menu from '../menu'
-
-const useStyles = makeStyles((theme) => ({
-  appBar: ({ trigger }) => ({
-    zIndex: 1201,
-    transition: 'padding 300ms',
-    padding: theme.spacing(1, 10),
-    transition: 'background-color 250ms',
-    backgroundColor: trigger ? theme.palette.secondary.main : 'transparent',
-    [theme.breakpoints.down('xs')]: {
-      padding: 0
-    }
-  })
-}))
 
 const Header = ({ window }) => {
   const trigger = useScrollTrigger({
@@ -25,10 +11,18 @@ const Header = ({ window }) => {
     threshold: 200,
     target: window ? window() : undefined
   })
-  const classes = useStyles({ trigger })
 
   return (
-    <AppBar className={classes.appBar} elevation={trigger ? 12 : 0}>
+    <AppBar
+      sx={{
+        zIndex: 1201,
+        transition: 'padding 300s, background-color 250ms',
+        py: { sm: 0, md: 1 },
+        px: { sm: 0, md: 10 },
+        backgroundColor: trigger ? 'secondary.main' : 'transparent'
+      }}
+      elevation={trigger ? 12 : 0}
+    >
       <Toolbar>
         <Logo />
         <Menu />

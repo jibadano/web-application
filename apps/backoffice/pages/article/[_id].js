@@ -40,11 +40,11 @@ const Article = () => {
           overtitle={
             <Breadcrumbs aria-label="breadcrumb">
               <Link color="inherit" href="/">
-                {t('backoffice.overview')}
+                {t('backoffice.dashboard')}
               </Link>
 
               <Typography color="textPrimary">
-                {t('backoffice.article')}
+                {t('backoffice.articles')}
               </Typography>
               <Typography color="textPrimary">{_id || 'New'}</Typography>
             </Breadcrumbs>
@@ -105,14 +105,16 @@ const Article = () => {
                 right={[
                   {
                     display: Boolean(_id),
-                    children: 'backoffice.remove',
+                    children: t('backoffice.remove'),
                     variant: 'outlined',
                     color: 'secondary',
                     onClick: () =>
                       removeArticle(_id).then(() => router.push('/article'))
                   },
                   {
-                    children: _id ? 'backoffice.save' : 'backoffice.publish',
+                    children: _id
+                      ? t('backoffice.save')
+                      : t('backoffice.article.publish'),
                     variant: 'contained',
                     color: 'primary',
                     onClick: handleSubmit

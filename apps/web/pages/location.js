@@ -1,28 +1,14 @@
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
-import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import LocationIcon from '@mui/icons-material/LocationOn'
-const useStyles = makeStyles((theme) => ({
-  section: {
-    backgroundColor: theme.palette.secondary.main,
-    minHeight: '40vh',
-    display: 'flex',
-    alignItems: 'flex-end'
-  },
-  section2: {
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(16, 0)
-  }
-}))
 
 const Instructors = () => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const [viewport, setViewport] = React.useState({
     latitude: 42.694923,
     longitude: 23.320802,
@@ -30,12 +16,24 @@ const Instructors = () => {
   })
   return (
     <div style={{ overflow: 'hidden' }}>
-      <div className={classes.section}>
+      <Box
+        sx={{
+          backgroundColor: 'secondary.main',
+          minHeight: '40vh',
+          display: 'flex',
+          alignItems: 'flex-end'
+        }}
+      >
         <Container maxWidth="lg">
           <Typography variant="h2">Location</Typography>
         </Container>
-      </div>
-      <div className={classes.section2}>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          py: 16
+        }}
+      >
         <Container maxWidth="lg">
           <Grid container spacing={8}>
             <Grid item xs={12} md={5}>
@@ -72,7 +70,7 @@ const Instructors = () => {
             </Grid>
           </Grid>
         </Container>
-      </div>
+      </Box>
     </div>
   )
 }

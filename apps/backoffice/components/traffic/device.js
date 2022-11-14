@@ -1,3 +1,4 @@
+import 'chart.js/auto'
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
 import { Doughnut } from 'react-chartjs-2'

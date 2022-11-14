@@ -4,7 +4,7 @@
   "main": "./index.js",
   "license": "MIT",
   "dependencies": {
-    "@apollo/client": "^3.4.16",
+    "@apollo/client": "3.7.1",
     "@jibadano/config": "0.0.11",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.1.13",
@@ -12,8 +12,8 @@
     "i18next": "^19.4.4",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.10",
-    "next": "^12.2.3",
-    "react": "^17.0.2",
+    "next": "13.0.3",
+    "react": "18.2.0",
     "react-i18next": "^11.4.0"
   }
 }

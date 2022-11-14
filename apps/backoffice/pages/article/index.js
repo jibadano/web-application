@@ -31,7 +31,7 @@ const Articles = () => {
           overtitle={
             <Breadcrumbs aria-label="breadcrumb">
               <Link color="inherit" href="/">
-                {t('backoffice.overview')}
+                {t('backoffice.dashboard')}
               </Link>
 
               <Typography color="textPrimary"></Typography>
@@ -59,13 +59,17 @@ const Articles = () => {
             _id: 'title'
           },
           {
+            title: t('backoffice.article.body'),
+            _id: 'body'
+          },
+          {
             title: t('backoffice.article.date'),
             _id: 'date'
           }
         ]}
-        rows={articles.map(({ _id, title, date, images }) => ({
+        rows={articles.map(({ _id, title, date, images, body }) => ({
           values: [
-            images && images.length && (
+            Boolean(images && images.length) && (
               <Box display="flex" alignItems="center" justifyContent="flex-end">
                 <Avatar
                   imgProps={{ loading: 'lazy' }}
@@ -77,6 +81,7 @@ const Articles = () => {
               </Box>
             ),
             title,
+            body.slice(0, 64) + '...',
             <FormattedDate value={date} />
           ],
           _id,

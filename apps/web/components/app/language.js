@@ -17,7 +17,7 @@ const Language = ({ inputProps = {}, ...props }) => {
       inputProps={{
         style: inputProps.style
           ? inputProps.style
-          : { padding: '6px 7px 5px 8px', border: 'none' },
+          : { padding: '6px 3px 2px 7px', border: 'none' },
         name: 'language',
         id: 'language',
         ...inputProps

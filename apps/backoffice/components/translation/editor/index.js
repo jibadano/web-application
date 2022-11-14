@@ -60,15 +60,10 @@ const Translations = () => {
     }
   })
 
-  if (settingsLoading || loading)
-    return (
-      <Box sx={{ display: 'flex', maxWidth: 'md' }}>
-        <Loading />
-      </Box>
-    )
+  if (settingsLoading || loading) return <Loading />
 
   return (
-    <Box component={Paper} sx={{ display: 'flex', maxWidth: 'md' }}>
+    <Box component={Paper} sx={{ display: 'flex' }}>
       <Box
         style={{
           maxHeight: '80vh',

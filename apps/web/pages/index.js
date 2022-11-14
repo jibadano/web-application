@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
-import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -11,20 +10,8 @@ import FadeOnScreen from '@components/app/animation/fadeOnScreen'
 import ImageButton from 'image/button'
 import Background from '@components/app/background'
 
-const useStyles = makeStyles((theme) => ({
-  section: {
-    backgroundColor: theme.palette.secondary.main,
-    padding: theme.spacing(6, 0)
-  },
-  section2: {
-    backgroundColor: theme.palette.primary.dark,
-    padding: theme.spacing(12, 0)
-  }
-}))
-
 const Home = () => {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   return (
     <div style={{ overflow: 'hidden' }}>
@@ -60,7 +47,13 @@ const Home = () => {
           </Box>
         </Container>
       </Background>
-      <div className={classes.section}>
+      <Box
+        sx={{
+          backgroundColor: 'secondary.main',
+          py: 6
+        }}
+      >
+        {' '}
         <Container maxWidth="lg">
           <Grid container spacing={6}>
             <Grid item xs={12}>
@@ -96,8 +89,14 @@ const Home = () => {
             </Grid>
           </Grid>
         </Container>
-      </div>
-      <div className={classes.section2}>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'primary.dark',
+          py: 12
+        }}
+      >
+        {' '}
         <Container maxWidth="lg">
           <Grid container spacing={6}>
             <Grid item xs={12} md={9}>
@@ -125,7 +124,7 @@ const Home = () => {
             </Grid>
           </Grid>
         </Container>
-      </div>
+      </Box>
       <div
         style={{
           background:

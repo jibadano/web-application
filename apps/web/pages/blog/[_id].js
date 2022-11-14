@@ -1,35 +1,21 @@
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
-import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 
-const useStyles = makeStyles((theme) => ({
-  section: {
-    backgroundColor: theme.palette.secondary.main,
-    minHeight: '20vh',
-    display: 'flex',
-    alignItems: 'flex-end'
-  },
-  section2: {
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(16, 0)
-  },
-  section3: {
-    backgroundColor: theme.palette.primary.dark,
-    padding: theme.spacing(16, 0)
-  }
-}))
-
 const Classes = () => {
   const { t } = useTranslation()
-  const classes = useStyles()
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <div className={classes.section}></div>
-      <div className={classes.section2}>
+      <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          py: 16
+        }}
+      >
+        {' '}
         <Container maxWidth="lg">
           <Box display="flex" alignItems="center" height="100%">
             <Box>
@@ -73,7 +59,7 @@ const Classes = () => {
             </Box>
           </Box>
         </Container>
-      </div>
+      </Box>
     </div>
   )
 }

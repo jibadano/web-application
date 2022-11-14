@@ -38,7 +38,7 @@ const TranslationSettings = () => {
   return (
     <FormContainer
       loading={loading}
-      title={t('backoffice.translation.languages')}
+      title={t('backoffice.translations.languages')}
       edit={edit}
       onEdit={() => setEdit(true)}
       onCancel={() => {
@@ -48,7 +48,7 @@ const TranslationSettings = () => {
       onSave={formik.handleSubmit}
     >
       <ListField id="i18next.whitelist" {...formik}>
-        {t('backoffice.translation.languages')}
+        {t('backoffice.translations.languages')}
       </ListField>
       <Select
         id="i18next.fallbackLng"
@@ -57,7 +57,7 @@ const TranslationSettings = () => {
         )}
         {...formik}
       >
-        {t('backoffice.default')}
+        {t('backoffice.translations.default')}
       </Select>
     </FormContainer>
   )

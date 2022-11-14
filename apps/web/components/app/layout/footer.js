@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'lib/router'
-import { makeStyles } from '@mui/styles'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -21,36 +20,23 @@ import IconButton from '@mui/material/IconButton'
 import config from '@jibadano/config'
 import { useTranslation } from 'lib/i18next'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.text.primary,
-    padding: theme.spacing(8, 4, 4, 4),
-    top: 'auto',
-    bottom: 0,
-    zIndex: -1,
-    borderRadius: 0
-  },
-  list: {
-    width: '60%',
-    [theme.breakpoints.down('xs')]: {
-      width: '100%'
-    }
-  },
-  copyright: {
-    marginTop: theme.spacing(4)
-  }
-}))
-
 const Footer = () => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const router = useRouter()
 
   return (
-    <Paper className={classes.root} position="relative">
+    <Box
+      component={Paper}
+      sx={{
+        position: 'relative',
+        backgroundColor: 'primary.main',
+        color: 'text.primary',
+        p: 4,
+        pt: 8
+      }}
+    >
       <Grid container spacing={2} justify="center">
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           <Box mx={2} textAlign="center">
             <Logo color="secondary" />
             <Typography color="textPrimary">{t('brand.slogan')}</Typography>
@@ -75,11 +61,11 @@ const Footer = () => {
               <IconButton>
                 <FacebookIcon color="textPrimary" />
               </IconButton>
-            </Link>{' '}
+            </Link>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={4} align="center">
-          <List className={classes.list}>
+        <Grid item xs={12} sm={4}>
+          <List>
             <ListItem>
               <LocationIcon
                 color="action"
@@ -112,8 +98,8 @@ const Footer = () => {
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={12} sm={4} align="center">
-          <List className={classes.list}>
+        <Grid item xs={12} sm={3}>
+          <List>
             <ListItem button onClick={() => router.push('/about')}>
               <Typography variant="body1" color="textPrimary">
                 {t('about')}
@@ -143,11 +129,11 @@ const Footer = () => {
           </List>
         </Grid>
 
-        <Grid item className={classes.copyright} xs={12} align="center">
+        <Grid item xs={12} align="center">
           <Copyright />
         </Grid>
       </Grid>
-    </Paper>
+    </Box>
   )
 }
 

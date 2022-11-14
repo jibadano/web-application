@@ -40,7 +40,7 @@ const Settings = () => {
             color="primary"
             onClick={() => startDeploy().then(() => setNav(2))}
           >
-            {t('backoffice.deployments.deploy')}
+            {t('backoffice.deploy')}
           </Button>
         }
       >
@@ -68,10 +68,19 @@ const Settings = () => {
           />
         </Tabs>
       </Box>
-      {nav == 0 && <MainSettings />}
+      {nav == 0 && (
+        <Box sx={{ maxWidth: 'sm' }}>
+          <MainSettings />
+        </Box>
+      )}
       {nav == 1 && (
-        <Box sx={{ display: 'grid', gap: 3 }}>
-          <TranslationEditor /> <TranslationSettings />
+        <Box sx={{ display: 'grid', gap: 3, maxWidth: 'sm' }}>
+          <Box sx={{ width: '100%' }}>
+            <TranslationEditor />
+          </Box>
+          <Box>
+            <TranslationSettings />
+          </Box>
         </Box>
       )}
       {nav == 2 && <ThemeEditor />}

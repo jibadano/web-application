@@ -52,7 +52,7 @@ const Users = () => {
       <Modal
         onClose={() => setConfirmRedeploy()}
         open={Boolean(confirmRedeploy)}
-        title={t('backoffice.deployment.restore.title')}
+        title={t('backoffice.deployment.restore')}
         actions={
           <>
             <Button sx={{ m: 1 }} onClick={() => setConfirmRedeploy()}>
