@@ -9,8 +9,7 @@
     "dev": "next dev -p 3000",
     "update-next": "next update",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build"
+    "start": "next start -p $PORT"
   },
   "dependencies": {
     "@apollo/client": "3.7.1",

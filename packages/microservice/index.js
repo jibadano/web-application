@@ -7,6 +7,7 @@ const Middleware = require('./middleware')
 const Mail = require('./mail')
 const Session = require('./session')
 const AccessControl = require('./accessControl')
+const Cron = require('./cron')
 
 class Microservice {
   constructor(config) {
@@ -18,6 +19,7 @@ class Microservice {
     this.controller = new Controller(this)
     this.middleware = new Middleware(this)
     this.mail = new Mail(this)
+    this.cron = new Cron(this)
   }
 
   report = () => {
@@ -29,6 +31,7 @@ class Microservice {
     report += '\nMail         \t' + this.mail.report()
     report += '\nSession      \t' + this.session.report()
     report += '\nMiddleware   \t' + this.middleware.report()
+    report += '\nCron         \t' + this.cron.report()
     report += '\nModel        \t' + this.model.report()
     report += '\nController   \t' + this.controller.report()
 
@@ -38,7 +41,11 @@ class Microservice {
 
   start = async () => {
     try {
-      await Promise.all([this.monitor.init(), this.model.init()])
+      await Promise.all([
+        this.monitor.init(),
+        this.model.init(),
+        this.cron.init()
+      ])
 
       const app = express()
 
