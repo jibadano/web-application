@@ -3,15 +3,19 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loa
 import Head from 'next/head'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { blue, cyan, blueGrey, common } from '@mui/material/colors'
-import 'lib/i18next/init'
+import initTranslations from 'lib/i18next/init'
 import Layout from '@backoffice/components/layout'
 import { SnackbarProvider } from 'notistack'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import Auth from '@backoffice/components/auth'
 import Email from '@backoffice/components/email'
+import config from '@jibadano/config'
 
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from 'lib/apollo'
+import Cookies from 'js-cookie'
+
+initTranslations(config, Cookies.get('lang'))
 
 export const theme = createTheme({
   palette: {
@@ -123,7 +127,7 @@ const inputGlobalStyles = (
 )
 
 const App = ({ Component, pageProps, router }) => {
-  const apolloClient = useApollo(pageProps)
+  const apolloClient = useApollo(pageProps, config.get('..services'))
 
   const template = router.query && router.query.template
   if (template) return <Email template={template} />

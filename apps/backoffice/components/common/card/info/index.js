@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 
 const CardInfo = ({ title, children, actions }) => {
   return (
-    <Box component={Paper}>
+    <Box component={Paper} sx={{ overflow: 'hidden' }}>
       <Box sx={{ p: 2 }}>
         <Typography color="textSecondary" gutterBottom variant="h6">
           {title}

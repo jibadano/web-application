@@ -5,7 +5,6 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "3.7.1",
-    "@jibadano/config": "0.0.11",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.1.13",
     "deepmerge": "^4.2.2",

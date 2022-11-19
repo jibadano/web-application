@@ -17,7 +17,6 @@ const Instructors = () => {
       width="100%"
       minHeight="400px"
       height="100%"
-      overflow="hidden"
       sx={{
         borderRadius: (theme) => theme.shape.borderRadius + 'px',
         overflow: 'hidden'

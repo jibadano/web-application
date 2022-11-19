@@ -13,13 +13,11 @@ import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
 
-import config from '@jibadano/config'
 import Cookies from 'js-cookie'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
-function getHttpLink() {
-  const services = config.get('..services')
+function getHttpLink(services) {
   const endpoints = []
   if (services) {
     for (let service in services) {
@@ -67,7 +65,6 @@ function split(endpoints, lastLink) {
 }
 
 let apolloClient
-let httpLink = getHttpLink()
 
 let authLink = setContext(({ variables }, { headers }) => {
   headers = { headers }
@@ -95,8 +92,10 @@ const resetToken = onError((err) => {
   }
 })
 
-function createApolloClient() {
+function createApolloClient(services) {
   let link = authLink.concat(resetToken)
+  let httpLink = getHttpLink(services)
+
   if (httpLink) link = link.concat(httpLink)
 
   return new ApolloClient({
@@ -115,8 +114,8 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient()
+export function initializeApollo(initialState = null, services) {
+  const _apolloClient = apolloClient ?? createApolloClient(services)
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -154,8 +153,8 @@ export function addApolloState(client, pageProps) {
   return pageProps
 }
 
-export function useApollo(pageProps) {
+export function useApollo(pageProps, services) {
   const state = pageProps[APOLLO_STATE_PROP_NAME]
-  const store = useMemo(() => initializeApollo(state), [state])
+  const store = useMemo(() => initializeApollo(state, services), [state])
   return store
 }

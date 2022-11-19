@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from '@mui/material/Select'
 import { useTranslation } from 'react-i18next'
+import Cookies from 'js-cookie'
 
 const Language = ({ inputProps = {}, ...props }) => {
   const { i18n } = useTranslation()
@@ -12,7 +13,10 @@ const Language = ({ inputProps = {}, ...props }) => {
       value={i18n.language}
       onChange={(e) => {
         const language = e.target.value
-        if (i18n.language != language) i18n.changeLanguage(language)
+        if (i18n.language != language) {
+          i18n.changeLanguage(language)
+          Cookies.set('lang', language)
+        }
       }}
       inputProps={{
         style: inputProps.style
