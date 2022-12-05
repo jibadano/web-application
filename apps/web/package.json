@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.3.0",
     "@jibadano/config": "*",
     "@mui/material": "^5.0.6",
+    "js-cookie": "^3.0.1",
     "form": "*",
     "formik": "^2.2.9",
     "graphql": "^15.0.0",

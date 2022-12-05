@@ -5,10 +5,12 @@ import { createTheme } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material/styles'
 import Email from '@components/app/email'
 import Layout from '@components/app/layout'
-import 'lib/i18next/init'
+import initTranslations from 'lib/i18next/init'
 import config from '@jibadano/config'
+import Cookies from 'js-cookie'
 
 export const theme = createTheme(config.get('..settings.theme'))
+initTranslations(config, Cookies.get('lang'))
 
 const App = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps)
