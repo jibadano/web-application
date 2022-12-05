@@ -28,7 +28,7 @@ module.exports = (ms) => {
     extend type Mutation {
       login(_id: ID, password: String, remember: Boolean): Token
       signup(_id: ID!, password: String!, role: Role): Credential
-      updatePassword(_id: ID!, password: String!): Token
+      updatePassword(_id: ID!, password: String!): Token @auth
     }
   `
 
@@ -61,7 +61,20 @@ module.exports = (ms) => {
         const credential = generate({ _id, password })
         return new ms.model.Credential({ ...credential, role }).save()
       },
-      updatePassword: (_, { _id, password }) => {
+      updatePassword: async (
+        _,
+        { _id, currentPassword, password },
+        { session }
+      ) => {
+        if (session.user._id != _id && session.user.role != 'ADMIN')
+          new ApolloError('Not allowed')
+
+        const user = await ms.model.Credential.findOne({ _id }).exec()
+        if (!user) return new ApolloError('User not found')
+
+        user.password = currentPassword
+        if (!validate(user)) return new ApolloError('Password is invalid')
+
         const credential = password ? generate({ _id, password }) : { _id }
 
         return ms.model.Credential.findOneAndUpdate(

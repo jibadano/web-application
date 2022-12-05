@@ -2,7 +2,7 @@ import React from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 
-const Loading = () => (
+const Loading = ({ size }) => (
   <Box
     sx={{
       justifyContent: 'center',
@@ -11,7 +11,7 @@ const Loading = () => (
       height: '100%'
     }}
   >
-    <CircularProgress size={64} thickness={5} variant="indeterminate" />
+    <CircularProgress size={size || 64} thickness={5} variant="indeterminate" />
   </Box>
 )
 

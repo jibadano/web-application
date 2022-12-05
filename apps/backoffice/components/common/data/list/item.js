@@ -1,7 +1,6 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
 
 const DataListItem = ({ label, primary, secondary }) => (
   <Box display={{ xs: 'block', md: 'flex' }} alignItems="center" width="100%">
@@ -19,6 +18,9 @@ const DataListItem = ({ label, primary, secondary }) => (
         {primary}
       </Typography>
     </Box>
+    <Typography align="left" color="textSecondary" variant="caption">
+      {secondary}
+    </Typography>
   </Box>
 )
 

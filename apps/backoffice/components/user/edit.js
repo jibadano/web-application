@@ -10,7 +10,7 @@ import FormContainer from '@backoffice/components/common/formContainer'
 import { useUser, useMe } from './hooks'
 import { useRole } from '../auth/hooks'
 
-const UserEdit = ({ _id, onDone = () => {} }) => {
+const UserEdit = ({ _id }) => {
   const { me } = useMe()
   const role = useRole()
   const { user, loading } = useUser(_id)
@@ -28,7 +28,7 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
     onSubmit: (variables) => {
       updateUser({
         variables: { _id, ...variables }
-      }).then(onDone)
+      }).then(() => setEdit())
     }
   })
 

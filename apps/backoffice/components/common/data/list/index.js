@@ -1,7 +1,6 @@
 import React from 'react'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
@@ -18,7 +17,7 @@ const DataList = ({
   children = children instanceof Array ? children : [children]
   const hasActions = onEdit || onRemove
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <>
       <Box display={orientation == 'horizontal' && 'flex'}>
         {header && <Box width="100%">{header}</Box>}
         <Box width="100%">
@@ -58,7 +57,7 @@ const DataList = ({
           )}
         </Box>
       )}
-    </Paper>
+    </>
   )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
 import TextField from 'form/textField'
-import Password from 'form/password'
 import Select from 'form/select'
 import { useCredential, useUpdateCredential } from '../auth/hooks'
 import { useFormik } from 'formik'
@@ -10,7 +9,7 @@ import FormContainer from '@backoffice/components/common/formContainer'
 import { useMe } from './hooks'
 import { useRole } from '../auth/hooks'
 
-const UserEdit = ({ _id, onDone = () => {} }) => {
+const UserEdit = ({ _id }) => {
   const { me } = useMe()
   const role = useRole()
   const [edit, setEdit] = React.useState()
@@ -23,25 +22,17 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
     validateOnBlur: false,
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      role: Yup.string().nullable(),
-      password: Yup.string().nullable(),
-      passwordConfirm: Yup.mixed()
-        .test(
-          'confirm',
-          t('backoffice.user.passwordConfirm.error.notmatch'),
-          function (confirm) {
-            return this.parent.password === confirm
-          }
-        )
-        .required(t('backoffice.required'))
+      role: Yup.string().nullable()
     }),
     onSubmit: (variables) =>
       updateCredential({
         variables
-      }).then(onDone)
+      }).then(() => setEdit())
   })
 
   const allowedToEdit = (me && me._id == _id) || role == 'ADMIN'
+  if (!allowedToEdit) return ''
+
   formik.disabled = !edit
   return (
     <form autoComplete="off" onSubmit={formik.handleSubmit}>
@@ -49,7 +40,7 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
         title={t('backoffice.user.security')}
         edit={edit}
         loading={loading}
-        onEdit={allowedToEdit && (() => setEdit(true))}
+        onEdit={() => setEdit(true)}
         onCancel={() => {
           formik.setValues({ _id: credential._id, role: credential.role })
           setEdit(false)
@@ -58,9 +49,9 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
       >
         <TextField
           id="_id"
-          disabled
           helpText={!!edit && t('backoffice.user.email.info.disabled')}
           {...formik}
+          disabled
         >
           {t('backoffice.user.email')}
         </TextField>
@@ -76,13 +67,6 @@ const UserEdit = ({ _id, onDone = () => {} }) => {
         >
           {t('backoffice.user.role')}
         </Select>
-        <Password id="password" {...formik}>
-          {t('backoffice.user.password')}
-        </Password>
-
-        <Password id="passwordConfirm" {...formik}>
-          {t('backoffice.user.passwordConfirm')}
-        </Password>
       </FormContainer>
     </form>
   )

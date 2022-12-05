@@ -13,12 +13,14 @@ import UserProfileSkeleton from './skeleton'
 const UserProfile = ({ _id }) => {
   const router = useRouter()
   const { t } = useTranslation()
-  const { me } = useMe()
+  const { me, loading: loadingMe } = useMe()
+  const { data, loading } = useUser(_id)
 
-  const { user, loading } = useUser(_id)
+  if (loading || loadingMe) return <UserProfileSkeleton />
 
-  if (loading) return <UserProfileSkeleton />
-  if (!user)
+  if (!data || !data.user) {
+    if (_id) return 'no user configured'
+
     return (
       <Button
         size="small"
@@ -28,6 +30,9 @@ const UserProfile = ({ _id }) => {
         {t('backoffice.user.configure')}
       </Button>
     )
+  }
+
+  const user = data && data.user
 
   return (
     <Button

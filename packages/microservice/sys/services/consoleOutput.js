@@ -15,7 +15,7 @@ module.exports = (ms) => {
       _id: ID
       date: Date
       value: String
-      type: LogType
+      type: ConsoleOutputType
     }
 
     enum ConsoleOutputType {

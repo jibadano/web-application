@@ -10,7 +10,7 @@ module.exports = (ms) => {
     }
     extend type Mutation {
       removeCredential(_id: ID!): Credential @auth(requires: ADMIN)
-      updateCredential(_id: ID!, role: Role): Credential @auth(requires: ADMIN)
+      updateCredential(_id: ID!, role: Role): Credential @auth
     }
 
     type Credential {

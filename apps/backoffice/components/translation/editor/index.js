@@ -143,8 +143,8 @@ const Translations = () => {
                 textAlign: 'center'
               }}
             >
-              <LanguageIcon fontSize="large" />
-              <Typography color="textSecondary" variant="h4">
+              <LanguageIcon fontSize="medium" />
+              <Typography color="textSecondary" variant="h5">
                 {t('backoffice.translations.select')}
               </Typography>
             </Box>

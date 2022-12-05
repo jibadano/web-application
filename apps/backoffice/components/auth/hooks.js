@@ -172,8 +172,8 @@ export const useRemoveCredential = () =>
   })
 
 const UPDATE_CREDENTIAL = gql`
-  mutation updateCredential($_id: ID!, $password: String, $role: Role) {
-    updateCredential(_id: $_id, password: $password, role: $role) {
+  mutation updateCredential($_id: ID!, $role: Role) {
+    updateCredential(_id: $_id, role: $role) {
       _id
       role
       createdAt
@@ -225,3 +225,16 @@ export const useRole = () => {
 
   return data && data.role
 }
+
+const UPDATE_PASSWORD = gql`
+  mutation updatePassword($_id: ID!, $password: String!) {
+    updatePassword(_id: $_id, password: $password)
+  }
+`
+
+export const useUpdatePassword = () =>
+  useMutation(UPDATE_PASSWORD, {
+    context: {
+      clientName: 'sys'
+    }
+  })

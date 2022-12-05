@@ -31,8 +31,10 @@ module.exports = (ms) => {
         ms.model.User.findOne({
           _id: (user && user._id) || session.user._id
         }).exec(),
-      me: (_, __, { session }) =>
-        ms.model.User.findOne({ _id: session.user._id }).exec()
+      me: async (_, __, { session }) =>
+        (await ms.model.User.findOne({ _id: session.user._id }).exec()) || {
+          _id
+        }
     },
     Mutation: {
       updateUser: (_, user, { session }) =>

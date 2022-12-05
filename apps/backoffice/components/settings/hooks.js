@@ -6,9 +6,15 @@ const DEPLOYMENTS = gql`
   query deployments {
     deployments {
       _id
-      date
+      service
       status
-      settings
+      moduleId
+      commit {
+        _id
+        message
+      }
+      createdAt
+      finishedAt
     }
   }
 `
@@ -21,36 +27,6 @@ export const useDeployments = (_id) => {
   })
   return { deployments: get(data, 'deployments') || [], data, ...rest }
 }
-
-const START_DEPLOY = gql`
-  mutation startDeploy($_id: ID) {
-    startDeploy(_id: $_id) {
-      _id
-      date
-      status
-      settings
-    }
-  }
-`
-
-export const useStartDeploy = () =>
-  useMutation(START_DEPLOY, {
-    context: {
-      clientName: 'sys'
-    },
-    update(cache, { data: { startDeploy } }) {
-      try {
-        const { deployments } = cache.readQuery({ query: DEPLOYMENTS })
-
-        cache.writeQuery({
-          query: DEPLOYMENTS,
-          data: { deployments: [startDeploy, ...deployments] }
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    }
-  })
 
 const DEPLOY_STATUS = gql`
   query deployStatus {
@@ -68,6 +44,30 @@ export const useDeployStatus = () => {
     ...rest
   }
 }
+
+const DEPLOY = gql`
+  mutation deploy {
+    deploy
+  }
+`
+
+export const useDeploy = () =>
+  useMutation(DEPLOY, {
+    context: {
+      clientName: 'sys'
+    },
+    update(cache, { data: { deploy } }) {
+      try {
+        if (deploy)
+          cache.writeQuery({
+            query: DEPLOY_STATUS,
+            data: { deployStatus: 'info' }
+          })
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  })
 
 const SETTINGS = gql`
   query settings {
@@ -101,7 +101,7 @@ export const useUpdateSettings = () =>
       try {
         cache.writeQuery({
           query: DEPLOY_STATUS,
-          data: { deployStatus: updateSettings.status }
+          data: { deployStatus: 'warning' }
         })
         cache.writeQuery({
           query: SETTINGS,
@@ -117,7 +117,7 @@ const TRANSLATIONS = gql`
   }
 `
 
-export const useTranslations = (languages) => {
+export const useTranslations = () => {
   const query = useQuery(TRANSLATIONS, {
     context: {
       clientName: 'sys'
@@ -160,7 +160,7 @@ export const useUpdateTranslation = () => {
       try {
         cache.writeQuery({
           query: DEPLOY_STATUS,
-          data: { deployStatus: 'required' }
+          data: { deployStatus: 'warning' }
         })
         cache.writeQuery({
           ...query,
@@ -189,6 +189,10 @@ export const useInsertTranslation = () =>
 
     update(cache, { data: { insertTranslation }, ...query }) {
       try {
+        cache.writeQuery({
+          query: DEPLOY_STATUS,
+          data: { deployStatus: 'warning' }
+        })
         cache.writeQuery({
           ...query,
           query: TRANSLATIONS,

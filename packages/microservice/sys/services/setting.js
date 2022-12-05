@@ -17,8 +17,6 @@ module.exports = (ms) => {
       ): Translation @auth
       insertTranslation(key: ID!, values: [TranslationValue]): Translation @auth
       insertTranslations(translations: [InputTranslation]!): Translation @auth
-
-      deploy: String @auth(requires: ADMIN)
     }
 
     input InputTranslation {
@@ -68,7 +66,7 @@ module.exports = (ms) => {
           { _id: 'translations', 'translations.key': key },
           {
             $set: {
-              status: 'required',
+              status: 'warning',
               'translations.$.key': newKey || key,
               'translations.$.values': values
             }
@@ -82,7 +80,7 @@ module.exports = (ms) => {
 
         return ms.model.Config.findOneAndUpdate(
           { _id: 'settings' },
-          { ...settings, status: 'required' },
+          { ...settings, status: 'warning' },
           {
             upsert: true,
             new: true
