@@ -3,7 +3,7 @@ import { useTranslation } from 'lib/i18next'
 import Button from '@mui/material/Button'
 import { useDeployStatus, useDeploy } from '../hooks'
 import Loading from '@backoffice/components/common/loading'
-import DeployIcon from '@mui/icons-material/SendAndArchive'
+import DeployIcon from '@mui/icons-material/Done'
 
 const DeploymentButton = () => {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ const DeploymentButton = () => {
   const deploying = deployStatus == 'info'
   return (
     <Button
-      startIcon={deploying ? <Loading size={16} /> : <DeployIcon />}
+      endIcon={deploying ? <Loading size={16} /> : <DeployIcon />}
       variant="contained"
       disabled={deploying}
       color="primary"

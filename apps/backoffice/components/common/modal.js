@@ -15,14 +15,14 @@ const Modal = ({ title, children, actions, open, onClose, ...props }) => {
         <IconButton
           size="small"
           onClick={onClose}
-          sx={{ position: 'absolute', right: 0, m: 1 }}
+          sx={{ position: 'absolute', right: 0, m: 2 }}
         >
           <CloseIcon />
         </IconButton>
       )}
       {title && (
-        <DialogTitle sx={{ p: 3 }}>
-          <Typography variant="h4">{title}</Typography>
+        <DialogTitle sx={{ p: 3, mr: 6 }}>
+          <Typography variant="h5">{title}</Typography>
         </DialogTitle>
       )}
       <DialogContent sx={{ p: 4 }}>{children}</DialogContent>

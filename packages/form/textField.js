@@ -41,13 +41,14 @@ const TextField = ({
   disabled,
   startAdornment,
   endAdornment,
+  autoComplete,
   ...props
 }) => (
   <MuiTextField
     id={id}
     type={type}
     disabled={disabled}
-    value={get(values, id) || ''}
+    value={get(values, id)}
     error={Boolean(get(touched, id) && get(errors, id))}
     helperText={
       Boolean(get(touched, id) && get(errors, id)) ? get(errors, id) : helpText
@@ -59,9 +60,6 @@ const TextField = ({
     label={children}
     rows={rows}
     multiline={multi}
-    InputLabelProps={{
-      shrink: get(values, id) ? true : undefined
-    }}
     InputProps={getInputProps({
       id,
       errors,
@@ -71,6 +69,10 @@ const TextField = ({
       startAdornment
     })}
     {...props}
+    inputProps={{
+      ...props.inputProps,
+      autoComplete: autoComplete
+    }}
   />
 )
 export default TextField

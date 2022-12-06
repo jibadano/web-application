@@ -40,6 +40,8 @@
     "backoffice.settings.main.contact.email": "E-mail",
     "backoffice.settings.main.contact.phone": "Phone",
     "backoffice.settings.main.contact.address": "Address",
+    "backoffice.settings.deployReminder": "Remember to apply your changes",
+    "backoffice.settings.deployReminder.message": "In order to impact your changes in your site, you will need to press the 'Apply changes' button and wait until the server restarts.",
     "backoffice.theme": "Theme",
     "backoffice.theme.color": "Color",
     "backoffice.theme.color.primary": "Primary",
@@ -164,6 +166,9 @@
     "backoffice.settings.main.contact.email": "E-mail",
     "backoffice.settings.main.contact.phone": "Teléfono",
     "backoffice.settings.main.contact.address": "Dirección",
+    "backoffice.settings.deployReminder": "Recuerda aplicar tus cambios",
+    "backoffice.settings.deployReminder.message": "Para ver tus cambios reflejados en tu página no basta solo con guardar, debes presionar el botón 'Aplicar cambios' y esperar a que impacte en los servidores.",
+
     "backoffice.theme": "Tema",
     "backoffice.theme.color": "Color",
     "backoffice.theme.color.primary": "Primario",

@@ -11,26 +11,24 @@ export default ({
   handleChange,
   options = [],
   ...props
-}) => {
-  return (
-    <FormControl fullWidth>
-      <InputLabel {...props} htmlFor={id}>
-        {children}
-      </InputLabel>
-      <Select
-        native
-        label={children}
-        id={id}
-        value={get(values, id) || ''}
-        onChange={handleChange}
-        {...props}
-      >
-        {options.map(({ name, value }) => (
-          <option key={value} value={value || ''}>
-            {name}
-          </option>
-        ))}
-      </Select>
-    </FormControl>
-  )
-}
+}) => (
+  <FormControl fullWidth>
+    <InputLabel {...props} htmlFor={id}>
+      {children}
+    </InputLabel>
+    <Select
+      native
+      label={children}
+      id={id}
+      value={get(values, id)}
+      onChange={handleChange}
+      {...props}
+    >
+      {options.map(({ name, value }) => (
+        <option key={value} value={value || ''}>
+          {name}
+        </option>
+      ))}
+    </Select>
+  </FormControl>
+)

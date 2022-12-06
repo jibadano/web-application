@@ -38,11 +38,10 @@ const getRemoteConfig = async (configUrl) => {
 
   const config = getConfigItem(configList, 'main')
   const settings = getConfigItem(configList, 'settings')
-  const translations = getConfigItem(configList, 'translations')
 
   if (!config) throw new Error('The "main" config is missing')
 
-  return { config, settings, translations: translations.translations }
+  return { config, settings }
 }
 
 const processSubmodule = (values = {}, name, def, mode) => {
@@ -112,10 +111,7 @@ const processModule = (values = {}, mode) => {
   return newValues
 }
 
-const processConfig = (
-  { config, settings, translations },
-  { appId, serviceId }
-) => {
+const processConfig = ({ config, settings }, { appId, serviceId }) => {
   if (appId && serviceId)
     throw new Error(
       "Can't process configuration for apps and services simultaneously"
@@ -155,8 +151,7 @@ const processConfig = (
     current,
     apps,
     services,
-    settings,
-    translations
+    settings
   }
 }
 

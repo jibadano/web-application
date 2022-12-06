@@ -4,18 +4,27 @@ import Actions from '@backoffice/components/common/actions'
 import Box from '@mui/material/Box'
 import { useTranslation } from 'lib/i18next'
 
-import { useUpdateTranslation } from '../hooks'
+import { useUpdateTranslation } from '../../hooks'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-const Translation = ({ onDone, languages, translation }) => {
+const Translation = ({ onDone, translation, languages }) => {
   const { t } = useTranslation()
   const [updateTranslation] = useUpdateTranslation()
+  const values = [...translation.values]
+  languages.forEach((language) => {
+    if (values.every((value) => value.language != language))
+      values.push({ language, text: '' })
+  })
+  const newTranslation = {
+    ...translation,
+    values
+  }
   return (
     <Formik
       enableReinitialize
       validateOnBlur={false}
-      initialValues={translation}
+      initialValues={newTranslation}
       validationSchema={Yup.object().shape({
         key: Yup.string().nullable(),
         values: Yup.array().of(

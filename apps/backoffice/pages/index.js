@@ -1,10 +1,10 @@
 import React from 'react'
+import { useRouter } from 'lib/router'
 import { useTranslation } from 'lib/i18next'
 import { Grid, Button, Link } from '@mui/material'
 import Traffic from '@backoffice/components/traffic/stats'
 import TrafficMap from '@backoffice/components/traffic/map'
 import Device from '@backoffice/components/traffic/device'
-import DeploymentList from '@backoffice/components/settings/deployment/list'
 import { useMe } from '@backoffice/components/user/hooks'
 import Title from '@backoffice/components/common/title'
 import FormattedDate from '@backoffice/components/common/formattedDate'
@@ -27,6 +27,7 @@ const greeting = () => {
 
 const Dashboard = () => {
   const { t } = useTranslation()
+  const router = useRouter()
   const { me } = useMe()
 
   return (
@@ -76,8 +77,25 @@ const Dashboard = () => {
       <Grid item lg={4} md={6} xl={3} xs={12}>
         <Device />
       </Grid>
-      <Grid item xs={12}>
-        <DeploymentList />
+      <Grid item xs={12} sm={6}>
+        <CardInfo
+          title={t('backoffice.settings.deployReminder')}
+          actions={
+            <Button
+              size="small"
+              onClick={() =>
+                router.push('/settings?nav=3', {
+                  pathname: '/settings',
+                  query: { nav: 3 }
+                })
+              }
+            >
+              {t('backoffice.deployments')}
+            </Button>
+          }
+        >
+          {t('backoffice.settings.deployReminder.message')}
+        </CardInfo>
       </Grid>
     </Grid>
   )

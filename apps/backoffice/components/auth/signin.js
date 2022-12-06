@@ -20,10 +20,7 @@ export default () => {
   const { t, i18n } = useTranslation()
 
   const formik = useFormik({
-    initialValues: {
-      _id: '',
-      password: ''
-    },
+    initialValues: {},
     validateOnBlur: false,
     validateOnChange: false,
     enableReinitialize: true,
@@ -37,7 +34,7 @@ export default () => {
         setValues({ _id, password: '' })
       )
   })
-
+  formik.autoComplete = 'new-password'
   return (
     <Box
       sx={{
@@ -75,27 +72,35 @@ export default () => {
           </Avatar>
           <Typography variant="h5">{t('backoffice.login')}</Typography>
         </Box>
-        <Box sx={{ my: 2, display: 'grid', gap: 3, width: '100%' }}>
-          <TextField id="_id" {...formik}>
-            {t('backoffice.login.username')}
-          </TextField>
-          <Password id="password" {...formik}>
-            {t('backoffice.login.password')}
-          </Password>
-          <Box>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              sx={{ height: 56 }}
-              onClick={formik.handleSubmit}
-              disabled={loading}
-              size="large"
-            >
-              {loading ? <CircularProgress size={32} /> : t('backoffice.login')}
-            </Button>
-          </Box>
+        <Box sx={{ my: 2, width: '100%' }}>
+          <form {...formik}>
+            <Box sx={{ display: 'grid', gap: 3 }}>
+              <TextField id="_id" {...formik}>
+                {t('backoffice.login.username')}
+              </TextField>
+              <Password id="password" {...formik}>
+                {t('backoffice.login.password')}
+              </Password>
+              <Box>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  sx={{ height: 56 }}
+                  onClick={formik.handleSubmit}
+                  disabled={loading}
+                  size="large"
+                >
+                  {loading ? (
+                    <CircularProgress size={32} />
+                  ) : (
+                    t('backoffice.login')
+                  )}
+                </Button>
+              </Box>
+            </Box>
+          </form>
         </Box>
         <Language i18n={i18n} variant="outlined" />
       </Box>

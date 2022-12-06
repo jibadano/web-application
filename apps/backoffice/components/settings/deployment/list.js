@@ -1,18 +1,14 @@
 import React from 'react'
 import { useTranslation } from 'lib/i18next'
-
 import { useDeployments } from '../hooks'
 import DataTable from '@backoffice/components/common/data/table'
 import Status from '@backoffice/components/common/status'
 import Modal from '@backoffice/components/common/modal'
-
 import IconButton from '@mui/material/IconButton'
 import Button from '@mui/material/Button'
-
 import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
-
-import MoreIcon from '@mui/icons-material/More'
+import MoreIcon from '@mui/icons-material/MoreHoriz'
 import DataList from '@backoffice/components/common/data/list'
 import DataListItem from '@backoffice/components/common/data/list/item'
 

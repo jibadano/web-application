@@ -12,7 +12,7 @@ export default (config, language) => {
     }
   }
 
-  const translations = config.get('..translations')
+  const translations = config.get('..settings.translations')
 
   const resources = {}
   translations.forEach(({ key, values }) =>

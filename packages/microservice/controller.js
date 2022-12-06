@@ -45,7 +45,6 @@ module.exports = class Controller {
 
       try {
         fs.readdirSync(defaultPath).forEach((serviceFile) => {
-          console.log(serviceFile)
           this.processService(
             defaultPath + '/' + serviceFile,
             serviceFile.replace('.js', ''),

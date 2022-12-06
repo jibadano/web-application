@@ -29,10 +29,15 @@ export const DataTableItemSkeleton = ({ config = [], button }) => {
     </TableRow>
   )
 }
-const DataTableItem = ({ config, onClick, values }) => {
+const DataTableItem = ({ key, config, onClick, values }) => {
   const mobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   return (
-    <TableRow hover style={{ cursor: onClick && 'pointer' }} onClick={onClick}>
+    <TableRow
+      key={key}
+      hover
+      style={{ cursor: onClick && 'pointer' }}
+      onClick={onClick}
+    >
       {values.map((value, i) => {
         if (config[i].hiddenMobile && mobile) return
 

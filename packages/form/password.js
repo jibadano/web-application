@@ -15,7 +15,9 @@ export default ({
   handleChange,
   handleBlur,
   helpText,
-  disabled
+  disabled,
+  autoComplete,
+  ...props
 }) => {
   const [displayType, setDisplayType] = React.useState(type)
 
@@ -56,6 +58,11 @@ export default ({
               <VisibilityOff />
             </IconButton>
           )
+      }}
+      {...props}
+      inputProps={{
+        ...props.inputProps,
+        autoComplete: autoComplete
       }}
     />
   )

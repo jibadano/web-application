@@ -7,10 +7,7 @@ import Select from 'form/select'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import {
-  useSettings,
-  useUpdateSettings
-} from '@backoffice/components/settings/hooks'
+import { useSettings, useUpdateSettings } from '../hooks'
 import FormContainer from '@backoffice/components/common/formContainer'
 
 const TranslationSettings = () => {
@@ -30,7 +27,7 @@ const TranslationSettings = () => {
       })
     }),
     onSubmit: (settings, { resetForm }) => {
-      updateSettings({ variables: { settings } })
+      updateSettings({ variables: { settings } }).then(() => setEdit())
     }
   })
 

@@ -9,14 +9,9 @@ module.exports = (ms) => {
     }
 
     extend type Mutation {
-      updateSettings(settings: Settings): Settings @auth
-      updateTranslation(
-        key: ID!
-        newKey: String
-        values: [TranslationValue]
-      ): Translation @auth
-      insertTranslation(key: ID!, values: [TranslationValue]): Translation @auth
-      insertTranslations(translations: [InputTranslation]!): Translation @auth
+      updateSettings(settings: Settings): Settings @auth(requires: USER)
+      updateTranslation(key: ID!, values: [TranslationValue]): Translation
+        @auth(requires: USER)
     }
 
     input InputTranslation {
@@ -31,43 +26,15 @@ module.exports = (ms) => {
 
   const resolvers = {
     Query: {
-      settings: () => ms.model.Config.findOne({ _id: 'settings' }).exec(),
-      translations: () =>
-        ms.model.Config.findOne({ _id: 'translations' })
-          .select('translations')
-          .exec()
-          .then(
-            (translations) => get(translations.toObject(), 'translations') || []
-          )
+      settings: () => ms.model.Config.findOne({ _id: 'settings' }).exec()
     },
     Mutation: {
-      insertTranslations: (_, { translations }) =>
+      updateTranslation: (_, { key, values }) =>
         ms.model.Config.findOneAndUpdate(
-          { _id: 'translations' },
-          {
-            $push: { translations: { $each: translations } }
-          },
-          {
-            new: true
-          }
-        ).exec(),
-      insertTranslation: (_, translation) =>
-        ms.model.Config.findOneAndUpdate(
-          { _id: 'translations', 'translations.key': { $ne: translation.key } },
-          {
-            $push: { translations: translation }
-          },
-          {
-            new: true
-          }
-        ).exec(),
-      updateTranslation: (_, { key, newKey, values }) =>
-        ms.model.Config.findOneAndUpdate(
-          { _id: 'translations', 'translations.key': key },
+          { _id: 'settings', 'translations.key': key },
           {
             $set: {
               status: 'warning',
-              'translations.$.key': newKey || key,
               'translations.$.values': values
             }
           },

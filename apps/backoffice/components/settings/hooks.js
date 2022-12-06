@@ -21,6 +21,7 @@ const DEPLOYMENTS = gql`
 
 export const useDeployments = (_id) => {
   const { data, ...rest } = useQuery(DEPLOYMENTS, {
+    notifyOnNetworkStatusChange: true,
     context: {
       clientName: 'sys'
     }
@@ -111,29 +112,9 @@ export const useUpdateSettings = () =>
     }
   })
 
-const TRANSLATIONS = gql`
-  query translations {
-    translations
-  }
-`
-
-export const useTranslations = () => {
-  const query = useQuery(TRANSLATIONS, {
-    context: {
-      clientName: 'sys'
-    }
-  })
-
-  return { ...query, translations: get(query, 'data.translations') || [] }
-}
-
 const UPDATE_TRANSLATION = gql`
-  mutation updateTranslation(
-    $key: ID!
-    $newKey: String
-    $values: [TranslationValue]
-  ) {
-    updateTranslation(key: $key, newKey: $newKey, values: $values)
+  mutation updateTranslation($key: ID!, $values: [TranslationValue]) {
+    updateTranslation(key: $key, values: $values)
   }
 `
 
@@ -162,10 +143,17 @@ export const useUpdateTranslation = () => {
           query: DEPLOY_STATUS,
           data: { deployStatus: 'warning' }
         })
+
+        const { settings } = cache.readQuery({ query: SETTINGS })
+
         cache.writeQuery({
-          ...query,
-          query: TRANSLATIONS,
-          data: { translations: [...updateTranslation.translations] }
+          query: SETTINGS,
+          data: {
+            settings: {
+              ...settings,
+              translations: [...updateTranslation.translations]
+            }
+          }
         })
       } catch (e) {
         console.log(e)
@@ -173,33 +161,3 @@ export const useUpdateTranslation = () => {
     }
   })
 }
-
-const INSERT_TRANSLATION = gql`
-  mutation insertTranslation($key: ID!, $values: [TranslationValue]) {
-    insertTranslation(key: $key, values: $values)
-  }
-`
-
-export const useInsertTranslation = () =>
-  useMutation(INSERT_TRANSLATION, {
-    context: {
-      clientName: 'sys'
-    },
-    notifyOnNetworkStatusChange: true,
-
-    update(cache, { data: { insertTranslation }, ...query }) {
-      try {
-        cache.writeQuery({
-          query: DEPLOY_STATUS,
-          data: { deployStatus: 'warning' }
-        })
-        cache.writeQuery({
-          ...query,
-          query: TRANSLATIONS,
-          data: { translations: [...insertTranslation.translations] }
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    }
-  })

@@ -46,9 +46,7 @@ const FormContainer = ({
             )
           )}
         </Box>
-
         {children}
-
         {!!edit && (
           <Box sx={{ pb: 2 }}>
             <Button fullWidth size="large" variant="contained" onClick={onSave}>

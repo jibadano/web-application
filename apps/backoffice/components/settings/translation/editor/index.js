@@ -2,34 +2,23 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'lib/i18next'
 
-import { useTranslations } from '../../settings/hooks'
-import get from 'lodash/get'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import Chip from '@mui/material/Chip'
 import Box from '@mui/material/Box'
 import LanguageIcon from '@mui/icons-material/LanguageOutlined'
-
 import Loading from '@backoffice/components/common/card/skeleton'
 import SideMenu from '@backoffice/components/common/sideMenu'
-
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
-
 import Typography from '@mui/material/Typography'
-
-import Paper from '@mui/material/Paper'
+import Divider from '@mui/material/Divider'
 import TextField from 'form/textField'
 import ListSubheader from '@mui/material/ListSubheader'
 import Fade from '@mui/material/Fade'
 import Translation from './item'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
 
-import {
-  useSettings,
-  useUpdateSettings
-} from '@backoffice/components/settings/hooks'
+import { useSettings } from '../../hooks'
 
 const Translations = () => {
   const { t } = useTranslation()
@@ -40,30 +29,15 @@ const Translations = () => {
     router.query.searchText || ''
   )
 
-  let { translations, loading } = useTranslations()
-  const [updateSettings, { loading: refreshing }] = useUpdateSettings()
+  const { settings, loading } = useSettings()
 
-  const { settings, loading: settingsLoading } = useSettings()
+  if (loading || !settings) return <Loading />
 
-  const formik = useFormik({
-    initialValues: settings,
-    enableReinitialize: true,
-    validationSchema: Yup.object().shape({
-      i18next: Yup.object().shape({
-        fallbackLng: Yup.string().nullable(),
-        whitelist: Yup.array().of(Yup.string()),
-        keySeparator: Yup.boolean().nullable()
-      })
-    }),
-    onSubmit: (settings, { resetForm }) => {
-      updateSettings({ variables: { settings } })
-    }
-  })
-
-  if (settingsLoading || loading) return <Loading />
+  const languages = settings.i18next.whitelist
+  const translations = settings.translations || []
 
   return (
-    <Box component={Paper} sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }}>
       <Box
         style={{
           maxHeight: '80vh',
@@ -113,7 +87,9 @@ const Translations = () => {
           </List>
         </SideMenu>
       </Box>
-
+      <Box ml={2} display={{ xs: 'none', sm: 'block' }}>
+        <Divider orientation="vertical" />
+      </Box>
       <Box sx={{ width: '100%' }}>
         <Fade in={selected} unmountOnExit mountOnEnter>
           <div>
@@ -121,7 +97,7 @@ const Translations = () => {
               key={selected && selected.key}
               onDone={(newTranslation) => setSelected(newTranslation)}
               translation={selected}
-              languages={get(formik, 'values.i18next.whitelist') || []}
+              languages={languages}
             />
           </div>
         </Fade>
